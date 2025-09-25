@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: inferenceNote
+    uniqueID: 227215633
+    locked: 0
+  - name: inferenceNote_Button
+    uniqueID: 3872468133
+    locked: 0
