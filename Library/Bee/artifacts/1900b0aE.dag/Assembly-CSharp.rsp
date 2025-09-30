@@ -379,6 +379,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.62f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/02_Scripts/CardController.cs"
 "Assets/02_Scripts/CardUp.cs"
+"Assets/02_Scripts/RandomQuestion.cs"
 "Assets/02_Scripts/SettingManager.cs"
 "Assets/02_Scripts/SpriteManager.cs"
 -langversion:9.0

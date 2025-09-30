@@ -64,6 +64,7 @@
     <Compile Include="Assets\02_Scripts\SpriteManager.cs" />
     <Compile Include="Assets\02_Scripts\SettingManager.cs" />
     <Compile Include="Assets\02_Scripts\CardUp.cs" />
+    <Compile Include="Assets\02_Scripts\RandomQuestion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
