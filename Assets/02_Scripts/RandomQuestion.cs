@@ -1,9 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RandomQuestion : MonoBehaviour
 {
+    Button questionButton;
+    string randomQuestion;
+
+    [SerializeField]
+    TextMeshProUGUI questionText;
+    TextMeshProUGUI allQuestionText;
+
+
     List<string> questions = new List<string>()
     {
         "이름에 ㄱ이 들어갑니까?",//1
@@ -73,12 +84,31 @@ public class RandomQuestion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        questionButton = GetComponent<Button>();
+        allQuestionText = GetComponentInChildren<TextMeshProUGUI>();
+        questionButton.onClick.AddListener(OnButtonClick);
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnButtonClick()
     {
-        
+        randomQuestion = GetRandomQuestion();
+        questionText.text = randomQuestion;
+
+        int questionsCount = questions.Count;
+        allQuestionText.text = questionsCount.ToString();
+
+        //if(questions.Count)
+
+        //string question = questions[index];
+
+
+    }
+
+    string GetRandomQuestion()
+    {
+        int index = Random.Range(0, questions.Count);
+        questions.RemoveAt(index);
+
+        return questions[index];
     }
 }
