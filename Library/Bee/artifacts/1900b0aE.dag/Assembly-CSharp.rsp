@@ -380,6 +380,8 @@
 "Assets/02_Scripts/CardController.cs"
 "Assets/02_Scripts/CardUp.cs"
 "Assets/02_Scripts/RandomQuestion.cs"
+"Assets/02_Scripts/SceneManager.cs"
+"Assets/02_Scripts/SelectCard.cs"
 "Assets/02_Scripts/SettingManager.cs"
 "Assets/02_Scripts/SpriteManager.cs"
 -langversion:9.0
