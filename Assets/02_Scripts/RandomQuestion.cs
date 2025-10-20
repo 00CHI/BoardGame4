@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class RandomQuestion : MonoBehaviour
 {
     Button questionButton;
+
     string randomQuestion;
 
     [SerializeField]
@@ -100,8 +101,6 @@ public class RandomQuestion : MonoBehaviour
         //if(questions.Count)
 
         //string question = questions[index];
-
-
     }
 
     string GetRandomQuestion()

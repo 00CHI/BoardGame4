@@ -1,8 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class SpreadCard : MonoBehaviour
 {
@@ -96,7 +97,7 @@ public class SpreadCard : MonoBehaviour
 
         //_CARD.localPosition = _TARGETPOS;
         _CARD.localScale = _endScale;
-
-
     }
+
+
 }

@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 24151572}
   - component: {fileID: 24151571}
   m_Layer: 5
-  m_Name: Character_SelectCard (2)
+  m_Name: Time_SelectCard (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4630,7 +4630,7 @@ GameObject:
   - component: {fileID: 244800954}
   - component: {fileID: 244800953}
   m_Layer: 5
-  m_Name: Character_SelectCard (4)
+  m_Name: Time_SelectCard (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6600,7 +6600,7 @@ GameObject:
   - component: {fileID: 321872947}
   - component: {fileID: 321872946}
   m_Layer: 5
-  m_Name: Character_SelectCard (7)
+  m_Name: Crime_SelectCard (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8328,7 +8328,6 @@ GameObject:
   - component: {fileID: 431703906}
   - component: {fileID: 431703905}
   - component: {fileID: 431703904}
-  - component: {fileID: 431703903}
   m_Layer: 5
   m_Name: TIME_Canvas
   m_TagString: Untagged
@@ -8361,30 +8360,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &431703903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 431703901}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 90
-    m_Right: 0
-    m_Top: 350
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 280, y: 440}
-  m_Spacing: {x: 10, y: 10}
-  m_Constraint: 1
-  m_ConstraintCount: 6
 --- !u!114 &431703904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9380,7 +9355,7 @@ GameObject:
   - component: {fileID: 492914587}
   - component: {fileID: 492914586}
   m_Layer: 5
-  m_Name: Character_SelectCard (4)
+  m_Name: Crime_SelectCard (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11424,7 +11399,7 @@ GameObject:
   - component: {fileID: 576515535}
   - component: {fileID: 576515534}
   m_Layer: 5
-  m_Name: Character_SelectCard
+  m_Name: Crime_SelectCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19525,7 +19500,7 @@ GameObject:
   - component: {fileID: 890646900}
   - component: {fileID: 890646899}
   m_Layer: 5
-  m_Name: Character_SelectCard (3)
+  m_Name: Crime_SelectCard (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21819,7 +21794,7 @@ GameObject:
   - component: {fileID: 987860722}
   - component: {fileID: 987860721}
   m_Layer: 5
-  m_Name: Character_SelectCard (1)
+  m_Name: Crime_SelectCard (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24884,7 +24859,7 @@ GameObject:
   - component: {fileID: 1123178341}
   - component: {fileID: 1123178340}
   m_Layer: 5
-  m_Name: Character_SelectCard (8)
+  m_Name: Crime_SelectCard (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26159,7 +26134,7 @@ GameObject:
   - component: {fileID: 1169299377}
   - component: {fileID: 1169299376}
   m_Layer: 5
-  m_Name: Character_SelectCard (5)
+  m_Name: Time_SelectCard (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28831,7 +28806,7 @@ GameObject:
   - component: {fileID: 1299726357}
   - component: {fileID: 1299726356}
   m_Layer: 5
-  m_Name: Character_SelectCard (5)
+  m_Name: Crime_SelectCard (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30642,7 +30617,7 @@ GameObject:
   - component: {fileID: 1375614545}
   - component: {fileID: 1375614544}
   m_Layer: 5
-  m_Name: Character_SelectCard (9)
+  m_Name: Crime_SelectCard (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31427,7 +31402,7 @@ GameObject:
   - component: {fileID: 1419097721}
   - component: {fileID: 1419097720}
   m_Layer: 5
-  m_Name: Character_SelectCard (3)
+  m_Name: Time_SelectCard (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31547,7 +31522,7 @@ GameObject:
   - component: {fileID: 1420492537}
   - component: {fileID: 1420492536}
   m_Layer: 5
-  m_Name: Character_SelectCard (1)
+  m_Name: Time_SelectCard (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33913,7 +33888,7 @@ GameObject:
   - component: {fileID: 1470442524}
   - component: {fileID: 1470442523}
   m_Layer: 5
-  m_Name: Character_SelectCard (10)
+  m_Name: Crime_SelectCard (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36707,7 +36682,7 @@ GameObject:
   - component: {fileID: 1584529326}
   - component: {fileID: 1584529325}
   m_Layer: 5
-  m_Name: Character_SelectCard (11)
+  m_Name: Crime_SelectCard (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37202,6 +37177,7 @@ MonoBehaviour:
   studentCanvas: {fileID: 1502399545}
   timeCanvas: {fileID: 431703901}
   crimeCanvas: {fileID: 1784985545}
+  _cardRenderer: {fileID: 0}
 --- !u!1 &1619141417
 GameObject:
   m_ObjectHideFlags: 0
@@ -37481,7 +37457,7 @@ GameObject:
   - component: {fileID: 1625582388}
   - component: {fileID: 1625582387}
   m_Layer: 5
-  m_Name: Character_SelectCard
+  m_Name: Time_SelectCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42598,7 +42574,7 @@ GameObject:
   - component: {fileID: 1838438315}
   - component: {fileID: 1838438314}
   m_Layer: 5
-  m_Name: Character_SelectCard (6)
+  m_Name: Crime_SelectCard (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44973,7 +44949,7 @@ GameObject:
   - component: {fileID: 1971826403}
   - component: {fileID: 1971826402}
   m_Layer: 5
-  m_Name: Character_SelectCard (2)
+  m_Name: Crime_SelectCard (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
