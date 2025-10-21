@@ -17,30 +17,39 @@ class SelectCard : SpreadCard
     [SerializeField]
     GameObject crimeCanvas;
 
+
+
     Button studentButton;
     Button timeButton;
     Button crimeButton;
+    Button selectedButton;
+
 
     Button[] studentButtons;
     Button[] timeButtons;
     Button[] crimeButtons;
 
-    public Image _cardRenderer;
 
+    public Image cardRenderer;
 
-    //Ease ease = Ease.InOutSine;
+    [SerializeField]
+    RectTransform slectedCard;
+    Vector3 selectedCardPos;
+
+    Ease ease = Ease.InOutSine;
 
     // Start is called before the first frame update
     void Start()
     {
         studentButton = SelectButton(studentCanvas, studentButtons);
-  
+
+        selectedCardPos = slectedCard.anchoredPosition;
+
         SetCard(studentCanvas);
 
-
         studentButton.onClick.AddListener(SelectStudentCard);
-        timeButton.onClick.AddListener(SelectTimeCard);
-        crimeButton.onClick.AddListener(SelectCrimeCard);
+        //timeButton.onClick.AddListener(SelectTimeCard);
+        //crimeButton.onClick.AddListener(SelectCrimeCard);
     }
 
 
@@ -48,13 +57,14 @@ class SelectCard : SpreadCard
     //Student => Time => Crime    
     void SelectStudentCard()
     {
-        CatdRotate("01_studentID","Ari_Choi", "studentID_back");
-        timeButton = SelectButton(timeCanvas, timeButtons);
 
-        SetFalseCard(timeCanvas, studentCanvas, crimeCanvas);
-        cards.Clear();
-        SetCard(timeCanvas);
+        CatdRotate(selectedButton.transform, "01_studentID", "Ari_Choi", "studentID_back");
 
+        //timeButton = SelectButton(timeCanvas, timeButtons);
+
+        //SetFalseCard(timeCanvas, studentCanvas, crimeCanvas);
+        //cards.Clear();
+        //SetCard(timeCanvas);
     }
     void SelectTimeCard()
     {
@@ -89,7 +99,7 @@ class SelectCard : SpreadCard
         }
 
         int _buttonIndex = UnityEngine.Random.Range(0, _ALLBUTTONS.Length);
-        Button _selectedButton = _ALLBUTTONS[_buttonIndex];
+        selectedButton = _ALLBUTTONS[_buttonIndex];
 
         for (int i = 0; i < _ALLBUTTONS.Length; i++)
         {
@@ -103,27 +113,38 @@ class SelectCard : SpreadCard
             }
         }
 
-        _cardRenderer = _selectedButton.GetComponent<Image>();
+        cardRenderer = selectedButton.GetComponent<Image>();
 
 
-        return _selectedButton;
+
+        return selectedButton;
     }
 
 
-    protected void CatdRotate(string _FILENAME, string _FCARDNAME, string _BCARDNAME)
+    void CatdRotate(Transform _BUTTONTR,string _FILENAME, string _FCARDNAME, string _BCARDNAME)
     {
 
-        _cardRenderer.sprite = Resources.Load<Sprite>($"03_Source/{_FILENAME}/{_FCARDNAME}");
-        // _cardRenderer.sprite = Resources.Load<Sprite>($"03_Source/04_back/{_BCARDNAME}");
+        Sprite _frontCard = Resources.Load<Sprite>($"03_Source/{_FILENAME}/{_FCARDNAME}");
+        Sprite _backCard = Resources.Load<Sprite>($"03_Source/04_back/{_BCARDNAME}");
 
-        //var _sequence = DOTween.Sequence();
-        //_sequence.Append(this.transform.DORotate(this.transform.eulerAngles
-        //    + new Vector3(0, 90, 0), 0.4f)).SetEase(ease);
+        cardRenderer.sprite = _backCard;
 
-        //_sequence.AppendCallback(() =>
-        //{ _frontRenderer.sprite = (this.transform.eulerAngles.y < 180) ? _frontRenderer.sprite : _backRenderer.sprite; });
+        var _sequence = DOTween.Sequence();
+        _sequence.Append(_BUTTONTR.DORotate(_BUTTONTR.eulerAngles
+            + new Vector3(0, 90, 0), 0.5f)).SetEase(ease);
 
-        //_sequence.Append(this.transform.DORotate(this.transform.eulerAngles
-        //   + new Vector3(0, 180, 0), 0.4f)).SetEase(ease);
+        _sequence.AppendCallback(() =>
+        { cardRenderer.sprite = (_BUTTONTR.eulerAngles.y < 180) ? cardRenderer.sprite = _frontCard : cardRenderer.sprite = _backCard; });
+
+        _sequence.Append(_BUTTONTR.DORotate(_BUTTONTR.eulerAngles
+           + new Vector3(0, 360, 0), 0.6f)).SetEase(ease);
+
+        if(_BUTTONTR.eulerAngles.y <= 360)
+        {
+            StartCoroutine(CardAssemble(selectedCardPos, 1f));
+        }
     }
+    
+
+
 }

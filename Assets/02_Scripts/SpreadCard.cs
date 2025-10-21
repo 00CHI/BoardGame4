@@ -15,6 +15,9 @@ public class SpreadCard : MonoBehaviour
      float spacingY = 470f;    // 카드 간 세로 간격
      float moveDuration = 0.3f; // 카드 등장 애니메이션 시간
 
+    int _cardCount;
+    RectTransform card;
+
     public List<Transform> cards = new List<Transform>();
 
     protected void SetCard(GameObject _PARENTPOS)
@@ -60,7 +63,7 @@ public class SpreadCard : MonoBehaviour
                     yield break;
                 }
 
-               RectTransform _card = cards[_cardIndex].GetComponent<RectTransform>();
+                card = cards[_cardIndex].GetComponent<RectTransform>();
 
                 yield return new WaitForSeconds(0.2f);
 
@@ -69,9 +72,8 @@ public class SpreadCard : MonoBehaviour
                     startPos.anchoredPosition.y - (y * spacingY)        
                 );
 
-                StartCoroutine(AnimateCard(_card, _targetPos, moveDuration));
+                StartCoroutine(AnimateCard(card, _targetPos, moveDuration));
                 _cardIndex++;
-
 
             }
         }
@@ -97,6 +99,39 @@ public class SpreadCard : MonoBehaviour
 
         //_CARD.localPosition = _TARGETPOS;
         _CARD.localScale = _endScale;
+    }
+
+
+    protected IEnumerator CardAssemble(Vector3 _TARGETPOS, float _DURATION)
+    {
+        _cardCount = cards.Count;
+
+        for (int i = _cardCount; i > 0; i--)
+        {
+
+            Vector3 _startPos = new Vector3(card.anchoredPosition.x, card.anchoredPosition.y);
+            Vector3 _startScale = Vector3.one;
+            Vector3 _endScale = Vector3.zero;
+
+            float t = 0f;
+            while (t < _DURATION)
+            {
+                t += Time.deltaTime;
+                float _progress = Mathf.SmoothStep(0, 1, t / _DURATION);
+                card.anchoredPosition = Vector3.Lerp(_startPos, _TARGETPOS, _progress);
+                card.localScale = Vector3.Lerp(_startScale, _endScale, _progress);
+                yield return null;
+
+            }
+
+            card.localPosition = _TARGETPOS;
+            card.localScale = _endScale;
+            cards.RemoveAt(i);
+            
+
+            yield return null;
+        }
+
     }
 
 
