@@ -1,0 +1,89 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F36F6FDD-9565-8621-3C37-182AD7A483DB}|Assembly-CSharp.csproj|c:\\users\\kuma_lab\\documents\\github\\boardgame4\\assets\\02_scripts\\selectcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F36F6FDD-9565-8621-3C37-182AD7A483DB}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\selectcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F36F6FDD-9565-8621-3C37-182AD7A483DB}|Assembly-CSharp.csproj|C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\assets\\02_scripts\\randomquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F36F6FDD-9565-8621-3C37-182AD7A483DB}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\randomquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F36F6FDD-9565-8621-3C37-182AD7A483DB}|Assembly-CSharp.csproj|C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\assets\\02_scripts\\spreadcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F36F6FDD-9565-8621-3C37-182AD7A483DB}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\spreadcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F36F6FDD-9565-8621-3C37-182AD7A483DB}|Assembly-CSharp.csproj|C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\assets\\02_scripts\\cardup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F36F6FDD-9565-8621-3C37-182AD7A483DB}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\cardup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SelectCard.cs",
+              "DocumentMoniker": "C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\Assets\\02_Scripts\\SelectCard.cs",
+              "RelativeDocumentMoniker": "Assets\\02_Scripts\\SelectCard.cs",
+              "ToolTip": "C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\Assets\\02_Scripts\\SelectCard.cs",
+              "RelativeToolTip": "Assets\\02_Scripts\\SelectCard.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAqwGoAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:22:10.249Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SpreadCard.cs",
+              "DocumentMoniker": "C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\Assets\\02_Scripts\\SpreadCard.cs",
+              "RelativeDocumentMoniker": "Assets\\02_Scripts\\SpreadCard.cs",
+              "ToolTip": "C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\Assets\\02_Scripts\\SpreadCard.cs",
+              "RelativeToolTip": "Assets\\02_Scripts\\SpreadCard.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAswHsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T00:13:14.331Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RandomQuestion.cs",
+              "DocumentMoniker": "C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\Assets\\02_Scripts\\RandomQuestion.cs",
+              "RelativeDocumentMoniker": "Assets\\02_Scripts\\RandomQuestion.cs",
+              "ToolTip": "C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\Assets\\02_Scripts\\RandomQuestion.cs",
+              "RelativeToolTip": "Assets\\02_Scripts\\RandomQuestion.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T04:48:51.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CardUp.cs",
+              "DocumentMoniker": "C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\Assets\\02_Scripts\\CardUp.cs",
+              "RelativeDocumentMoniker": "Assets\\02_Scripts\\CardUp.cs",
+              "ToolTip": "C:\\Users\\KUMA_LAB\\Documents\\GitHub\\BoardGame4\\Assets\\02_Scripts\\CardUp.cs",
+              "RelativeToolTip": "Assets\\02_Scripts\\CardUp.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T04:48:50.842Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
