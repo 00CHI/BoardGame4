@@ -19,9 +19,9 @@ class SelectCard : SpreadCard
     GameObject crimeCanvas;
 
     public Button studentButton;
-    public Button timeButton;
-    public Button crimeButton;
-    public Button selectedButton;
+    Button timeButton;
+    Button crimeButton;
+    Button selectedButton;
 
 
     Button[] studentButtons;
@@ -30,6 +30,15 @@ class SelectCard : SpreadCard
 
 
     public Image cardRenderer;
+
+    public Image studentCard;
+    public Image timeCard;
+    public Image crimeCard;
+
+    string studentName;
+    string timeName;
+    string crimeName;
+
 
     [SerializeField]
     RectTransform slectedCard;
@@ -99,10 +108,11 @@ class SelectCard : SpreadCard
         studentButton = studentButtons[index];
 
         int _nameIndex = UnityEngine.Random.Range(0, studentNames.Count);//{_studentName}
-        string _studentName = studentNames[_nameIndex];
+        studentName = studentNames[_nameIndex];
 
-        CardRotate(selectedButton.transform, "01_studentID", $"{_studentName}", "studentID_back", timeCanvas, studentCanvas, crimeCanvas);//, timeCanvas, studentCanvas, crimeCanvas, studentButton
+        
 
+        CardRotate(selectedButton.transform, "01_studentID", $"{studentName}", "studentID_back", timeCanvas, studentCanvas, crimeCanvas);//, timeCanvas, studentCanvas, crimeCanvas, studentButton
 
         SelectButton(timeCanvas, ref timeButtons, (idx) => SelectTimeCard(idx));
 
@@ -119,9 +129,9 @@ class SelectCard : SpreadCard
         }
 
         int _nameIndex = UnityEngine.Random.Range(0, timeNames.Count);//{_studentName}
-        string _timeName = timeNames[_nameIndex];
+        timeName = timeNames[_nameIndex];
 
-        CardRotate(selectedButton.transform, "02_time", $"{_timeName}", "time_back", crimeCanvas, studentCanvas, timeCanvas);//, crimeCanvas, studentCanvas, timeCanvas, timeButton
+        CardRotate(selectedButton.transform, "02_time", $"{timeName}", "time_back", crimeCanvas, studentCanvas, timeCanvas);//, crimeCanvas, studentCanvas, timeCanvas, timeButton
 
         SelectButton(crimeCanvas, ref crimeButtons, (idx) => SelectCrimeCard(idx));
 
@@ -133,17 +143,22 @@ class SelectCard : SpreadCard
         crimeButton = crimeButtons[index];
 
         int _nameIndex = UnityEngine.Random.Range(0, crimeNames.Count);//{_studentName}
-        string _crimeName = crimeNames[_nameIndex];
+        crimeName = crimeNames[_nameIndex];
 
         if (crimeButton == null)
         {
             Debug.Log("None Crimebutton");
         }
 
-        CardRotate(selectedButton.transform, "03_crime", $"{_crimeName}", "crime_back", crimeCanvas, studentCanvas, timeCanvas);//, crimeCanvas, studentCanvas, timeCanvas, crimeButton
+        CardRotate(selectedButton.transform, "03_crime", $"{crimeName}", "crime_back", crimeCanvas, studentCanvas, timeCanvas);//, crimeCanvas, studentCanvas, timeCanvas, crimeButton
 
 
         DOVirtual.DelayedCall(2.5f, () => SetActiveFalse());
+        //DOVirtual.DelayedCall(2.5f, () => SetGameCard(studentCard, "01_studentID", $"{studentName}"));
+        //DOVirtual.DelayedCall(2.5f, () => SetGameCard(timeCard, "02_time", $"{timeName}"));
+        //DOVirtual.DelayedCall(2.5f, () => SetGameCard(crimeCard, "03_crime", $"{crimeName}"));
+
+
     }
 
     void SetActiveFalse()
@@ -187,8 +202,6 @@ class SelectCard : SpreadCard
         void CardRotate(Transform _BUTTONTR, string _FILENAME, string _FCARDNAME, string _BCARDNAME, GameObject _CANVAS1, GameObject _CANVAS2, GameObject _CANVAS3)//GameObject _CANVAS1, GameObject _CANVAS2, GameObject _CANVAS3, Button _BUTTON01, Button[] _BUTTONS
         {
 
-
-
             Sprite _frontCard = Resources.Load<Sprite>($"03_Source/{_FILENAME}/{_FCARDNAME}");
             Sprite _backCard = Resources.Load<Sprite>($"03_Source/04_back/{_BCARDNAME}");
 
@@ -204,16 +217,20 @@ class SelectCard : SpreadCard
             _sequence.Append(_BUTTONTR.DORotate(_BUTTONTR.eulerAngles
                + new Vector3(0, 360, 0), 0.6f)).SetEase(ease);
 
-            CardChage(_CANVAS1, _CANVAS2, _CANVAS3);
+            CardChange(_CANVAS1, _CANVAS2, _CANVAS3);
 
         }
 
-        void CardChage(GameObject _CANVAS1, GameObject _CANVAS2, GameObject _CANVAS3)
+        void CardChange(GameObject _CANVAS1, GameObject _CANVAS2, GameObject _CANVAS3)
         {
             DOVirtual.DelayedCall(1f, () => ReturnAllCards());
             DOVirtual.DelayedCall(3f, () => SetFalseCard(_CANVAS1, _CANVAS2, _CANVAS3));
         }
-    
+
+        void SetGameCard(Image _CARDIMAGE,  string _FILENAME, string _CARDNAME)
+        {
+            _CARDIMAGE.sprite = Resources.Load<Sprite>($"03_Source/{_FILENAME}/{_CARDNAME}");
+        }      
 }
 
 
