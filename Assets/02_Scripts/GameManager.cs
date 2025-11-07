@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    public SelectCard SelectCard;
+   SelectCard SelectCard;
     
 
     // Start is called before the first frame update
