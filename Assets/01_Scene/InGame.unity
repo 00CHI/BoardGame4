@@ -41571,6 +41571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5167decd30b128d4d854aa3d9ebc5e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectCard: {fileID: 1603436759}
 --- !u!4 &1814367988
 Transform:
   m_ObjectHideFlags: 0

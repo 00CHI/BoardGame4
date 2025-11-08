@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;
 
-class SelectCard : SpreadCard
+public class SelectCard : SpreadCard
 {
     [SerializeField]
     GameObject studentCanvas;

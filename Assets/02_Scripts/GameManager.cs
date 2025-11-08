@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
+    //public SpreadCard SpreadCard;
     public SelectCard SelectCard;
-    
+
 
     // Start is called before the first frame update
     void Start()
