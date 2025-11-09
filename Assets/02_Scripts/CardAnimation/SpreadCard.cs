@@ -21,13 +21,6 @@ public class SpreadCard : MonoBehaviour
     public List<Transform> cards = new List<Transform>();
 
 
-
-    void Start()
-    {
-
-    }
-
-
     public void ReturnAllCards()
     {
         StartCoroutine(ReturnCards());

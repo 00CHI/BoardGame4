@@ -24,9 +24,9 @@ public class SelectCard : SpreadCard
     Button selectedButton;
 
 
-    Button[] studentButtons;
-    Button[] timeButtons;
-    Button[] crimeButtons;
+    public Button[] studentButtons;
+    public Button[] timeButtons;
+    public Button[] crimeButtons;
 
 
     public Image cardRenderer;
@@ -38,6 +38,10 @@ public class SelectCard : SpreadCard
     string studentName;
     string timeName;
     string crimeName;
+
+    public int studentNameIndex;
+    public int timeNameIndex;
+    public int cirmeNameIndex;
 
 
     [SerializeField]
@@ -90,7 +94,7 @@ public class SelectCard : SpreadCard
     };
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         selectedCardPos = slectedCard.anchoredPosition;
 
@@ -107,10 +111,13 @@ public class SelectCard : SpreadCard
         selectedButton = studentButtons[index];
         studentButton = studentButtons[index];
 
-        int _nameIndex = UnityEngine.Random.Range(0, studentNames.Count);//{_studentName}
-        studentName = studentNames[_nameIndex];
+        studentNameIndex = UnityEngine.Random.Range(0, studentNames.Count);//{_studentName}
+        studentName = studentNames[studentNameIndex];
 
-        
+        Singleton.Player.eSTUDENT = (eSTUDENT)studentNameIndex + 1;
+
+
+
 
         CardRotate(selectedButton.transform, "01_studentID", $"{studentName}", "studentID_back", timeCanvas, studentCanvas, crimeCanvas);//, timeCanvas, studentCanvas, crimeCanvas, studentButton
 
@@ -128,8 +135,11 @@ public class SelectCard : SpreadCard
             Debug.Log("None Timebutton");
         }
 
-        int _nameIndex = UnityEngine.Random.Range(0, timeNames.Count);//{_studentName}
-        timeName = timeNames[_nameIndex];
+        timeNameIndex = UnityEngine.Random.Range(0, timeNames.Count);//{_studentName}
+        timeName = timeNames[timeNameIndex];
+
+        Singleton.Player.eTIME = (eTIME)timeNameIndex + 1;
+
 
         CardRotate(selectedButton.transform, "02_time", $"{timeName}", "time_back", crimeCanvas, studentCanvas, timeCanvas);//, crimeCanvas, studentCanvas, timeCanvas, timeButton
 
@@ -142,13 +152,12 @@ public class SelectCard : SpreadCard
         selectedButton = crimeButtons[index];
         crimeButton = crimeButtons[index];
 
-        int _nameIndex = UnityEngine.Random.Range(0, crimeNames.Count);//{_studentName}
-        crimeName = crimeNames[_nameIndex];
+        cirmeNameIndex = UnityEngine.Random.Range(0, crimeNames.Count);//{_studentName}
+        crimeName = crimeNames[cirmeNameIndex];
 
-        if (crimeButton == null)
-        {
-            Debug.Log("None Crimebutton");
-        }
+        Singleton.Player.eCRIME = (eCRIME)cirmeNameIndex + 1;
+
+
 
         CardRotate(selectedButton.transform, "03_crime", $"{crimeName}", "crime_back", crimeCanvas, studentCanvas, timeCanvas);//, crimeCanvas, studentCanvas, timeCanvas, crimeButton
 

@@ -64,8 +64,11 @@
     <Compile Include="Assets\02_Scripts\Common\Singleton.cs" />
     <Compile Include="Assets\02_Scripts\Scene\SceneManager.cs" />
     <Compile Include="Assets\02_Scripts\Game\GameManager.cs" />
+    <Compile Include="Assets\02_Scripts\Game\Player.cs" />
     <Compile Include="Assets\02_Scripts\Common\Enum.cs" />
     <Compile Include="Assets\02_Scripts\CardAnimation\CardController.cs" />
+    <Compile Include="Assets\02_Scripts\AI\AIMember\AI01.cs" />
+    <Compile Include="Assets\02_Scripts\Common\Struct.cs" />
     <Compile Include="Assets\02_Scripts\AI\AI.cs" />
     <Compile Include="Assets\02_Scripts\Atlas\SpriteManager.cs" />
     <Compile Include="Assets\02_Scripts\Setting\SettingManager.cs" />

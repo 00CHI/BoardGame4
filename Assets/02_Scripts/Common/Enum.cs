@@ -8,6 +8,29 @@ public enum eAISTATE
 
 }
 
+public enum eAIMEMBER
+{
+    eAIMEMBER_NONE,
+    eAIMEMBER_ONE,
+    eAIMEMBER_TWO,
+    eAIMEMBER_THREE,
+    eAIMEMBER_FOUR,
+    eAIMEMBER_FIVE,
+    eAIMEMBER_SIX,
+    eAIMEMBER_SEVEN,
+    eAIMEMBER_EIGHT,
+    eAIMEMBER_NINE
+}
+
+
+public enum eROUND
+{
+    eROUND_NONE,
+    eROUND_FRIST,
+    eROUND_SECOND
+
+}
+
 public enum eCHARACTER
 {
     eCHARACTER_NONE,
@@ -15,6 +38,7 @@ public enum eCHARACTER
     eCHARACTER_AI
 
 }
+
 public enum eSTAT
 {
     eSTAT_NONE,
