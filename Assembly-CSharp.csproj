@@ -60,6 +60,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Assets\02_Scripts\CardController.cs" />
     <Compile Include="Assets\02_Scripts\SelectCard.cs" />
     <Compile Include="Assets\02_Scripts\GameManager.cs" />
@@ -70,6 +71,24 @@
     <Compile Include="Assets\02_Scripts\RandomQuestion.cs" />
     <Compile Include="Assets\02_Scripts\SpreadCard.cs" />
     <Compile Include="Assets\02_Scripts\SceneManager.cs" />
+=======
+    <Compile Include="Assets\02_Scripts\CardAnimation\SpreadCard.cs" />
+    <Compile Include="Assets\02_Scripts\Common\Singleton.cs" />
+    <Compile Include="Assets\02_Scripts\Scene\SceneManager.cs" />
+    <Compile Include="Assets\02_Scripts\Game\GameManager.cs" />
+    <Compile Include="Assets\02_Scripts\Game\Player.cs" />
+    <Compile Include="Assets\02_Scripts\Common\Enum.cs" />
+    <Compile Include="Assets\02_Scripts\CardAnimation\CardController.cs" />
+    <Compile Include="Assets\02_Scripts\AI\AIMember\AI01.cs" />
+    <Compile Include="Assets\02_Scripts\Common\Struct.cs" />
+    <Compile Include="Assets\02_Scripts\AI\AI.cs" />
+    <Compile Include="Assets\02_Scripts\Atlas\SpriteManager.cs" />
+    <Compile Include="Assets\02_Scripts\Setting\SettingManager.cs" />
+    <Compile Include="Assets\02_Scripts\Game\RandomQuestion.cs" />
+    <Compile Include="Assets\02_Scripts\Game\RoomManager.cs" />
+    <Compile Include="Assets\02_Scripts\Game\SelectCard.cs" />
+    <Compile Include="Assets\02_Scripts\CardAnimation\CardUp.cs" />
+>>>>>>> a464bde4 (251109_PM8:43)
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
