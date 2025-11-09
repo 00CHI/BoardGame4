@@ -18,7 +18,7 @@ public class SelectCard : SpreadCard
     [SerializeField]
     GameObject crimeCanvas;
 
-    public Button studentButton;
+    Button studentButton;
     Button timeButton;
     Button crimeButton;
     Button selectedButton;

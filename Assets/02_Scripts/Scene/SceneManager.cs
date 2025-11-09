@@ -5,15 +5,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public  class  SceneManager : MonoBehaviour
 {
     [SerializeField]
     Button StartButton;
 
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        StartButton.onClick.AddListener(OnButtonClick);
+        Singleton.SceneManager = this;
+
+        //StartButton.onClick.AddListener(OnButtonClick);
 
     }
 
@@ -23,8 +26,15 @@ public class SceneManager : MonoBehaviour
 
     }
 
-    void OnButtonClick()
+    public void OnButtonClick()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("InGame");
+
     }
+
+    public void OnCancleButtonClick()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
+    }
+
 }
