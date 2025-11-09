@@ -6,6 +6,7 @@ public static class Singleton
 {
     public static GameManager GameManager;
     public static SpriteManager SpriteManager;
+    public static SceneManager SceneManager;
 
     public static RoomManager RoomManager;
 

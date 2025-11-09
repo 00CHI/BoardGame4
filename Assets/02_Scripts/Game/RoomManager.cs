@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviour
 {
-    int roomMemberCount = 4;
+    public int roomMemberCount = 4;
 
     string teacherToggle = "YES";
+
+    public bool isStart = false;
 
     Text roomMemberText;
     Text teacherToggleText;
@@ -18,9 +20,14 @@ public class RoomManager : MonoBehaviour
     Button teacherYesButton;
     Button teacherNoButton;
 
+    Button cancleButton;
+    Button startButton;
+
     // Start is called before the first frame update
     void Awake()
     {
+        Singleton.RoomManager = this;
+
         roomMemberText = GameObject.Find("Person_Text").GetComponent<Text>();
         teacherToggleText = GameObject.Find("ToggleTeacher_Text").GetComponent<Text>();
 
@@ -30,6 +37,10 @@ public class RoomManager : MonoBehaviour
         teacherYesButton = GameObject.Find("TeacherLeft_Button").GetComponent<Button>();
         teacherNoButton = GameObject.Find("TeacherRight_Button").GetComponent<Button>();
 
+        cancleButton = GameObject.Find("Cancle_Button").GetComponent<Button>();
+        startButton = GameObject.Find("Confirm_Button").GetComponent<Button>();
+
+
 
         roomMemberText.text = $"{roomMemberCount}Έν";
 
@@ -38,6 +49,9 @@ public class RoomManager : MonoBehaviour
 
         teacherYesButton.onClick.AddListener(OnTeacherToggleClick);
         teacherNoButton.onClick.AddListener(OnTeacherToggleClick);
+
+        //cancleButton.onClick.AddListener(Singleton.SceneManager.OnCancleButtonClick);
+        startButton.onClick.AddListener(OnStartButtonClick);
     }
 
     // Update is called once per frame
@@ -87,6 +101,17 @@ public class RoomManager : MonoBehaviour
         }
 
         teacherToggleText.text = teacherToggle;
+    }
+
+    void OnStartButtonClick()
+    {
+
+        Singleton.SceneManager.OnButtonClick();
+        DontDestroyOnLoad(gameObject);
+        gameObject.SetActive(false);
+
+        isStart = true;
+
     }
 
 }

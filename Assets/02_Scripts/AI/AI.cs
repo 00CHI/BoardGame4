@@ -7,6 +7,21 @@ public class AI: MonoBehaviour
 
 
 
+    public List<GameObject> aiObjects = new List<GameObject>();
+    public List<GameObject> aiProfiles = new List<GameObject>();
+
+    List<eAIMEMBER> aiMembers = new List<eAIMEMBER>()
+    {
+        eAIMEMBER.eAIMEMBER_ONE,
+        eAIMEMBER.eAIMEMBER_TWO,
+        eAIMEMBER.eAIMEMBER_THREE,
+        eAIMEMBER.eAIMEMBER_FOUR,
+        eAIMEMBER.eAIMEMBER_FIVE,
+        eAIMEMBER.eAIMEMBER_SIX,
+        eAIMEMBER.eAIMEMBER_SEVEN,
+        eAIMEMBER.eAIMEMBER_EIGHT,
+        eAIMEMBER.eAIMEMBER_NINE
+    };
 
     eCHARACTER eCHARACTER;
     eAIMEMBER eAIMEMBER;
@@ -20,12 +35,34 @@ public class AI: MonoBehaviour
         Singleton.AI = this;
 
         eCHARACTER = eCHARACTER.eCHARACTER_AI;
+
+        if(Singleton.RoomManager.isStart == true)
+        {
+            GetChildren(Singleton.RoomManager.roomMemberCount);
+
+            //for(int i =  )
+            //{
+
+            //}
+            aiProfiles.RemoveAt(8 - Singleton.RoomManager.roomMemberCount);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+
+
+
+    public void GetChildren(int _ROOMMEMBER)
+    {
+        for (int i = 0; i < _ROOMMEMBER; i++)
+        {
+            aiObjects.Add(transform.GetChild(i).gameObject);
+        }
     }
 
     void AICardSetting()

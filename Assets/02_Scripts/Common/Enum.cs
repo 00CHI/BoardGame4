@@ -51,7 +51,7 @@ public enum eSTAT
 public enum eSTUDENT
 {
     eSTUDENT_NONE,
-    eSTUDENT_Ari_Choi,///1
+    eSTUDENT_Ari_Choi,//1
     eSTUDENT_bada_Seo,//2
     eSTUDENT_Bora_Nam,//3
     eSTUDENT_doha_Bae,//4
