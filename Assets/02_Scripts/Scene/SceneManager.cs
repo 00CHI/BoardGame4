@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 
 public  class  SceneManager : MonoBehaviour
 {
-    [SerializeField]
-    Button StartButton;
+    //[SerializeField]
+    //Button StartButton;
 
 
     // Start is called before the first frame update

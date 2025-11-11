@@ -39,12 +39,6 @@ public class AI: MonoBehaviour
         if(Singleton.RoomManager.isStart == true)
         {
             GetChildren(Singleton.RoomManager.roomMemberCount);
-
-            //for(int i =  )
-            //{
-
-            //}
-            aiProfiles.RemoveAt(8 - Singleton.RoomManager.roomMemberCount);
         }
     }
 
@@ -59,9 +53,17 @@ public class AI: MonoBehaviour
 
     public void GetChildren(int _ROOMMEMBER)
     {
-        for (int i = 0; i < _ROOMMEMBER; i++)
+        for (int i = 0; i < _ROOMMEMBER - 1; i++)
         {
             aiObjects.Add(transform.GetChild(i).gameObject);
+        }
+
+        int j = 8;
+
+        for (j = 8; j >= _ROOMMEMBER; j--)
+        {
+            aiProfiles[j - 1].SetActive(false);
+
         }
     }
 
