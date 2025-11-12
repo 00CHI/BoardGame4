@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +14,17 @@ public class RandomQuestion : MonoBehaviour
 
     string randomQuestion;
 
+    public int index;
+
     [SerializeField]
     TextMeshProUGUI questionText;
     TextMeshProUGUI allQuestionText;
 
 
-    List<string> questions = new List<string>()
+    public HashSet<string> questions_HashSet;
+
+
+    public List<string> questions = new List<string>()
     {
         "이름에 ㄱ이 들어갑니까?",//1
         "이름에 ㄱ이 들어갑니까?",//2
@@ -95,6 +103,9 @@ public class RandomQuestion : MonoBehaviour
         randomQuestion = GetRandomQuestion();
         questionText.text = randomQuestion;
 
+        Singleton.AIMembers.AIAnswer(index);
+
+
         int questionsCount = questions.Count;
         allQuestionText.text = questionsCount.ToString();
 
@@ -105,9 +116,37 @@ public class RandomQuestion : MonoBehaviour
 
     string GetRandomQuestion()
     {
-        int index = Random.Range(0, questions.Count);
-        questions.RemoveAt(index);
+        //questions_HashSet = new HashSet<string>(questions);
+        //List<string> uniqueQuestions = questions_HashSet.ToList();
+        //List<string> result = new List<string>();
+
+        index = Random.Range(0, questions.Count);
+
+
 
         return questions[index];
+    
     }
+
+    private List<T> GetNotDuplicateRandomList_HashSet<T>(IList<T> list, int count)
+    {
+        HashSet<T> hashSet = new HashSet<T>(list);
+        List<T> uniqueList = hashSet.ToList();
+        List<T> result = new List<T>();
+        int n = uniqueList.Count;
+
+        // count > n => error!
+
+        for (int i = 0; i < count; i++)
+        {
+            int r = UnityEngine.Random.Range(i, n);
+            T temp = uniqueList[i];
+            uniqueList[i] = uniqueList[r];
+            uniqueList[r] = temp;
+            result.Add(uniqueList[i]);
+        }
+
+        return result;
+    }
+
 }

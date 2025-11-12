@@ -67,13 +67,13 @@
     <Compile Include="Assets\02_Scripts\Game\Player.cs" />
     <Compile Include="Assets\02_Scripts\Common\Enum.cs" />
     <Compile Include="Assets\02_Scripts\CardAnimation\CardController.cs" />
-    <Compile Include="Assets\02_Scripts\AI\AIMember\AI01.cs" />
     <Compile Include="Assets\02_Scripts\Common\Struct.cs" />
     <Compile Include="Assets\02_Scripts\AI\AI.cs" />
     <Compile Include="Assets\02_Scripts\Atlas\SpriteManager.cs" />
     <Compile Include="Assets\02_Scripts\Setting\SettingManager.cs" />
     <Compile Include="Assets\02_Scripts\Game\RandomQuestion.cs" />
     <Compile Include="Assets\02_Scripts\Game\RoomManager.cs" />
+    <Compile Include="Assets\02_Scripts\AI\AIMember\AIMembers.cs" />
     <Compile Include="Assets\02_Scripts\Game\SelectCard.cs" />
     <Compile Include="Assets\02_Scripts\CardAnimation\CardUp.cs" />
   </ItemGroup>

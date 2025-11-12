@@ -167,7 +167,6 @@ public class SelectCard : SpreadCard
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(timeCard, "02_time", $"{timeName}"));
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(crimeCard, "03_crime", $"{crimeName}"));
 
-
     }
 
     void SetActiveFalse()

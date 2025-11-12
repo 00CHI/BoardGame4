@@ -12,6 +12,7 @@ public static class Singleton
 
     public static Player Player;
     public static AI AI;
+    public static AIMembers AIMembers;
 
     public static SelectCard SelectCard;
     public static RandomQuestion RandomQuestion;

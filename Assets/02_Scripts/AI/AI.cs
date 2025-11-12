@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class AI: MonoBehaviour
 {
-
-
-
     public List<GameObject> aiObjects = new List<GameObject>();
     public List<GameObject> aiProfiles = new List<GameObject>();
 
@@ -24,7 +21,6 @@ public class AI: MonoBehaviour
     };
 
     eCHARACTER eCHARACTER;
-    eAIMEMBER eAIMEMBER;
 
     AIStatInt aiStatInt;
 
@@ -34,7 +30,6 @@ public class AI: MonoBehaviour
     {
         Singleton.AI = this;
 
-        eCHARACTER = eCHARACTER.eCHARACTER_AI;
 
         if(Singleton.RoomManager.isStart == true)
         {
@@ -63,8 +58,9 @@ public class AI: MonoBehaviour
         for (j = 8; j >= _ROOMMEMBER; j--)
         {
             aiProfiles[j - 1].SetActive(false);
-
         }
+            
+        //Singleton.AIMembers.AIMemberSelect();
     }
 
     void AICardSetting()
@@ -98,3 +94,5 @@ public class AI: MonoBehaviour
         //}
     }
 }
+
+
