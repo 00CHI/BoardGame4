@@ -160,10 +160,11 @@
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\AI\\AI.cs",
               "ToolTip": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\AI\\AI.cs",
               "RelativeToolTip": "Assets\\02_Scripts\\AI\\AI.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAALAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAmwBoAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-11T11:40:58.215Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -173,7 +174,7 @@
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\AI\\AIMember\\AIMembers.cs",
               "ToolTip": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\AI\\AIMember\\AIMembers.cs",
               "RelativeToolTip": "Assets\\02_Scripts\\AI\\AIMember\\AIMembers.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAADwv3YAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAkwGYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-12T00:09:37.874Z",
               "IsPinned": true,

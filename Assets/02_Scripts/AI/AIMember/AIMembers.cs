@@ -43,37 +43,40 @@ public class AIMembers : MonoBehaviour
         int _membernum = 0;
         int _totalmember = Singleton.RoomManager.roomMemberCount + 1;
 
-        while (eAIMEMBER != (eAIMEMBER)_totalmember)
+        while (eAIMEMBER != (eAIMEMBER)_totalmember -1)
         {
             switch (eAIMEMBER)
             {
                 case eAIMEMBER.eAIMEMBER_ONE:
-
-                        AIStudentSelect();
+                    AllAISelect();
 
                     break;
                 case eAIMEMBER.eAIMEMBER_TWO:
-                    AIStudentSelect();
+                    AllAISelect();
                     break;
                 case eAIMEMBER.eAIMEMBER_THREE:
-                    AIStudentSelect();
+                    AllAISelect();
 
                     break;
                 case eAIMEMBER.eAIMEMBER_FOUR:
-                    AIStudentSelect();
+                    AllAISelect();
+
                     break;
                 case eAIMEMBER.eAIMEMBER_FIVE:
-                    AIStudentSelect();
+                    AllAISelect();
+
                     break;
                 case eAIMEMBER.eAIMEMBER_SIX:
-                    AIStudentSelect();
+                    AllAISelect();
+
                     break;
                 case eAIMEMBER.eAIMEMBER_SEVEN:
-                    AIStudentSelect();
+                    AllAISelect();
 
                     break;
                 case eAIMEMBER.eAIMEMBER_EIGHT:
-                    AIStudentSelect();
+                    AllAISelect();
+
                     break;
             }
 
@@ -89,7 +92,7 @@ public class AIMembers : MonoBehaviour
     void AIMemberSetting()
     {
         //Singleton.AI.
-        for (int i = 0; i <= Singleton.RoomManager.roomMemberCount - 1; i++)
+        for (int i = 0; i <= Singleton.RoomManager.roomMemberCount - 2; i++)
         {
 
             if (eAIMEMBER == eAIMEMBER.eAIMEMBER_NONE)
@@ -100,23 +103,27 @@ public class AIMembers : MonoBehaviour
         }
 
     }
+
+    void AllAISelect()
+    {
+        AIStudentSelect();
+        AITimeSelect();
+        AICrimeSelect();
+    }
     public void AIStudentSelect()
     {
-        //for (int i = 0; i < System.Enum.GetValues(typeof(eSTUDENT)).Length;)
-        //{
-            int _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eSTUDENT)).Length);
+        int _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eSTUDENT)).Length);
+
         while(eSTUDENT == eSTUDENT.eSTUDENT_NONE)
         {
             if (Singleton.AI.aiStudents.Contains((eSTUDENT)_randomnum))
             {
                 _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eSTUDENT)).Length);
-                //continue;
             }
             else
             {
                 Singleton.AI.aiStudents.Add((eSTUDENT)_randomnum);
                 eSTUDENT = (eSTUDENT)_randomnum;
-                //i++;
                 break;
             }
 
@@ -127,7 +134,60 @@ public class AIMembers : MonoBehaviour
             }
         }
 
-        //}
+    }
+
+    public void AITimeSelect()
+    {
+        int _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eTIME)).Length);
+
+        while (eTIME == eTIME.eTIME_NONE)
+        {
+            if (Singleton.AI.aiTimes.Contains((eTIME)_randomnum))
+            {
+                _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eTIME)).Length);
+                //continue;
+            }
+            else
+            {
+                Singleton.AI.aiTimes.Add((eTIME)_randomnum);
+                eTIME = (eTIME)_randomnum;
+                //i++;
+                break;
+            }
+
+            if (eTIME != eTIME.eTIME_NONE)
+            {
+                break;
+
+            }
+        }
+    }
+
+    public void AICrimeSelect()
+    {
+        int _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eCRIME)).Length);
+
+        while (eCRIME == eCRIME.eCRIME_NONE)
+        {
+            if (Singleton.AI.aiCrimes.Contains((eCRIME)_randomnum))
+            {
+                _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eCRIME)).Length);
+                //continue;
+            }
+            else
+            {
+                Singleton.AI.aiCrimes.Add((eCRIME)_randomnum);
+                eCRIME = (eCRIME)_randomnum;
+                //i++;
+                break;
+            }
+
+            if (eCRIME != eCRIME.eCRIME_NONE)
+            {
+                break;
+
+            }
+        }
     }
 
     public void AIAnswer(int index)

@@ -23,6 +23,8 @@ public class AI: MonoBehaviour
 
     public List<GameObject> aiMembersList = new List<GameObject>();
     public List<eSTUDENT> aiStudents = new List<eSTUDENT>();
+    public List<eTIME> aiTimes = new List<eTIME>();
+    public List<eCRIME> aiCrimes = new List<eCRIME>();
 
 
     eCHARACTER eCHARACTER;
