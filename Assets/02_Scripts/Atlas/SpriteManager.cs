@@ -26,7 +26,7 @@ public class SpriteManager : MonoBehaviour
     void OnButtonClick()
     {
         spriteNum++;
-        Debug.Log(spriteNum);
+        //Debug.Log(spriteNum);
 
 
         if (spriteNum >= inferenceAtlas.spriteCount)
@@ -43,7 +43,7 @@ public class SpriteManager : MonoBehaviour
         
         if (inferenceImage.sprite == null)
         {
-            inferenceImage.sprite = SpriteReturn("inferenceCheck5" );
+            inferenceImage.sprite = SpriteReturn("inferenceCheck5");
         }
 
     }

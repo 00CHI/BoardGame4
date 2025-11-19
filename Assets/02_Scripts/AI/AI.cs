@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,10 @@ public class AI: MonoBehaviour
         eAIMEMBER.eAIMEMBER_NINE
     };
 
+    public List<GameObject> aiMembersList = new List<GameObject>();
+    public List<eSTUDENT> aiStudents = new List<eSTUDENT>();
+
+
     eCHARACTER eCHARACTER;
 
     AIStatInt aiStatInt;
@@ -34,6 +39,8 @@ public class AI: MonoBehaviour
         if(Singleton.RoomManager.isStart == true)
         {
             GetChildren(Singleton.RoomManager.roomMemberCount);
+
+            //Singleton.AIMembers.AICardSetting();
         }
     }
 
@@ -63,36 +70,9 @@ public class AI: MonoBehaviour
         //Singleton.AIMembers.AIMemberSelect();
     }
 
-    void AICardSetting()
-    {
 
-        for (int i = 0; i < System.Enum.GetValues(typeof(eAIMEMBER)).Length; i++)
-        {
-        }
 
-        //switch (eAIMEMBER)
-        //{
-        //    case eAIMEMBER.eAIMEMBER_ONE:
 
-        //        break;
-        //    case eAIMEMBER.eAIMEMBER_TWO:
-        //        break;
-        //    case eAIMEMBER.eAIMEMBER_THREE:
-        //        break;
-        //    case eAIMEMBER.eAIMEMBER_FOUR:
-        //        break;
-        //    case eAIMEMBER.eAIMEMBER_FIVE:
-        //        break;
-        //    case eAIMEMBER.eAIMEMBER_SIX:
-        //        break;
-        //    case eAIMEMBER.eAIMEMBER_SEVEN:
-        //        break;
-        //    case eAIMEMBER.eAIMEMBER_EIGHT:
-        //        break;
-        //    case eAIMEMBER.eAIMEMBER_NINE:
-        //        break;
-        //}
-    }
 }
 
 

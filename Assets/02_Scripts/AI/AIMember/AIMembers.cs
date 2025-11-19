@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
-public class AIMembers : AI
+public class AIMembers : MonoBehaviour
 {
 
 
-    public eAIMEMBER eAIMEMBER;
+    public eAIMEMBER eAIMEMBER = eAIMEMBER.eAIMEMBER_NONE;
     public eCHARACTER eCHARACTER;
 
     public eSTUDENT eSTUDENT;
@@ -18,25 +21,115 @@ public class AIMembers : AI
     public Text answerText;
 
 
+
+
     // Start is called before the first frame update
     void Awake()
     {
-        Singleton.AIMembers = this;
-
+        //reset
         eCHARACTER = eCHARACTER.eCHARACTER_AI;
+        eAIMEMBER = eAIMEMBER.eAIMEMBER_NONE;
+        eSTUDENT = eSTUDENT.eSTUDENT_NONE;
+        eTIME = eTIME.eTIME_NONE;
+        eCRIME = eCRIME.eCRIME_NONE;
 
+        if (Singleton.AI == null)
+        {
+            Singleton.AI = GetComponentInParent<AI>();
+        }
+
+        AIMemberSetting();
+
+        int _membernum = 0;
+        int _totalmember = Singleton.RoomManager.roomMemberCount + 1;
+
+        while (eAIMEMBER != (eAIMEMBER)_totalmember)
+        {
+            switch (eAIMEMBER)
+            {
+                case eAIMEMBER.eAIMEMBER_ONE:
+
+                        AIStudentSelect();
+
+                    break;
+                case eAIMEMBER.eAIMEMBER_TWO:
+                    AIStudentSelect();
+                    break;
+                case eAIMEMBER.eAIMEMBER_THREE:
+                    AIStudentSelect();
+
+                    break;
+                case eAIMEMBER.eAIMEMBER_FOUR:
+                    AIStudentSelect();
+                    break;
+                case eAIMEMBER.eAIMEMBER_FIVE:
+                    AIStudentSelect();
+                    break;
+                case eAIMEMBER.eAIMEMBER_SIX:
+                    AIStudentSelect();
+                    break;
+                case eAIMEMBER.eAIMEMBER_SEVEN:
+                    AIStudentSelect();
+
+                    break;
+                case eAIMEMBER.eAIMEMBER_EIGHT:
+                    AIStudentSelect();
+                    break;
+            }
+
+            _membernum++;
+
+            if (_membernum == _totalmember)
+            {
+                break;
+            }
+
+        }
     }
-
-    // Update is called once per frame
-    void Update()
+    void AIMemberSetting()
     {
+        //Singleton.AI.
+        for (int i = 0; i <= Singleton.RoomManager.roomMemberCount - 1; i++)
+        {
+
+            if (eAIMEMBER == eAIMEMBER.eAIMEMBER_NONE)
+            {
+                var member = Singleton.AI.aiMembersList[i].GetComponent<AIMembers>();
+                member.eAIMEMBER = (eAIMEMBER)i + 1;
+            }
+        }
 
     }
-
-    public void AIMemberSelect()
+    public void AIStudentSelect()
     {
-        
+        //for (int i = 0; i < System.Enum.GetValues(typeof(eSTUDENT)).Length;)
+        //{
+            int _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eSTUDENT)).Length);
+        while(eSTUDENT == eSTUDENT.eSTUDENT_NONE)
+        {
+            if (Singleton.AI.aiStudents.Contains((eSTUDENT)_randomnum))
+            {
+                _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eSTUDENT)).Length);
+                //continue;
+            }
+            else
+            {
+                Singleton.AI.aiStudents.Add((eSTUDENT)_randomnum);
+                eSTUDENT = (eSTUDENT)_randomnum;
+                //i++;
+                break;
+            }
+
+            if(eSTUDENT != eSTUDENT.eSTUDENT_NONE)
+            {
+                break;
+
+            }
+        }
+
+        //}
     }
+
     public void AIAnswer(int index)
     {
         switch (eSTUDENT)
@@ -898,63 +991,75 @@ public class AIMembers : AI
     }
 }
 
-//switch (eAIMEMBER)
+//int _membernum = 0;
+//int _totalmember = Singleton.RoomManager.roomMemberCount;
+
+//while (eAIMEMBER != (eAIMEMBER)_totalmember)
 //{
-//    case eAIMEMBER.eAIMEMBER_ONE:
+//    switch (eAIMEMBER)
+//    {
+//        case eAIMEMBER.eAIMEMBER_ONE:
+
+//            AIStudentSelect();
+
+//            break;
+//        case eAIMEMBER.eAIMEMBER_TWO:
+//            AIStudentSelect();
+
+//            break;
+//        case eAIMEMBER.eAIMEMBER_THREE:
+
+//            AIStudentSelect();
+
+//            break;
+//        case eAIMEMBER.eAIMEMBER_FOUR:
+//            AIStudentSelect();
+
+//            break;
+//        case eAIMEMBER.eAIMEMBER_FIVE:
+//            AIStudentSelect();
+
+//            break;
+//        case eAIMEMBER.eAIMEMBER_SIX:
+//            AIStudentSelect();
+
+//            break;
+//        case eAIMEMBER.eAIMEMBER_SEVEN:
+//            AIStudentSelect();
+
+
+//            break;
+//        case eAIMEMBER.eAIMEMBER_EIGHT:
+//            AIStudentSelect();
+
+//            break;
+//    }
+
+//    _membernum++;
+
+//    if (_membernum == Singleton.RoomManager.roomMemberCount)
+//    {
 //        break;
-//    case eAIMEMBER.eAIMEMBER_TWO:
-//        break;
-//    case eAIMEMBER.eAIMEMBER_THREE:
-//        break;
-//    case eAIMEMBER.eAIMEMBER_FOUR:
-//        break;
-//    case eAIMEMBER.eAIMEMBER_FIVE:
-//        break;
-//    case eAIMEMBER.eAIMEMBER_SIX:
-//        break;
-//    case eAIMEMBER.eAIMEMBER_SEVEN:
-//        break;
-//    case eAIMEMBER.eAIMEMBER_EIGHT:
-//        break;
+//    }
 //}
 
-//for (int i = 0;)
-//    if (aiObjects[0].gameObject == gameObject)
-//    {
 
-//        eAIMEMBER = eAIMEMBER.eAIMEMBER_ONE;
-//    }
-//    else if (aiObjects[1].gameObject == gameObject)
-//    {
-//        eAIMEMBER = eAIMEMBER.eAIMEMBER_TWO;
 
-//    }
-//    else if (aiObjects[2].gameObject == gameObject)
-//    {
-//        eAIMEMBER = eAIMEMBER.eAIMEMBER_THREE;
 
-//    }
-//    else if (aiObjects[3].gameObject == gameObject)
-//    {
-//        eAIMEMBER = eAIMEMBER.eAIMEMBER_FOUR;
+//for (int i = 0; i < System.Enum.GetValues(typeof(eAIMEMBER)).Length;)
+//{
+//    int _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eSTUDENT)).Length);
 
-//    }
-//    else if (aiObjects[4] == this.gameObject)
+//    if (aiStudents.Contains((eSTUDENT)_randomnum))
 //    {
-//        eAIMEMBER = eAIMEMBER.eAIMEMBER_FIVE;
-
+//        _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eSTUDENT)).Length);
+//        continue;
 //    }
-//    else if (aiObjects[5] == this.gameObject)
+//    else
 //    {
-//        eAIMEMBER = eAIMEMBER.eAIMEMBER_SIX;
-
-//    }
-//    else if (aiObjects[6] == this.gameObject)
-//    {
-//        eAIMEMBER = eAIMEMBER.eAIMEMBER_SEVEN;
-
-//    }
-//    else if (aiObjects[7] == this.gameObject)
-//    {
-//        eAIMEMBER = eAIMEMBER.eAIMEMBER_EIGHT;
-//    }
+//        aiStudents.Add((eSTUDENT)_randomnum);
+//        eSTUDENT = (eSTUDENT)_randomnum;
+//        //i++;
+//        break;
+//    } 
+//}
