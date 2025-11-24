@@ -3134,7 +3134,7 @@ GameObject:
   - component: {fileID: 1255099316}
   - component: {fileID: 1255099315}
   m_Layer: 5
-  m_Name: PROFILE_Button (1)
+  m_Name: PROFILE_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

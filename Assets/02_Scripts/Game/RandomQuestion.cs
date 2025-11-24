@@ -21,7 +21,6 @@ public class RandomQuestion : MonoBehaviour
     TextMeshProUGUI allQuestionText;
 
 
-    public HashSet<string> questions_HashSet;
 
 
     public List<string> questions = new List<string>()
@@ -88,13 +87,17 @@ public class RandomQuestion : MonoBehaviour
         "당신은 화장실 물을 일부러 안 내렸습니까?"//60
     };
 
+    public List<int> selectedQuestions = new List<int>();
 
+    public int questionCount = 60;
 
     // Start is called before the first frame update
     void Start()
     {
         questionButton = GetComponent<Button>();
         allQuestionText = GetComponentInChildren<TextMeshProUGUI>();
+        allQuestionText.text = questionCount.ToString();
+
         questionButton.onClick.AddListener(OnButtonClick);
     }
 
@@ -105,9 +108,6 @@ public class RandomQuestion : MonoBehaviour
 
         Singleton.AIMembers.AIAnswer(index);
 
-
-        int questionsCount = questions.Count;
-        allQuestionText.text = questionsCount.ToString();
 
         //if(questions.Count)
 
@@ -122,31 +122,46 @@ public class RandomQuestion : MonoBehaviour
 
         index = Random.Range(0, questions.Count);
 
+        while(questionCount != 0)
+        {
+            if (selectedQuestions.Contains(index))
+            {
+                index = Random.Range(0, questions.Count);
+            }
+            else
+            {
+                selectedQuestions.Add(index);
+                questionCount--;
 
+                allQuestionText.text = questionCount.ToString();
+
+                break;
+            }
+        }
 
         return questions[index];
     
     }
 
-    private List<T> GetNotDuplicateRandomList_HashSet<T>(IList<T> list, int count)
-    {
-        HashSet<T> hashSet = new HashSet<T>(list);
-        List<T> uniqueList = hashSet.ToList();
-        List<T> result = new List<T>();
-        int n = uniqueList.Count;
+    //private List<T> GetNotDuplicateRandomList_HashSet<T>(IList<T> list, int count)
+    //{
+    //    HashSet<T> hashSet = new HashSet<T>(list);
+    //    List<T> uniqueList = hashSet.ToList();
+    //    List<T> result = new List<T>();
+    //    int n = uniqueList.Count;
 
-        // count > n => error!
+    //    // count > n => error!
 
-        for (int i = 0; i < count; i++)
-        {
-            int r = UnityEngine.Random.Range(i, n);
-            T temp = uniqueList[i];
-            uniqueList[i] = uniqueList[r];
-            uniqueList[r] = temp;
-            result.Add(uniqueList[i]);
-        }
+    //    for (int i = 0; i < count; i++)
+    //    {
+    //        int r = UnityEngine.Random.Range(i, n);
+    //        T temp = uniqueList[i];
+    //        uniqueList[i] = uniqueList[r];
+    //        uniqueList[r] = temp;
+    //        result.Add(uniqueList[i]);
+    //    }
 
-        return result;
-    }
+    //    return result;
+    //}
 
 }
