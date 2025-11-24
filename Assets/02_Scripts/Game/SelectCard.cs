@@ -44,13 +44,14 @@ public class SelectCard : SpreadCard
     public int cirmeNameIndex;
 
 
+
     [SerializeField]
     RectTransform slectedCard;
     Vector3 selectedCardPos;
 
     Ease ease = Ease.InOutSine;
 
-    List<string> studentNames = new List<string>()
+    public List<string> studentNames = new List<string>()
     {
         "Ari_Choi",//1
         "bada_Seo",//2
@@ -67,17 +68,23 @@ public class SelectCard : SpreadCard
         "schoolmaste"//13
     };
 
-    List<string> timeNames = new List<string>()
+    public List<string> timeNames = new List<string>()
     {
-        "After",//1
-        "Break",//2
-        "CleaningTime",//3
-        "DropOff",//4
-        "GoToSchool",//5
-        "Lunch",//6
+        "After01",//1
+        "Break01",//2
+        "CleaningTime01",//3
+        "DropOff01",//4
+        "GoToSchool01",//5
+        "Lunch01",//6
+        "After02",//7
+        "Break02",//8
+        "CleaningTime02",//9
+        "DropOff02",//10
+        "GoToSchool02",//11
+        "Lunch02",//12
     };
 
-    List<string> crimeNames = new List<string>()
+    public List<string> crimeNames = new List<string>()
     {
         "Absence",//1
         "Alcohol",//2
@@ -167,6 +174,7 @@ public class SelectCard : SpreadCard
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(timeCard, "02_time", $"{timeName}"));
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(crimeCard, "03_crime", $"{crimeName}"));
 
+
     }
 
     void SetActiveFalse()
@@ -235,7 +243,7 @@ public class SelectCard : SpreadCard
             DOVirtual.DelayedCall(3f, () => SetFalseCard(_CANVAS1, _CANVAS2, _CANVAS3));
         }
 
-        void SetGameCard(Image _CARDIMAGE,  string _FILENAME, string _CARDNAME)
+    void SetGameCard(Image _CARDIMAGE,  string _FILENAME, string _CARDNAME)
         {
             _CARDIMAGE.sprite = Resources.Load<Sprite>($"03_Source/{_FILENAME}/{_CARDNAME}");
         }      

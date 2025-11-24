@@ -68,12 +68,18 @@ public enum eSTUDENT
 public enum eTIME
 {
     eTIME_NONE,
-    eTIME_After,//1
-    eTIME_Break,//2
-    eTIME_CleaningTime,//3
-    eTIME_DropOff,//4
-    eTIME_GoToSchool,//5
-    eTIME_Lunch,//6
+    eTIME_After01,//1
+    eTIME_Break01,//2
+    eTIME_CleaningTime01,//3
+    eTIME_DropOff01,//4
+    eTIME_GoToSchool01,//5
+    eTIME_Lunch01,//6
+    eTIME_After02,//1
+    eTIME_Break02,//2
+    eTIME_CleaningTime02,//3
+    eTIME_DropOff02,//4
+    eTIME_GoToSchool02,//5
+    eTIME_Lunch02,//6
 }
 
 public enum eCRIME

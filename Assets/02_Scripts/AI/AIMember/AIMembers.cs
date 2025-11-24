@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
+using DG.Tweening;
+
 
 public class AIMembers : MonoBehaviour
 {
@@ -19,8 +21,6 @@ public class AIMembers : MonoBehaviour
 
     public string answer;
     public Text answerText;
-
-
 
 
     // Start is called before the first frame update
@@ -38,12 +38,67 @@ public class AIMembers : MonoBehaviour
             Singleton.AI = GetComponentInParent<AI>();
         }
 
+
+
+
         AIMemberSetting();
+    }
+
+    void Update()
+    {
+        if(Singleton.Player.eSTUDENT != eSTUDENT.eSTUDENT_NONE && Singleton.Player.eTIME != eTIME.eTIME_NONE && Singleton.Player.eCRIME != eCRIME.eCRIME_NONE)
+        {
+            SelectedAI();
+        }
+    }
+    void AIMemberSetting()
+    {
+        //Singleton.AI.
+        for (int i = 0; i <= Singleton.RoomManager.roomMemberCount - 2; i++)
+        {
+
+            if (eAIMEMBER == eAIMEMBER.eAIMEMBER_NONE)
+            {
+                var member = Singleton.AI.aiMembersList[i].GetComponent<AIMembers>();
+                member.eAIMEMBER = (eAIMEMBER)i + 1;
+            }
+        }
+
+    }
+    public void SelectedAI()
+    {
+        foreach (eSTUDENT eSTUDENT in System.Enum.GetValues(typeof(eSTUDENT)))
+        {
+            if (eSTUDENT == Singleton.Player.eSTUDENT)
+            {
+                Singleton.AI.aiStudents.Add(eSTUDENT);
+
+                break;
+            }
+        }
+        foreach (eTIME eTIME in System.Enum.GetValues(typeof(eTIME)))
+        {
+            if (eTIME == Singleton.Player.eTIME)
+            {
+                Singleton.AI.aiTimes.Add(eTIME);
+
+                break;
+            }
+        }
+        foreach (eCRIME eCRIME in System.Enum.GetValues(typeof(eCRIME)))
+        {
+            if (eCRIME == Singleton.Player.eCRIME)
+            {
+                Singleton.AI.aiCrimes.Add(eCRIME);
+
+                break;
+            }
+        }
 
         int _membernum = 0;
         int _totalmember = Singleton.RoomManager.roomMemberCount + 1;
 
-        while (eAIMEMBER != (eAIMEMBER)_totalmember -1)
+        while (eAIMEMBER != (eAIMEMBER) _totalmember -1)
         {
             switch (eAIMEMBER)
             {
@@ -88,20 +143,6 @@ public class AIMembers : MonoBehaviour
             }
 
         }
-    }
-    void AIMemberSetting()
-    {
-        //Singleton.AI.
-        for (int i = 0; i <= Singleton.RoomManager.roomMemberCount - 2; i++)
-        {
-
-            if (eAIMEMBER == eAIMEMBER.eAIMEMBER_NONE)
-            {
-                var member = Singleton.AI.aiMembersList[i].GetComponent<AIMembers>();
-                member.eAIMEMBER = (eAIMEMBER)i + 1;
-            }
-        }
-
     }
 
     void AllAISelect()
@@ -887,7 +928,7 @@ public class AIMembers : MonoBehaviour
 
         switch (eTIME)
         {
-            case eTIME.eTIME_After://1 /15:30
+            case eTIME.eTIME_After01://1 /15:30
                 if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
                 {
                     answer = "아니요";
@@ -909,7 +950,7 @@ public class AIMembers : MonoBehaviour
                     answerText.text = answer;
                 }
                 break;
-            case eTIME.eTIME_Break://2 /13:50
+            case eTIME.eTIME_Break01://2 /13:50
                 if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
                 {
                     answer = "네";
@@ -931,7 +972,7 @@ public class AIMembers : MonoBehaviour
                     answerText.text = answer;
                 }
                 break;
-            case eTIME.eTIME_CleaningTime://3 /16:30
+            case eTIME.eTIME_CleaningTime01://3 /16:30
                 if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
                 {
                     answer = "아니요";
@@ -953,7 +994,7 @@ public class AIMembers : MonoBehaviour
                     answerText.text = answer;
                 }
                 break;
-            case eTIME.eTIME_DropOff://4 /17:00
+            case eTIME.eTIME_DropOff01://4 /17:00
                 if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
                 {
                     answer = "아니요";
@@ -975,7 +1016,7 @@ public class AIMembers : MonoBehaviour
                     answerText.text = answer;
                 }
                 break;
-            case eTIME.eTIME_GoToSchool://5 /8:30
+            case eTIME.eTIME_GoToSchool01://5 /8:30
                 if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
                 {
                     answer = "네";
@@ -997,7 +1038,139 @@ public class AIMembers : MonoBehaviour
                     answerText.text = answer;
                 }
                 break;
-            case eTIME.eTIME_Lunch://6 /12:00
+            case eTIME.eTIME_Lunch01://6 /12:00
+                if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 25 || index == 26 || index == 27)//"당신은 15시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 28 || index == 29 || index == 30)//"당신은 13시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 31 || index == 32 || index == 33)//"당신은 16시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                break;
+            case eTIME.eTIME_After02://1 /15:30
+                if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 25 || index == 26 || index == 27)//"당신은 15시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 28 || index == 29 || index == 30)//"당신은 13시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 31 || index == 32 || index == 33)//"당신은 16시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                break;
+            case eTIME.eTIME_Break02://2 /13:50
+                if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 25 || index == 26 || index == 27)//"당신은 15시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 28 || index == 29 || index == 30)//"당신은 13시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 31 || index == 32 || index == 33)//"당신은 16시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                break;
+            case eTIME.eTIME_CleaningTime02://3 /16:30
+                if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 25 || index == 26 || index == 27)//"당신은 15시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 28 || index == 29 || index == 30)//"당신은 13시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 31 || index == 32 || index == 33)//"당신은 16시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                break;
+            case eTIME.eTIME_DropOff02://4 /17:00
+                if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 25 || index == 26 || index == 27)//"당신은 15시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 28 || index == 29 || index == 30)//"당신은 13시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 31 || index == 32 || index == 33)//"당신은 16시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                break;
+            case eTIME.eTIME_GoToSchool02://5 /8:30
+                if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 25 || index == 26 || index == 27)//"당신은 15시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 28 || index == 29 || index == 30)//"당신은 13시 이전에 범행을 저질렀습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 31 || index == 32 || index == 33)//"당신은 16시 이후에 범행을 저질렀습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                break;
+            case eTIME.eTIME_Lunch02://6 /12:00
                 if (index == 22 || index == 23 || index == 24)//"당신은 15시 이전에 범행을 저질렀습니까?"
                 {
                     answer = "네";
