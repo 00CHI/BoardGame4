@@ -11,6 +11,14 @@ public class Player : MonoBehaviour
     public eTIME eTIME = eTIME.eTIME_NONE;
     public eCRIME eCRIME = eCRIME.eCRIME_NONE;
 
+    public int turnNumber = 0;
+
+    public bool myTrun = false;
+    public bool myAnswerTime = false;
+
+
+
+
 
     // Start is called before the first frame update
     void Awake()

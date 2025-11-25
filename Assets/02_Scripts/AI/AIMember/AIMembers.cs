@@ -15,6 +15,8 @@ public class AIMembers : MonoBehaviour
     public eAIMEMBER eAIMEMBER = eAIMEMBER.eAIMEMBER_NONE;
     public eCHARACTER eCHARACTER;
 
+    public eAISTATE eAISTATE = eAISTATE.eAISTATE_NONE;
+
     public eSTUDENT eSTUDENT;
     public eTIME eTIME;
     public eCRIME eCRIME;
@@ -22,12 +24,16 @@ public class AIMembers : MonoBehaviour
     public string answer;
     public Text answerText;
 
+    public int turnNumber = 0;
+
+    public bool myTrun = false;
+    public bool myAnswer = false;
+
 
     // Start is called before the first frame update
     void Awake()
     {
         //reset
-        eCHARACTER = eCHARACTER.eCHARACTER_AI;
         eAIMEMBER = eAIMEMBER.eAIMEMBER_NONE;
         eSTUDENT = eSTUDENT.eSTUDENT_NONE;
         eTIME = eTIME.eTIME_NONE;
@@ -38,9 +44,6 @@ public class AIMembers : MonoBehaviour
             Singleton.AI = GetComponentInParent<AI>();
         }
 
-
-
-
         AIMemberSetting();
     }
 
@@ -50,6 +53,28 @@ public class AIMembers : MonoBehaviour
         {
             SelectedAI();
         }
+
+
+
+        switch(eAISTATE)
+        {
+             case eAISTATE.eAISTATE_NONE:
+                    eAISTATE = eAISTATE.eAISTATE_WAIT;
+                 break;
+             case eAISTATE.eAISTATE_WAIT:
+                    if(myTrun)
+                    {
+                        eAISTATE = eAISTATE.eAISTATE_QUESTION;
+                    }
+                 break;
+             case eAISTATE.eAISTATE_QUESTION:
+                  break;
+             case eAISTATE.eAISTATE_ANSWER:
+                  break;
+             case eAISTATE.eAISTATE_REASONING:
+                  break;
+        }
+        
     }
     void AIMemberSetting()
     {
@@ -1221,6 +1246,13 @@ public class AIMembers : MonoBehaviour
             case eCRIME.eCRIME_Washing://12 ¾È¾ÄÀ½ : ¼¼¸ð
                 break;
         }
+    }
+
+    void AIStatSetting()
+    {
+
+
+
     }
 }
 

@@ -28,7 +28,7 @@ public class AI: MonoBehaviour
     public List<eCRIME> aiCrimes = new List<eCRIME>();
 
 
-    eCHARACTER eCHARACTER;
+    public eCHARACTER eCHARACTER;
 
     AIStatInt aiStatInt;
 
@@ -75,6 +75,14 @@ public class AI: MonoBehaviour
 
 
 
+    //public enum eAISTATE
+    //{
+    //    eAISTATE_NONE,
+    //    eAISTATE_WAIT,
+    //    eAISTATE_QUESTION,
+    //    eAISTATE_ANSWER,
+    //    eAISTATE_REASONING
+    //}
 
 }
 
