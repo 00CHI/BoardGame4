@@ -1,11 +1,13 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
-using DG.Tweening;
 
 
 public class AIMembers : MonoBehaviour
@@ -26,8 +28,11 @@ public class AIMembers : MonoBehaviour
 
     public int turnNumber = 0;
 
+    public bool myWait = false;
     public bool myTrun = false;
     public bool myAnswer = false;
+
+    public GameObject answerPanel;
 
 
     // Start is called before the first frame update
@@ -38,6 +43,8 @@ public class AIMembers : MonoBehaviour
         eSTUDENT = eSTUDENT.eSTUDENT_NONE;
         eTIME = eTIME.eTIME_NONE;
         eCRIME = eCRIME.eCRIME_NONE;
+        eAISTATE = eAISTATE.eAISTATE_NONE;
+
 
         if (Singleton.AI == null)
         {
@@ -49,33 +56,60 @@ public class AIMembers : MonoBehaviour
 
     void Update()
     {
-        if(Singleton.Player.eSTUDENT != eSTUDENT.eSTUDENT_NONE && Singleton.Player.eTIME != eTIME.eTIME_NONE && Singleton.Player.eCRIME != eCRIME.eCRIME_NONE)
+        if(Singleton.SelectCard.isSelectedComplete)
         {
             SelectedAI();
         }
 
+        //if(eAISTATE == eAISTATE.eAISTATE_NONE)
+        //{
+           
+        //}
 
-
-        switch(eAISTATE)
+        switch (eAISTATE)
         {
-             case eAISTATE.eAISTATE_NONE:
-                    eAISTATE = eAISTATE.eAISTATE_WAIT;
-                 break;
-             case eAISTATE.eAISTATE_WAIT:
-                    if(myTrun)
-                    {
-                        eAISTATE = eAISTATE.eAISTATE_QUESTION;
-                    }
-                 break;
-             case eAISTATE.eAISTATE_QUESTION:
-                  break;
-             case eAISTATE.eAISTATE_ANSWER:
-                  break;
-             case eAISTATE.eAISTATE_REASONING:
-                  break;
+            case eAISTATE.eAISTATE_NONE:
+
+                eAISTATE = eAISTATE.eAISTATE_WAIT;
+                myWait = true;
+                break;
+            case eAISTATE.eAISTATE_WAIT:
+
+                if (myWait)
+                {
+                    AIStateWait();
+
+                }
+                //if (myTrun)
+                //{
+                //    eAISTATE = eAISTATE.eAISTATE_QUESTION;
+                //}
+                else if (myAnswer)
+                {
+                    myWait = false;
+                    eAISTATE = eAISTATE.eAISTATE_ANSWER;
+                }
+
+                break;
+            case eAISTATE.eAISTATE_QUESTION:
+
+                // AIStateQuestion();
+
+                break;
+            case eAISTATE.eAISTATE_ANSWER:
+
+                if (myAnswer)
+                {
+                    AIStateAnswer();
+                }
+                break;
+            case eAISTATE.eAISTATE_REASONING:
+                break;
         }
-        
+
     }
+
+
     void AIMemberSetting()
     {
         //Singleton.AI.
@@ -90,8 +124,40 @@ public class AIMembers : MonoBehaviour
         }
 
     }
+    public void AIStateWait()
+    {
+        eAISTATE = eAISTATE.eAISTATE_WAIT;
+
+        answerPanel.SetActive(false);
+
+        myWait = true;
+        myTrun = false;
+        myAnswer = false;
+    }
+    void AIStateQuestion()
+    {
+        Singleton.RandomQuestion.OnButtonClick();
+    }
+    void AIStateAnswer()
+    {
+
+        answerPanel.SetActive(true);
+
+        AIAnswer(Singleton.RandomQuestion.index);
+    }
+    void AIStateReasoning()
+    {
+    }
+
     public void SelectedAI()
     {
+
+        if (Singleton.Player == null)
+        {
+            GameObject _player = GameObject.FindWithTag("Player");
+            Singleton.Player = _player.GetComponent<Player>();
+        }
+
         foreach (eSTUDENT eSTUDENT in System.Enum.GetValues(typeof(eSTUDENT)))
         {
             if (eSTUDENT == Singleton.Player.eSTUDENT)
@@ -109,78 +175,86 @@ public class AIMembers : MonoBehaviour
 
                 break;
             }
+
         }
         foreach (eCRIME eCRIME in System.Enum.GetValues(typeof(eCRIME)))
         {
             if (eCRIME == Singleton.Player.eCRIME)
             {
                 Singleton.AI.aiCrimes.Add(eCRIME);
-
                 break;
             }
         }
 
         int _membernum = 0;
-        int _totalmember = Singleton.RoomManager.roomMemberCount + 1;
+        int _totalmember = Singleton.RoomManager.roomMemberCount;
 
-        while (eAIMEMBER != (eAIMEMBER) _totalmember -1)
+        while (true) //eAIMEMBER != (eAIMEMBER)_totalmember - 1
         {
-            switch (eAIMEMBER)
+
+            if (_membernum == _totalmember)//Singleton.AI.aiStudents.Count > Singleton.RoomManager.roomMemberCount
             {
-                case eAIMEMBER.eAIMEMBER_ONE:
-                    AllAISelect();
-
-                    break;
-                case eAIMEMBER.eAIMEMBER_TWO:
-                    AllAISelect();
-                    break;
-                case eAIMEMBER.eAIMEMBER_THREE:
-                    AllAISelect();
-
-                    break;
-                case eAIMEMBER.eAIMEMBER_FOUR:
-                    AllAISelect();
-
-                    break;
-                case eAIMEMBER.eAIMEMBER_FIVE:
-                    AllAISelect();
-
-                    break;
-                case eAIMEMBER.eAIMEMBER_SIX:
-                    AllAISelect();
-
-                    break;
-                case eAIMEMBER.eAIMEMBER_SEVEN:
-                    AllAISelect();
-
-                    break;
-                case eAIMEMBER.eAIMEMBER_EIGHT:
-                    AllAISelect();
-
-                    break;
-            }
-
-            _membernum++;
-
-            if (_membernum == _totalmember)
-            {
+                Singleton.SelectCard.isSelectedComplete = false;
                 break;
             }
 
-        }
-    }
+            AIMembers _aIMembers = Singleton.AI.aiMembersList[_membernum].GetComponent<AIMembers>();
 
+            //eAIMEMBER = (eAIMEMBER)_membernum;
+
+
+            switch (eAIMEMBER)
+            {
+                case eAIMEMBER.eAIMEMBER_ONE:
+                    _aIMembers.AllAISelect();
+                    break;
+                case eAIMEMBER.eAIMEMBER_TWO:
+                    _aIMembers.AllAISelect();
+                    break;
+                case eAIMEMBER.eAIMEMBER_THREE:
+                    _aIMembers.AllAISelect();
+
+                    break;
+                case eAIMEMBER.eAIMEMBER_FOUR:
+                    _aIMembers.AllAISelect();
+
+                    break;
+                case eAIMEMBER.eAIMEMBER_FIVE:
+                    _aIMembers.AllAISelect();
+
+                    break;
+                case eAIMEMBER.eAIMEMBER_SIX:
+                    _aIMembers.AllAISelect();
+
+                    break;
+                case eAIMEMBER.eAIMEMBER_SEVEN:
+                    _aIMembers.AllAISelect();
+
+                    break;
+                case eAIMEMBER.eAIMEMBER_EIGHT:
+                    _aIMembers.AllAISelect();
+
+                    break;
+            }
+
+
+            _membernum++;
+
+        }
+
+    }
     void AllAISelect()
     {
         AIStudentSelect();
         AITimeSelect();
         AICrimeSelect();
     }
+
     public void AIStudentSelect()
     {
         int _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eSTUDENT)).Length);
 
-        while(eSTUDENT == eSTUDENT.eSTUDENT_NONE)
+        while (eSTUDENT == eSTUDENT.eSTUDENT_NONE)//Singleton.AI.aiStudents.Count > Singleton.RoomManager.roomMemberCount
         {
             if (Singleton.AI.aiStudents.Contains((eSTUDENT)_randomnum))
             {
@@ -193,7 +267,7 @@ public class AIMembers : MonoBehaviour
                 break;
             }
 
-            if(eSTUDENT != eSTUDENT.eSTUDENT_NONE)
+            if (eSTUDENT != eSTUDENT.eSTUDENT_NONE)
             {
                 break;
 
@@ -1246,14 +1320,12 @@ public class AIMembers : MonoBehaviour
             case eCRIME.eCRIME_Washing://12 안씻음 : 세모
                 break;
         }
+
+
+        DOVirtual.DelayedCall(1.5f, () => AIStateWait());//0.5초 대기 후 답변 완료 콜백
     }
 
-    void AIStatSetting()
-    {
 
-
-
-    }
 }
 
 //int _membernum = 0;

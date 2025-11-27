@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -51,9 +53,10 @@ public class AI: MonoBehaviour
     void Update()
     {
 
+
+
+
     }
-
-
 
 
     public void GetChildren(int _ROOMMEMBER)
@@ -69,20 +72,9 @@ public class AI: MonoBehaviour
         {
             aiProfiles[j - 1].SetActive(false);
         }
-            
+
         //Singleton.AIMembers.AIMemberSelect();
     }
-
-
-
-    //public enum eAISTATE
-    //{
-    //    eAISTATE_NONE,
-    //    eAISTATE_WAIT,
-    //    eAISTATE_QUESTION,
-    //    eAISTATE_ANSWER,
-    //    eAISTATE_REASONING
-    //}
 
 }
 

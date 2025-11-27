@@ -43,6 +43,8 @@ public class SelectCard : SpreadCard
     public int timeNameIndex;
     public int cirmeNameIndex;
 
+    public bool isSelectedComplete;
+
 
 
     [SerializeField]
@@ -103,8 +105,8 @@ public class SelectCard : SpreadCard
     // Start is called before the first frame update
     void Awake()
     {
+        Singleton.SelectCard = this;
         selectedCardPos = slectedCard.anchoredPosition;
-
 
         SetCard(studentCanvas);
 
@@ -121,9 +123,12 @@ public class SelectCard : SpreadCard
         studentNameIndex = UnityEngine.Random.Range(0, studentNames.Count);//{_studentName}
         studentName = studentNames[studentNameIndex];
 
+        if (Singleton.Player == null)
+        {
+            GameObject _player = GameObject.FindWithTag("Player");
+            Singleton.Player = _player.GetComponent<Player>();
+        }
         Singleton.Player.eSTUDENT = (eSTUDENT)studentNameIndex + 1;
-
-
 
 
         CardRotate(selectedButton.transform, "01_studentID", $"{studentName}", "studentID_back", timeCanvas, studentCanvas, crimeCanvas);//, timeCanvas, studentCanvas, crimeCanvas, studentButton
@@ -145,6 +150,11 @@ public class SelectCard : SpreadCard
         timeNameIndex = UnityEngine.Random.Range(0, timeNames.Count);//{_studentName}
         timeName = timeNames[timeNameIndex];
 
+        if (Singleton.Player == null)
+        {
+            GameObject _player = GameObject.FindWithTag("Player");
+            Singleton.Player = _player.GetComponent<Player>();
+        }
         Singleton.Player.eTIME = (eTIME)timeNameIndex + 1;
 
 
@@ -162,6 +172,11 @@ public class SelectCard : SpreadCard
         cirmeNameIndex = UnityEngine.Random.Range(0, crimeNames.Count);//{_studentName}
         crimeName = crimeNames[cirmeNameIndex];
 
+        if (Singleton.Player == null)
+        {
+            GameObject _player = GameObject.FindWithTag("Player");
+            Singleton.Player = _player.GetComponent<Player>();
+        }
         Singleton.Player.eCRIME = (eCRIME)cirmeNameIndex + 1;
 
 
@@ -173,13 +188,18 @@ public class SelectCard : SpreadCard
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(studentCard, "01_studentID", $"{studentName}"));
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(timeCard, "02_time", $"{timeName}"));
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(crimeCard, "03_crime", $"{crimeName}"));
+        DOVirtual.DelayedCall(2.5f, () => Singleton.GameManager.GameTurn());
 
 
     }
 
     void SetActiveFalse()
     {
+        isSelectedComplete = true;
+
         gameObject.SetActive(false);
+
+
     }
 
     void SelectButton(GameObject _PARENTCANVAS,ref Button[] _ALLBUTTONS, Action<int> _ONCLICKED)

@@ -18,17 +18,12 @@ public class Player : MonoBehaviour
 
 
 
-
-
     // Start is called before the first frame update
     void Awake()
     {
         Singleton.Player = this;
 
         eCHARACTER = eCHARACTER.eCHARACTER_PLAYER;
-
-
-
     }
 
     // Update is called once per frame

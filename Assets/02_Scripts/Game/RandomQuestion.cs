@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +17,12 @@ public class RandomQuestion : MonoBehaviour
     string randomQuestion;
 
     public int index;
+    public int aiIndex;
 
     [SerializeField]
     TextMeshProUGUI questionText;
     TextMeshProUGUI allQuestionText;
+
 
 
 
@@ -92,8 +96,10 @@ public class RandomQuestion : MonoBehaviour
     public int questionCount = 60;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        Singleton.RandomQuestion = this;
+
         questionButton = GetComponent<Button>();
         allQuestionText = GetComponentInChildren<TextMeshProUGUI>();
         allQuestionText.text = questionCount.ToString();
@@ -101,12 +107,27 @@ public class RandomQuestion : MonoBehaviour
         questionButton.onClick.AddListener(OnButtonClick);
     }
 
-    void OnButtonClick()
+    public void OnButtonClick()
     {
         randomQuestion = GetRandomQuestion();
         questionText.text = randomQuestion;
 
-        Singleton.AIMembers.AIAnswer(index);
+        aiIndex = UnityEngine.Random.Range(0, Singleton.RoomManager.roomMemberCount-1);
+
+        Singleton.AIMembers = Singleton.AI.aiMembersList[aiIndex].GetComponent<AIMembers>();
+
+        //Singleton.AIMembers.eAISTATE = eAISTATE.eAISTATE_ANSWER;
+        //Singleton.AIMembers.answerPanel.SetActive(true);
+        Singleton.AIMembers.myWait = false;
+        Singleton.AIMembers.myAnswer = true;
+
+        //DOVirtual.DelayedCall(1f, () => Singleton.AIMembers.AIStateWait());
+
+
+
+
+
+
 
 
         //if(questions.Count)
@@ -114,19 +135,16 @@ public class RandomQuestion : MonoBehaviour
         //string question = questions[index];
     }
 
-    string GetRandomQuestion()
+    public string GetRandomQuestion()
     {
-        //questions_HashSet = new HashSet<string>(questions);
-        //List<string> uniqueQuestions = questions_HashSet.ToList();
-        //List<string> result = new List<string>();
 
-        index = Random.Range(0, questions.Count);
+        index = UnityEngine.Random.Range(0, questions.Count);
 
         while(questionCount != 0)
         {
             if (selectedQuestions.Contains(index))
             {
-                index = Random.Range(0, questions.Count);
+                index = UnityEngine.Random.Range(0, questions.Count);
             }
             else
             {
