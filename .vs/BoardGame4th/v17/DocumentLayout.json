@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\assets\\02_scripts\\game\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\assets\\02_scripts\\game\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\game\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|c:\\users\\suin4\\onedrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_programing\\boardgame4th\\assets\\02_scripts\\game\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\game\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|c:\\users\\suin4\\onedrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_programing\\boardgame4th\\assets\\02_scripts\\game\\profilebutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\game\\profilebutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\assets\\02_scripts\\ai\\aimember\\aimembers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\ai\\aimember\\aimembers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|c:\\users\\suin4\\onedrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_programing\\boardgame4th\\assets\\02_scripts\\game\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\game\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\assets\\02_scripts\\ai\\ai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\ai\\ai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\assets\\02_scripts\\game\\profilebutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\game\\profilebutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\assets\\02_scripts\\game\\selectcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,10 +35,6 @@
       "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\atlas\\spritemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\assets\\02_scripts\\ai\\aimember\\aimembers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\ai\\aimember\\aimembers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\assets\\02_scripts\\game\\roommanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\game\\roommanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -41,10 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\assets\\02_scripts\\game\\randomquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\game\\randomquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\assets\\02_scripts\\ai\\ai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\ai\\ai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{73F2FB39-42FA-0676-1F34-05E33DBFACBC}|Assembly-CSharp.csproj|C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\assets\\02_scripts\\common\\enum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -102,11 +102,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "SelectCard.cs",
               "DocumentMoniker": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\Game\\SelectCard.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\Game\\SelectCard.cs",
@@ -115,18 +115,17 @@
               "ViewState": "AgIAANUAAAAAAAAAAAAvwO0AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-09T09:10:27.464Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "GameManager.cs",
               "DocumentMoniker": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\Game\\GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\Game\\GameManager.cs",
               "ToolTip": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\Game\\GameManager.cs",
               "RelativeToolTip": "Assets\\02_Scripts\\Game\\GameManager.cs",
-              "ViewState": "AgIAAIAAAAAAAAAAAAAQwL0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAK0AAAAAAAAAAAAuwBMBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-09T09:11:00.438Z",
               "IsPinned": true,
@@ -143,18 +142,17 @@
               "ViewState": "AgIAACIAAAAAAAAAAAAAwCwAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-09T09:10:53.721Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\Game\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\Game\\Player.cs",
               "ToolTip": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\Game\\Player.cs",
               "RelativeToolTip": "Assets\\02_Scripts\\Game\\Player.cs",
-              "ViewState": "AgIAAG8AAAAAAAAAAAA1wKcIAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAcwIQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-09T09:19:54.922Z",
               "IsPinned": true,
@@ -162,7 +160,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 3,
               "Title": "AI.cs",
               "DocumentMoniker": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\AI\\AI.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\AI\\AI.cs",
@@ -176,13 +174,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "AIMembers.cs",
               "DocumentMoniker": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\AI\\AIMember\\AIMembers.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\AI\\AIMember\\AIMembers.cs",
               "ToolTip": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\AI\\AIMember\\AIMembers.cs",
               "RelativeToolTip": "Assets\\02_Scripts\\AI\\AIMember\\AIMembers.cs",
-              "ViewState": "AgIAALwAAAAAAAAAAAAqwMgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAANYBAAAAAAAAAAAcwLcBAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-12T00:09:37.874Z",
               "IsPinned": true,
@@ -190,7 +188,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Singleton.cs",
               "DocumentMoniker": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\Common\\Singleton.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\Common\\Singleton.cs",
@@ -199,12 +197,11 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-09T09:25:59.398Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "RoomManager.cs",
               "DocumentMoniker": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\Game\\RoomManager.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\Game\\RoomManager.cs",
@@ -213,12 +210,11 @@
               "ViewState": "AgIAAB8AAAAAAAAAAAAAwCwAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-11T11:37:40.458Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "RandomQuestion.cs",
               "DocumentMoniker": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\Game\\RandomQuestion.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\Game\\RandomQuestion.cs",
@@ -227,12 +223,11 @@
               "ViewState": "AgIAAF4AAAAAAAAAAAAowHUAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-12T00:57:41.362Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "ProfileButton.cs",
               "DocumentMoniker": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\Game\\ProfileButton.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\Game\\ProfileButton.cs",
@@ -240,8 +235,7 @@
               "RelativeToolTip": "Assets\\02_Scripts\\Game\\ProfileButton.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAUwCMAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T01:29:29.074Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-02T01:29:29.074Z"
             },
             {
               "$type": "Document",
@@ -253,8 +247,7 @@
               "RelativeToolTip": "Library\\PackageCache\\com.unity.textmeshpro@3.0.7\\Scripts\\Runtime\\TMP_Text.cs",
               "ViewState": "AgIAAHQAAAAAAAAAAAAswIMAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-12T02:18:15.93Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-12T02:18:15.93Z"
             },
             {
               "$type": "Document",
@@ -266,8 +259,7 @@
               "RelativeToolTip": "Library\\PackageCache\\com.unity.ugui@1.0.0\\Runtime\\UI\\Core\\Layout\\GridLayoutGroup.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-30T01:57:32.908Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-30T01:57:32.908Z"
             },
             {
               "$type": "Document",
@@ -283,7 +275,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "SpriteManager.cs",
               "DocumentMoniker": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\Atlas\\SpriteManager.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\Atlas\\SpriteManager.cs",
@@ -291,12 +283,11 @@
               "RelativeToolTip": "Assets\\02_Scripts\\Atlas\\SpriteManager.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAIwC0AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T12:14:12.786Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-11T12:14:12.786Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "SceneManager.cs",
               "DocumentMoniker": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\Scene\\SceneManager.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\Scene\\SceneManager.cs",
@@ -304,8 +295,7 @@
               "RelativeToolTip": "Assets\\02_Scripts\\Scene\\SceneManager.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T13:40:13.732Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-09T13:40:13.732Z"
             },
             {
               "$type": "Document",
@@ -316,8 +306,7 @@
               "ToolTip": "C:\\Users\\suin4\\OneDrive\\\u30C9\u30AD\u30E5\u30E1\u30F3\u30C8\\01_Programing\\BoardGame4th\\Assets\\02_Scripts\\SceneManager.cs",
               "RelativeToolTip": "Assets\\02_Scripts\\SceneManager.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-14T00:08:06.404Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-14T00:08:06.404Z"
             },
             {
               "$type": "Document",

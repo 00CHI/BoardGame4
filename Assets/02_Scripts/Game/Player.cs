@@ -130,10 +130,8 @@ public class Player : MonoBehaviour
         aiButtons[6].interactable = true;
         aiButtons[7].interactable = true;
 
-        DOVirtual.DelayedCall(1f, () => {
-            myTurn= false;
-            ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
-        });
+
+
     }
     void PlayerReasoning()
     {

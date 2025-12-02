@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,18 +17,27 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> turnNumberIndex = new List<GameObject>();
 
+    public Slider turnTimerSlider;
+
 
     public bool isTrunStart;
     public bool isTrun;
     public bool isAITrun;
     public bool isPlayerTrun;
+    public bool isNext = false;
 
     public int turnCount;
+    public float currentTurnTime = 0f;
+    public float maxTurnTime = 30f;
     //int roundNumber;
 
     // Start is called before the first frame update
     void Awake()
     {
+        currentTurnTime = maxTurnTime;
+        turnTimerSlider.maxValue = 1f;
+        turnTimerSlider.value = 1f;
+
         Singleton.GameManager = this;
 
         isTrunStart = true;
@@ -91,23 +102,44 @@ public class GameManager : MonoBehaviour
 
         if (Singleton.AI.isAISelectComplete )
         {
-
-            if(isTrun)
+            if (isTrun)
             {
+                AIMembers _aimem = turnNumberIndex[turnCount].GetComponent<AIMembers>();
+                Player _player = turnNumberIndex[turnCount].GetComponent<Player>();
+
                 Debug.Log($" 턴넘버 체크시작{turnCount}");
 
-                GameTurn();
+                if (currentTurnTime > 0)
+                {
+                    currentTurnTime -= Time.deltaTime;
 
-                Singleton.AI.isAISelectComplete = false;
-
-                isTrun = false;
-
-                //turnCount++;
-
-                //isTrunStart = false;
-            }
+                    float normalizedValue = currentTurnTime / maxTurnTime;
+                    turnTimerSlider.value = normalizedValue;
+                }
 
 
+                if (currentTurnTime <= 0)
+                {
+                    Debug.Log("시간 초과! 다음 턴으로 이동");
+
+                    EndTurn(_aimem, _player);
+
+
+                }
+                else if (isNext)
+                {
+                    EndTurn(_aimem, _player);
+
+                }
+        }
+       
+
+
+            //isTrun = false;
+
+            //turnCount++;
+
+            //isTrunStart = false;
         }
 
         //while (roundNumber != 20)
@@ -150,7 +182,6 @@ public class GameManager : MonoBehaviour
 
             if (isAITrun)
             {
-        
 
                 _aimem.myTrun = true;
                 //_aimem.myWait = false;
@@ -158,11 +189,9 @@ public class GameManager : MonoBehaviour
 
                 _aimem.eAISTATE = eAISTATE.eAISTATE_QUESTION;
 
+
+
                 Debug.Log($"{turnCount} : {_aimem.eCHARACTER}  AI 턴 시작");
-
-                isAITrun = false;
-
-
 
             }
 
@@ -190,6 +219,7 @@ public class GameManager : MonoBehaviour
 
             if (_player.turnNumber == turnCount)
             {
+
                 isPlayerTrun = true;
 
                 //_player.myTrun = true;
@@ -202,6 +232,7 @@ public class GameManager : MonoBehaviour
 
             }
 
+ 
             //if (!Singleton.Player.myTrun)
             //{
             //    isTrunStart = false;
@@ -214,7 +245,38 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void NextTurnButton()
+    {
+        isNext = true;
+    }
 
+    void EndTurn(AIMembers _AIMEMBER,Player _PLAYER)
+    {
+        turnCount++;
+
+        if (turnCount >= Singleton.RoomManager.roomMemberCount)
+        {
+            turnCount = 0;
+
+        }
+
+        _AIMEMBER.eAISTATE = eAISTATE.eAISTATE_WAIT;
+        _PLAYER.ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
+
+
+        isAITrun = false;
+        isPlayerTrun = false;
+        //Singleton.AI.isAISelectComplete = false;
+
+
+        currentTurnTime = maxTurnTime;
+
+        isTrun = true;
+        isNext = false;
+
+        GameTurn();
+
+    }
 
 }
 
