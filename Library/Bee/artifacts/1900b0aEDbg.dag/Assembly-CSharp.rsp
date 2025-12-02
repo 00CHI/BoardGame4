@@ -394,6 +394,7 @@
 "Assets/02_Scripts/Common/Struct.cs"
 "Assets/02_Scripts/Game/GameManager.cs"
 "Assets/02_Scripts/Game/Player.cs"
+"Assets/02_Scripts/Game/ProfileButton.cs"
 "Assets/02_Scripts/Game/RandomQuestion.cs"
 "Assets/02_Scripts/Game/RoomManager.cs"
 "Assets/02_Scripts/Game/SelectCard.cs"

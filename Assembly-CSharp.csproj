@@ -63,6 +63,7 @@
     <Compile Include="Assets\02_Scripts\CardAnimation\SpreadCard.cs" />
     <Compile Include="Assets\02_Scripts\Common\Singleton.cs" />
     <Compile Include="Assets\02_Scripts\Scene\SceneManager.cs" />
+    <Compile Include="Assets\02_Scripts\Game\ProfileButton.cs" />
     <Compile Include="Assets\02_Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\02_Scripts\Game\Player.cs" />
     <Compile Include="Assets\02_Scripts\Common\Enum.cs" />

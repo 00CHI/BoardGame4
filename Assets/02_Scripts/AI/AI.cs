@@ -32,6 +32,8 @@ public class AI: MonoBehaviour
 
     public eCHARACTER eCHARACTER;
 
+    public bool isAISelectComplete = false;
+
     AIStatInt aiStatInt;
 
 

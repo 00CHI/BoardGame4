@@ -67,7 +67,7 @@ public class SelectCard : SpreadCard
         "mingug_Jo",//10
         "Minjae_Kim",//11
         "Mirae_Yoon",//12
-        "schoolmaste"//13
+        //"schoolmaste"//13
     };
 
     public List<string> timeNames = new List<string>()
@@ -188,14 +188,17 @@ public class SelectCard : SpreadCard
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(studentCard, "01_studentID", $"{studentName}"));
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(timeCard, "02_time", $"{timeName}"));
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(crimeCard, "03_crime", $"{crimeName}"));
-        DOVirtual.DelayedCall(2.5f, () => Singleton.GameManager.GameTurn());
+        DOVirtual.DelayedCall(2.5f, () =>
+        {
+            isSelectedComplete = true;
+
+        });
 
 
     }
 
     void SetActiveFalse()
     {
-        isSelectedComplete = true;
 
         gameObject.SetActive(false);
 

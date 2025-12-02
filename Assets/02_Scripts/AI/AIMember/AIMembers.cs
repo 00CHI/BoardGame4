@@ -27,12 +27,15 @@ public class AIMembers : MonoBehaviour
     public Text answerText;
 
     public int turnNumber = 0;
+    //public int aiIndex;
 
     public bool myWait = false;
     public bool myTrun = false;
     public bool myAnswer = false;
+    public bool isAISelected = false;
 
     public GameObject answerPanel;
+
 
 
     // Start is called before the first frame update
@@ -56,59 +59,86 @@ public class AIMembers : MonoBehaviour
 
     void Update()
     {
-        if(Singleton.SelectCard.isSelectedComplete)
+        if(Singleton.SelectCard.isSelectedComplete && !isAISelected)
         {
+
             SelectedAI();
+
+            Singleton.SelectCard.isSelectedComplete = false;
+            isAISelected = true;
         }
 
-        //if(eAISTATE == eAISTATE.eAISTATE_NONE)
-        //{
-           
-        //}
 
+      
+
+    }
+
+   void LateUpdate()
+    {
         switch (eAISTATE)
         {
             case eAISTATE.eAISTATE_NONE:
 
                 eAISTATE = eAISTATE.eAISTATE_WAIT;
-                myWait = true;
                 break;
             case eAISTATE.eAISTATE_WAIT:
+                AIStateWait();
 
-                if (myWait)
-                {
-                    AIStateWait();
-
-                }
-                //if (myTrun)
+                //if (myWait && !myTrun && !myAnswer)
                 //{
+
+                //}
+                //if (!myWait && myTrun && !myAnswer)//Singleton.GameManager.isAITrun
+                //{
+                //    myWait = false;
+                //    myAnswer = false;
+
                 //    eAISTATE = eAISTATE.eAISTATE_QUESTION;
                 //}
-                else if (myAnswer)
-                {
-                    myWait = false;
-                    eAISTATE = eAISTATE.eAISTATE_ANSWER;
-                }
+                //else if(!myWait && !myTrun && myAnswer)
+                //{
+                //    myWait = false;
+                //    myAnswer = true;
+                //    eAISTATE = eAISTATE.eAISTATE_ANSWER;
+                //}
+
 
                 break;
             case eAISTATE.eAISTATE_QUESTION:
 
-                // AIStateQuestion();
+                if (myTrun)
+                {
+                    AIStateQuestion();
+
+                }
+
+                 eAISTATE = eAISTATE.eAISTATE_WAIT;
+                myTrun = false;
 
                 break;
             case eAISTATE.eAISTATE_ANSWER:
 
-                if (myAnswer)
+                if(myAnswer)
                 {
                     AIStateAnswer();
                 }
+
+
+                eAISTATE = eAISTATE.eAISTATE_WAIT;
+
+                myAnswer = false;
+
+                DOVirtual.DelayedCall(1f, () =>
+                {
+                    answerPanel.SetActive(false);
+                });
+
+
                 break;
             case eAISTATE.eAISTATE_REASONING:
                 break;
         }
-
     }
-
 
     void AIMemberSetting()
     {
@@ -128,22 +158,78 @@ public class AIMembers : MonoBehaviour
     {
         eAISTATE = eAISTATE.eAISTATE_WAIT;
 
-        answerPanel.SetActive(false);
+        //answerPanel.SetActive(false);
 
-        myWait = true;
-        myTrun = false;
-        myAnswer = false;
+        //myWait = true;
+        //myTrun = false;
+        //myAnswer = false;
     }
     void AIStateQuestion()
     {
+
+
         Singleton.RandomQuestion.OnButtonClick();
+
+        int _aiIndex = UnityEngine.Random.Range(0, Singleton.RoomManager.roomMemberCount);
+
+        while(_aiIndex == turnNumber)
+        {
+            _aiIndex = UnityEngine.Random.Range(0, Singleton.RoomManager.roomMemberCount);
+           
+        }
+
+        Player _player = Singleton.GameManager.turnNumberIndex[_aiIndex].GetComponent<Player>();
+        AIMembers _aimem = Singleton.GameManager.turnNumberIndex[_aiIndex].GetComponent<AIMembers>();
+
+        if (_aimem == null)
+        {
+            //_player = Singleton.GameManager.turnNumberIndex[aiIndex].GetComponent<Player>();
+            _player.ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_ANSWER;
+
+            _player.myAnswer = true;
+
+
+        }
+        if (_player == null)
+        {
+            //_aimem = Singleton.GameManager.turnNumberIndex[aiIndex].GetComponent<AIMembers>();
+
+            _aimem.eAISTATE = eAISTATE.eAISTATE_ANSWER;
+            _aimem.myAnswer = true;
+            //_aimem.AIStateAnswer();
+            _aimem.answerPanel.SetActive(true);
+
+            //if (_aimem.answerPanel == null)
+            //{
+            //    Debug.LogError("_aimem.answerPanel is null!");
+            //}
+            //else
+            //{
+            //    _aimem.answerPanel.SetActive(true);
+            //}
+
+
+        }
+
+
+
+        //myWait = true;
+        //myTrun = false;
+        //myAnswer = false;
+
+        //Singleton.GameManager.isTrunStart = false;
+
+
     }
     void AIStateAnswer()
     {
-
-        answerPanel.SetActive(true);
+        //AIMembers _aimem = Singleton.GameManager.turnNumberIndex[aiIndex].GetComponent<AIMembers>();
+        Debug.Log($"AI {eCHARACTER}질문 턴 시작");
 
         AIAnswer(Singleton.RandomQuestion.index);
+
+
+        //answerPanel.SetActive(false);
     }
     void AIStateReasoning()
     {
@@ -166,6 +252,11 @@ public class AIMembers : MonoBehaviour
 
                 break;
             }
+
+            if (Singleton.AI.aiStudents.Count == Singleton.RoomManager.roomMemberCount)
+            {
+                break;
+            }
         }
         foreach (eTIME eTIME in System.Enum.GetValues(typeof(eTIME)))
         {
@@ -173,6 +264,11 @@ public class AIMembers : MonoBehaviour
             {
                 Singleton.AI.aiTimes.Add(eTIME);
 
+                break;
+            }
+
+            if (Singleton.AI.aiTimes.Count == Singleton.RoomManager.roomMemberCount)
+            {
                 break;
             }
 
@@ -184,17 +280,26 @@ public class AIMembers : MonoBehaviour
                 Singleton.AI.aiCrimes.Add(eCRIME);
                 break;
             }
+
+            if (Singleton.AI.aiCrimes.Count == Singleton.RoomManager.roomMemberCount)
+            {
+                break;
+            }
         }
 
         int _membernum = 0;
-        int _totalmember = Singleton.RoomManager.roomMemberCount;
 
-        while (true) //eAIMEMBER != (eAIMEMBER)_totalmember - 1
+        while (!isAISelected && _membernum <= Singleton.RoomManager.roomMemberCount) //eAIMEMBER != (eAIMEMBER)_totalmember - 1!isAISelected && 
         {
 
-            if (_membernum == _totalmember)//Singleton.AI.aiStudents.Count > Singleton.RoomManager.roomMemberCount
+            if (_membernum == Singleton.RoomManager.roomMemberCount)//Singleton.AI.aiStudents.Count > Singleton.RoomManager.roomMemberCount
             {
-                Singleton.SelectCard.isSelectedComplete = false;
+
+                Singleton.AI.isAISelectComplete = true;
+                isAISelected = true;
+
+                Debug.Log("AI Select Complete");
+
                 break;
             }
 
@@ -203,7 +308,7 @@ public class AIMembers : MonoBehaviour
             //eAIMEMBER = (eAIMEMBER)_membernum;
 
 
-            switch (eAIMEMBER)
+            switch (_aIMembers.eAIMEMBER)
             {
                 case eAIMEMBER.eAIMEMBER_ONE:
                     _aIMembers.AllAISelect();
@@ -233,6 +338,7 @@ public class AIMembers : MonoBehaviour
                     break;
                 case eAIMEMBER.eAIMEMBER_EIGHT:
                     _aIMembers.AllAISelect();
+
 
                     break;
             }
@@ -332,6 +438,7 @@ public class AIMembers : MonoBehaviour
 
     public void AIAnswer(int index)
     {
+
         switch (eSTUDENT)
         {
             case eSTUDENT.eSTUDENT_Ari_Choi://1 :최아리
@@ -1296,33 +1403,1113 @@ public class AIMembers : MonoBehaviour
         switch (eCRIME)
         {
             case eCRIME.eCRIME_Absence://1 땡땡이 : 네모
+                if (index == 34|| index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+
                 break;
             case eCRIME.eCRIME_Alcohol://2 술마심 : 동그라미
+                if (index == 34 || index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
                 break;
             case eCRIME.eCRIME_Cigarette://3 담배핌 : 동그라미
+                if (index == 34 || index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
                 break;
             case eCRIME.eCRIME_Cleaning://4 청소안함 : 세모
+                if (index == 34 || index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
                 break;
             case eCRIME.eCRIME_Doodle://5 교장쌤낙서 : 별
+                if (index == 34 || index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
                 break;
             case eCRIME.eCRIME_Dues://6 학생회비 : 동그라미
+                if (index == 34 || index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
                 break;
             case eCRIME.eCRIME_Homework://7 숙제안함 : 네모
+                if (index == 34 || index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
                 break;
             case eCRIME.eCRIME_InformalLanguage://8 반말 : 별
+                if (index == 34 || index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
                 break;
             case eCRIME.eCRIME_Restroom://9 화장실물안내림 : 세모
+                if (index == 34 || index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
                 break;
             case eCRIME.eCRIME_Teacher://10 선생님고백 : 별
+                if (index == 34 || index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
                 break;
             case eCRIME.eCRIME_Test://11 시험안침 :네모
+                if (index == 34 || index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
                 break;
             case eCRIME.eCRIME_Washing://12 안씻음 : 세모
+                if (index == 34 || index == 35 || index == 36)//"당신의 죄는 가볍습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"당신은 타인에게 피해 끼쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"당신은 물건을 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"당신은 학업에 관한 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"당신의 죄는 청결과 관련이 있습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"당신은 선생님과 관련된 죄를 지었습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"당신은 화장실에 교장 선생님 낙서를 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"당신은 교생 선생님께 고백했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"당신은 선생님께 반말했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"당신은 술을 훔쳐 마셨습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"당신은 담배를 훔쳐 폈습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"당신은 학생 회비를 훔쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"당신은 숙제를 안 했습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"당신은 시험을 안 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"당신은 땡땡이를 쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"당신은 청소를 안 하고 도망쳤습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"당신은 씻지 않고 지속적으로 등교했습니까?"
+                {
+                    answer = "네";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"당신은 화장실 물을 일부러 안 내렸습니까?"
+                {
+                    answer = "아니요";
+                    answerText.text = answer;
+                }
                 break;
         }
 
 
-        DOVirtual.DelayedCall(1.5f, () => AIStateWait());//0.5초 대기 후 답변 완료 콜백
     }
 
 

@@ -12,7 +12,7 @@ using UnityEngine.UI;
 
 public class RandomQuestion : MonoBehaviour
 {
-    Button questionButton;
+    public Button questionButton;
 
     string randomQuestion;
 
@@ -104,7 +104,10 @@ public class RandomQuestion : MonoBehaviour
         allQuestionText = GetComponentInChildren<TextMeshProUGUI>();
         allQuestionText.text = questionCount.ToString();
 
+        questionButton.interactable = false;
+
         questionButton.onClick.AddListener(OnButtonClick);
+
     }
 
     public void OnButtonClick()
@@ -112,14 +115,15 @@ public class RandomQuestion : MonoBehaviour
         randomQuestion = GetRandomQuestion();
         questionText.text = randomQuestion;
 
-        aiIndex = UnityEngine.Random.Range(0, Singleton.RoomManager.roomMemberCount-1);
+        //questionButton.interactable = false;
 
-        Singleton.AIMembers = Singleton.AI.aiMembersList[aiIndex].GetComponent<AIMembers>();
+
+        //_aimem.myWait = true;
+        //_aimem.myTrun = false;
+        //_aimem.myAnswer = false;
 
         //Singleton.AIMembers.eAISTATE = eAISTATE.eAISTATE_ANSWER;
         //Singleton.AIMembers.answerPanel.SetActive(true);
-        Singleton.AIMembers.myWait = false;
-        Singleton.AIMembers.myAnswer = true;
 
         //DOVirtual.DelayedCall(1f, () => Singleton.AIMembers.AIStateWait());
 

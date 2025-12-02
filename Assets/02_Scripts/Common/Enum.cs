@@ -7,6 +7,16 @@ public enum eAISTATE
     eAISTATE_REASONING
 }
 
+public enum ePLAYERSTATE
+{
+    ePLAYERSTATE_NONE,
+    ePLAYERSTATE_WAIT,
+    ePLAYERSTATE_QUESTION,
+    ePLAYERSTATE_ANSWER,
+    ePLAYERSTATE_REASONING
+}
+
+
 
 
 public enum eAIMEMBER
@@ -72,7 +82,7 @@ public enum eSTUDENT
     eSTUDENT_mingug_Jo,//10
     eSTUDENT_Minjae_Kim,//11
     eSTUDENT_Mirae_Yoon,//12
-    eSTUDENT_schoolmaste//13
+    //eSTUDENT_schoolmaste//13
 }
 public enum eTIME
 {
