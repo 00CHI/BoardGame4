@@ -39048,7 +39048,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1814367989}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GameTurn
+        m_MethodName: NextTurnButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -52810,7 +52810,7 @@ MonoBehaviour:
   isNext: 0
   turnCount: 0
   currentTurnTime: 30
-  turnLimitTime: 0
+  maxTurnTime: 30
 --- !u!1 &1819429423
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,8 +40,8 @@ public class GameManager : MonoBehaviour
 
         Singleton.GameManager = this;
 
-        isTrunStart = true;
-        isTrun = true;
+        isTrunStart = false;
+        isTrun = true ;
         isAITrun = false;
         isPlayerTrun = false;
 
@@ -62,11 +62,6 @@ public class GameManager : MonoBehaviour
             }
             _randCharIndex++;
         }
-    }
-    void Start()
-    {
-
-
     }
 
     // Update is called once per frame
@@ -100,8 +95,14 @@ public class GameManager : MonoBehaviour
             _trunindex++;
         }
 
-        if (Singleton.AI.isAISelectComplete )
+        if (Singleton.AI.isAISelectComplete)
         {
+            if (isTrunStart)
+            {
+                GameTurn();
+                isTrunStart = false;
+
+            }
             if (isTrun)
             {
                 AIMembers _aimem = turnNumberIndex[turnCount].GetComponent<AIMembers>();
@@ -109,13 +110,10 @@ public class GameManager : MonoBehaviour
 
                 Debug.Log($" 턴넘버 체크시작{turnCount}");
 
-                if (currentTurnTime > 0)
-                {
-                    currentTurnTime -= Time.deltaTime;
+                currentTurnTime -= Time.deltaTime;
 
-                    float normalizedValue = currentTurnTime / maxTurnTime;
-                    turnTimerSlider.value = normalizedValue;
-                }
+                float normalizedValue = currentTurnTime / maxTurnTime;
+                turnTimerSlider.value = normalizedValue;
 
 
                 if (currentTurnTime <= 0)
@@ -131,9 +129,7 @@ public class GameManager : MonoBehaviour
                     EndTurn(_aimem, _player);
 
                 }
-        }
-       
-
+            }
 
             //isTrun = false;
 
@@ -141,6 +137,8 @@ public class GameManager : MonoBehaviour
 
             //isTrunStart = false;
         }
+
+
 
         //while (roundNumber != 20)
         //{
@@ -260,13 +258,20 @@ public class GameManager : MonoBehaviour
 
         }
 
-        _AIMEMBER.eAISTATE = eAISTATE.eAISTATE_WAIT;
-        _PLAYER.ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
+        if(_AIMEMBER != null)
+        {
+            _AIMEMBER.eAISTATE = eAISTATE.eAISTATE_WAIT;
+
+        }
+        if (_PLAYER != null)
+        {
+            _PLAYER.ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
+
+        }
 
 
         isAITrun = false;
         isPlayerTrun = false;
-        //Singleton.AI.isAISelectComplete = false;
 
 
         currentTurnTime = maxTurnTime;

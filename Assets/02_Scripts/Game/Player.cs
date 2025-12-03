@@ -101,10 +101,11 @@ public class Player : MonoBehaviour
 
 
 
-        DOVirtual.DelayedCall(1f, () => {
+        DOVirtual.DelayedCall(2f, () =>
+        {
             myAnswer = false;
-            ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT; 
-        } );
+            ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
+        });
 
 
 

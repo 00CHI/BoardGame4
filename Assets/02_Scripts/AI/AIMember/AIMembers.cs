@@ -66,10 +66,11 @@ public class AIMembers : MonoBehaviour
 
             Singleton.SelectCard.isSelectedComplete = false;
             isAISelected = true;
+            Singleton.GameManager.isTrunStart = true;
         }
 
 
-      
+
 
     }
 
@@ -128,7 +129,7 @@ public class AIMembers : MonoBehaviour
 
                 myAnswer = false;
 
-                DOVirtual.DelayedCall(1f, () =>
+                DOVirtual.DelayedCall(2f, () =>
                 {
                     answerPanel.SetActive(false);
                 });
