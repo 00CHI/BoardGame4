@@ -16,6 +16,13 @@ public enum ePLAYERSTATE
     ePLAYERSTATE_REASONING
 }
 
+public enum eBUTTONTYBE
+{
+    eBUTTONTYBE_NONE,
+    eBUTTONTYBE_STUDENT,
+    eBUTTONTYBE_TIME,
+    eBUTTONTYBE_CRIME
+}
 
 
 
@@ -82,7 +89,7 @@ public enum eSTUDENT
     eSTUDENT_mingug_Jo,//10
     eSTUDENT_Minjae_Kim,//11
     eSTUDENT_Mirae_Yoon,//12
-    //eSTUDENT_schoolmaste//13
+    eSTUDENT_schoolmaste//13
 }
 public enum eTIME
 {

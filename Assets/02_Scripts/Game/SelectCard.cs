@@ -67,7 +67,7 @@ public class SelectCard : SpreadCard
         "mingug_Jo",//10
         "Minjae_Kim",//11
         "Mirae_Yoon",//12
-        //"schoolmaste"//13
+        "schoolmaste"//13
     };
 
     public List<string> timeNames = new List<string>()

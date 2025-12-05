@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public string answer;
     public GameObject answerPanel;
     public GameObject blackBG;
+    public GameObject reasoningButton;
     public Button[] aiButtons;
     public Text answerText;
 
@@ -38,6 +39,8 @@ public class Player : MonoBehaviour
         eCHARACTER = eCHARACTER.eCHARACTER_PLAYER;
 
         blackBG.SetActive(false);
+        reasoningButton.SetActive(false);
+
 
         aiButtons[0].interactable = false;
         aiButtons[1].interactable = false;
@@ -81,11 +84,9 @@ public class Player : MonoBehaviour
     {
         answerPanel.SetActive(false);
         blackBG.SetActive(false);
+        reasoningButton.SetActive(false);
         Singleton.RandomQuestion.questionButton.interactable = false;
         isButtonClicked = false;
-
-
-
     }
     void PlayerAnswer()
     {
@@ -120,7 +121,10 @@ public class Player : MonoBehaviour
             isButtonClicked = true;
 
         }
+
         blackBG.SetActive(true);
+        reasoningButton.SetActive(true);
+
 
         aiButtons[0].interactable = true;
         aiButtons[1].interactable = true;
@@ -130,6 +134,7 @@ public class Player : MonoBehaviour
         aiButtons[5].interactable = true;
         aiButtons[6].interactable = true;
         aiButtons[7].interactable = true;
+
 
 
 

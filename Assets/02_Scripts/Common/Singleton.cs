@@ -16,6 +16,9 @@ public static class Singleton
 
     public static SelectCard SelectCard;
     public static RandomQuestion RandomQuestion;
+    public static ProfileButton ProfileButton;
+    public static Reasoning Reasoning;
+    public static ReasonCheck ReasonCheck;
 
     //public static AudioManager AudioManager;
 }

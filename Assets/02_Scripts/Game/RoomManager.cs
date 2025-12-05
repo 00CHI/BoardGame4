@@ -63,7 +63,7 @@ public class RoomManager : MonoBehaviour
     void OnMemeberPlusClick()
     {
 
-        if (roomMemberCount >= 10)
+        if (roomMemberCount >= 9)
         {
             roomMemberCount = 3;
         }

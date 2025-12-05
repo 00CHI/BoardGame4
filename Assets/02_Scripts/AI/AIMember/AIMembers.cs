@@ -6,13 +6,14 @@ using System.Linq;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 
 public class AIMembers : MonoBehaviour
 {
-
+    public Image profileImage;
 
     public eAIMEMBER eAIMEMBER = eAIMEMBER.eAIMEMBER_NONE;
     public eCHARACTER eCHARACTER;
@@ -290,10 +291,10 @@ public class AIMembers : MonoBehaviour
 
         int _membernum = 0;
 
-        while (!isAISelected && _membernum <= Singleton.RoomManager.roomMemberCount) //eAIMEMBER != (eAIMEMBER)_totalmember - 1!isAISelected && 
+        while (!isAISelected && _membernum <= Singleton.RoomManager.roomMemberCount-1) //eAIMEMBER != (eAIMEMBER)_totalmember - 1!isAISelected && 
         {
 
-            if (_membernum == Singleton.RoomManager.roomMemberCount)//Singleton.AI.aiStudents.Count > Singleton.RoomManager.roomMemberCount
+            if (_membernum == Singleton.RoomManager.roomMemberCount-1)//Singleton.AI.aiStudents.Count > Singleton.RoomManager.roomMemberCount
             {
 
                 Singleton.AI.isAISelectComplete = true;
@@ -305,6 +306,7 @@ public class AIMembers : MonoBehaviour
             }
 
             AIMembers _aIMembers = Singleton.AI.aiMembersList[_membernum].GetComponent<AIMembers>();
+
 
             //eAIMEMBER = (eAIMEMBER)_membernum;
 
@@ -348,6 +350,8 @@ public class AIMembers : MonoBehaviour
             _membernum++;
 
         }
+
+
 
     }
     void AllAISelect()
