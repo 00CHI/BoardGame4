@@ -1,4 +1,4 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +26,8 @@ public class AIMembers : MonoBehaviour
     public Text answerText;
 
     public int turnNumber = 0;
+    int currentIndex = 0;
+    int schoolMasterIndex = 0;
     //public int aiIndex;
 
     public bool myWait = false;
@@ -38,6 +40,8 @@ public class AIMembers : MonoBehaviour
     Coroutine answerRoutine;
 
     public GameObject answerPanel;
+
+
 
 
     // Start is called before the first frame update
@@ -227,7 +231,7 @@ public class AIMembers : MonoBehaviour
     void AIStateAnswer()
     {
         //AIMembers _aimem = Singleton.GameManager.turnNumberIndex[aiIndex].GetComponent<AIMembers>();
-        Debug.Log($"AI {eCHARACTER}Áú¹® ÅÏ ½ÃÀÛ");
+        Debug.Log($"AI {eCHARACTER}ì§ˆë¬¸ í„´ ì‹œì‘");
 
         AIAnswer(Singleton.RandomQuestion.index);
 
@@ -302,6 +306,7 @@ public class AIMembers : MonoBehaviour
 
         }
 
+
         foreach (eSTUDENT eSTUDENT in System.Enum.GetValues(typeof(eSTUDENT)))
         {
             if (eSTUDENT == Singleton.Player.eSTUDENT)
@@ -355,6 +360,7 @@ public class AIMembers : MonoBehaviour
 
                 Singleton.AI.isAISelectComplete = true;
                 isAISelected = true;
+
 
                 Debug.Log("AI Select Complete");
 
@@ -423,6 +429,12 @@ public class AIMembers : MonoBehaviour
     public void AIStudentSelect()
     {
         int _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eSTUDENT)).Length);
+        schoolMasterIndex = UnityEngine.Random.Range(0, Singleton.RoomManager.roomMemberCount - 1);
+
+        if (currentIndex == schoolMasterIndex)
+        {
+            _randomnum = 13; //eSTUDENT_schoolmaster
+        }
 
         while (eSTUDENT == eSTUDENT.eSTUDENT_NONE)//Singleton.AI.aiStudents.Count > Singleton.RoomManager.roomMemberCount
         {
@@ -430,19 +442,30 @@ public class AIMembers : MonoBehaviour
             if (Singleton.AI.aiStudents.Contains((eSTUDENT)_randomnum))
             {
                 _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eSTUDENT)).Length);
+
+            }
+            else if(!Singleton.AI.aiStudents.Contains((eSTUDENT)13) && Singleton.AI.aiStudents.Count == Singleton.RoomManager.roomMemberCount - 1)
+            {
+                _randomnum = 13;
+                Singleton.AI.aiStudents.Add((eSTUDENT)_randomnum);
+                eSTUDENT = (eSTUDENT)_randomnum;
+                break;
             }
             else
             {
                 Singleton.AI.aiStudents.Add((eSTUDENT)_randomnum);
                 eSTUDENT = (eSTUDENT)_randomnum;
                 break;
-            }
+            }     
 
             if (eSTUDENT != eSTUDENT.eSTUDENT_NONE)
             {
                 break;
 
             }
+
+            currentIndex++;
+
         }
 
     }
@@ -450,6 +473,9 @@ public class AIMembers : MonoBehaviour
     public void AITimeSelect()
     {
         int _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eTIME)).Length);
+
+
+
 
         while (eTIME == eTIME.eTIME_NONE)
         {
@@ -506,692 +532,692 @@ public class AIMembers : MonoBehaviour
 
         switch (eSTUDENT)
         {
-            case eSTUDENT.eSTUDENT_Ari_Choi://1 :ÃÖ¾Æ¸®
+            case eSTUDENT.eSTUDENT_Ari_Choi://1 :ìµœì•„ë¦¬
 
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if(index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
+                else if(index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
 
                 break;
-            case eSTUDENT.eSTUDENT_bada_Seo://2 : ¼­¹Ù´Ù
+            case eSTUDENT.eSTUDENT_bada_Seo://2 : ì„œë°”ë‹¤
 
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
-            case eSTUDENT.eSTUDENT_Bora_Nam://3 : ³²º¸¶ó
+            case eSTUDENT.eSTUDENT_Bora_Nam://3 : ë‚¨ë³´ë¼
 
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
-            case eSTUDENT.eSTUDENT_doha_Bae://4 : ¹èµµÇÏ
+            case eSTUDENT.eSTUDENT_doha_Bae://4 : ë°°ë„í•˜
 
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                break;
-            case eSTUDENT.eSTUDENT_Donghoon_Moon://5 : ¹®µ¿ÈÆ
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
                 break;
-            case eSTUDENT.eSTUDENT_galam_Heo://6 : Çã°¡¶÷
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
+            case eSTUDENT.eSTUDENT_Donghoon_Moon://5 : ë¬¸ë™í›ˆ
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                break;
-            case eSTUDENT.eSTUDENT_hali_Gu://7 : ±¸ÇÏ¸®
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
                 break;
-            case eSTUDENT.eSTUDENT_hanbyeol_Bu://8 : ºÎÇÑº°
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
+            case eSTUDENT.eSTUDENT_galam_Heo://6 : í—ˆê°€ëŒ
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                break;
-            case eSTUDENT.eSTUDENT_Jiho_Lee://9 : ÀÌÁöÈ£
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
                 break;
-            case eSTUDENT.eSTUDENT_mingug_Jo://10 : Á¶¹Î±¹
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
+            case eSTUDENT.eSTUDENT_hali_Gu://7 : êµ¬í•˜ë¦¬
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                break;
-            case eSTUDENT.eSTUDENT_Minjae_Kim://11: ±è¹ÎÀç
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
-            case eSTUDENT.eSTUDENT_Mirae_Yoon://12: À±¹Ì·¡
-                if (index == 0 || index == 1)//"ÀÌ¸§¿¡ ¤¡ÀÌ µé¾î°©´Ï±î?"
+            case eSTUDENT.eSTUDENT_hanbyeol_Bu://8 : ë¶€í•œë³„
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 2 || index == 3)//"ÀÌ¸§¿¡ ¤·ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 4 || index == 5)//"ÀÌ¸§¿¡ ¤²ÀÌ µé¾î°©´Ï±î?"
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 6 || index == 7)//"´ç½ÅÀº ¿©¼ºÀÔ´Ï±î?"
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 8 || index == 9)//"´ç½ÅÀº ³²¼ºÀÔ´Ï±î?"
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 10 || index == 11)//"´ç½ÅÀº Àå¹ßÀÔ´Ï±î?"
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 12 || index == 13)//"´ç½ÅÀº ´Ü¹ßÀÔ´Ï±î?"
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 14 || index == 15)//"´ç½ÅÀº ¼ôÄÆÀÔ´Ï±î?"
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 16 || index == 17)//"´ç½ÅÀº 1ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 18 || index == 19)//"´ç½ÅÀº 2ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 20 || index == 21)//"´ç½ÅÀº 3ÇĞ³âÀÔ´Ï±î?"
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                break;
+            case eSTUDENT.eSTUDENT_Jiho_Lee://9 : ì´ì§€í˜¸
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                break;
+            case eSTUDENT.eSTUDENT_mingug_Jo://10 : ì¡°ë¯¼êµ­
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                break;
+            case eSTUDENT.eSTUDENT_Minjae_Kim://11: ê¹€ë¯¼ì¬
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                break;
+            case eSTUDENT.eSTUDENT_Mirae_Yoon://12: ìœ¤ë¯¸ë˜
+                if (index == 0 || index == 1)//"ì´ë¦„ì— ã„±ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 2 || index == 3)//"ì´ë¦„ì— ã…‡ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 4 || index == 5)//"ì´ë¦„ì— ã…‚ì´ ë“¤ì–´ê°‘ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 6 || index == 7)//"ë‹¹ì‹ ì€ ì—¬ì„±ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 8 || index == 9)//"ë‹¹ì‹ ì€ ë‚¨ì„±ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 10 || index == 11)//"ë‹¹ì‹ ì€ ì¥ë°œì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 12 || index == 13)//"ë‹¹ì‹ ì€ ë‹¨ë°œì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 14 || index == 15)//"ë‹¹ì‹ ì€ ìˆì»·ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 16 || index == 17)//"ë‹¹ì‹ ì€ 1í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 18 || index == 19)//"ë‹¹ì‹ ì€ 2í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 20 || index == 21)//"ë‹¹ì‹ ì€ 3í•™ë…„ì…ë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
@@ -1200,266 +1226,266 @@ public class AIMembers : MonoBehaviour
         switch (eTIME)
         {
             case eTIME.eTIME_After01://1 /15:30
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if(index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if(index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
             case eTIME.eTIME_Break01://2 /13:50
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
             case eTIME.eTIME_CleaningTime01://3 /16:30
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
                 break;
             case eTIME.eTIME_DropOff01://4 /17:00
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
                 break;
             case eTIME.eTIME_GoToSchool01://5 /8:30
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
             case eTIME.eTIME_Lunch01://6 /12:00
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
             case eTIME.eTIME_After02://1 /15:30
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
             case eTIME.eTIME_Break02://2 /13:50
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
             case eTIME.eTIME_CleaningTime02://3 /16:30
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
                 break;
             case eTIME.eTIME_DropOff02://4 /17:00
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
                 break;
             case eTIME.eTIME_GoToSchool02://5 /8:30
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
             case eTIME.eTIME_Lunch02://6 /12:00
-                if (index == 22 || index == 23 || index == 24)//"´ç½ÅÀº 15½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                if (index == 22 || index == 23 || index == 24)//"ë‹¹ì‹ ì€ 15ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 25 || index == 26 || index == 27)//"´ç½ÅÀº 15½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 25 || index == 26 || index == 27)//"ë‹¹ì‹ ì€ 15ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 28 || index == 29 || index == 30)//"´ç½ÅÀº 13½Ã ÀÌÀü¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 28 || index == 29 || index == 30)//"ë‹¹ì‹ ì€ 13ì‹œ ì´ì „ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 31 || index == 32 || index == 33)//"´ç½ÅÀº 16½Ã ÀÌÈÄ¿¡ ¹üÇàÀ» ÀúÁú·¶½À´Ï±î?"
+                else if (index == 31 || index == 32 || index == 33)//"ë‹¹ì‹ ì€ 16ì‹œ ì´í›„ì— ë²”í–‰ì„ ì €ì§ˆë €ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
@@ -1467,1108 +1493,1108 @@ public class AIMembers : MonoBehaviour
 
         switch (eCRIME)
         {
-            case eCRIME.eCRIME_Absence://1 ¶¯¶¯ÀÌ : ³×¸ğ
-                if (index == 34|| index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
+            case eCRIME.eCRIME_Absence://1 ë•¡ë•¡ì´ : ë„¤ëª¨
+                if (index == 34|| index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
 
                 break;
-            case eCRIME.eCRIME_Alcohol://2 ¼ú¸¶½É : µ¿±×¶ó¹Ì
-                if (index == 34 || index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
+            case eCRIME.eCRIME_Alcohol://2 ìˆ ë§ˆì‹¬ : ë™ê·¸ë¼ë¯¸
+                if (index == 34 || index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                break;
-            case eCRIME.eCRIME_Cigarette://3 ´ã¹èÇË : µ¿±×¶ó¹Ì
-                if (index == 34 || index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
-            case eCRIME.eCRIME_Cleaning://4 Ã»¼Ò¾ÈÇÔ : ¼¼¸ğ
-                if (index == 34 || index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
+            case eCRIME.eCRIME_Cigarette://3 ë‹´ë°°í•Œ : ë™ê·¸ë¼ë¯¸
+                if (index == 34 || index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                break;
-            case eCRIME.eCRIME_Doodle://5 ±³Àå½Ü³«¼­ : º°
-                if (index == 34 || index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
-            case eCRIME.eCRIME_Dues://6 ÇĞ»ıÈ¸ºñ : µ¿±×¶ó¹Ì
-                if (index == 34 || index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
+            case eCRIME.eCRIME_Cleaning://4 ì²­ì†Œì•ˆí•¨ : ì„¸ëª¨
+                if (index == 34 || index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                break;
-            case eCRIME.eCRIME_Homework://7 ¼÷Á¦¾ÈÇÔ : ³×¸ğ
-                if (index == 34 || index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
-            case eCRIME.eCRIME_InformalLanguage://8 ¹İ¸» : º°
-                if (index == 34 || index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
+            case eCRIME.eCRIME_Doodle://5 êµì¥ìŒ¤ë‚™ì„œ : ë³„
+                if (index == 34 || index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                break;
-            case eCRIME.eCRIME_Restroom://9 È­Àå½Ç¹°¾È³»¸² : ¼¼¸ğ
-                if (index == 34 || index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
-                {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
-            case eCRIME.eCRIME_Teacher://10 ¼±»ı´Ô°í¹é : º°
-                if (index == 34 || index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
+            case eCRIME.eCRIME_Dues://6 í•™ìƒíšŒë¹„ : ë™ê·¸ë¼ë¯¸
+                if (index == 34 || index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                break;
-            case eCRIME.eCRIME_Test://11 ½ÃÇè¾ÈÄ§ :³×¸ğ
-                if (index == 34 || index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
-                {
-                    answer = "³×";
-                    answerText.text = answer;
-                }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
-                    answerText.text = answer;
-                }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
-                {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
-            case eCRIME.eCRIME_Washing://12 ¾È¾ÄÀ½ : ¼¼¸ğ
-                if (index == 34 || index == 35 || index == 36)//"´ç½ÅÀÇ ÁË´Â °¡º±½À´Ï±î?"
+            case eCRIME.eCRIME_Homework://7 ìˆ™ì œì•ˆí•¨ : ë„¤ëª¨
+                if (index == 34 || index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 37 || index == 38 || index == 39)//"´ç½ÅÀº Å¸ÀÎ¿¡°Ô ÇÇÇØ ³¢ÃÆ½À´Ï±î?"
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 40 || index == 41)//"´ç½ÅÀº ¹°°ÇÀ» ÈÉÃÆ½À´Ï±î?"
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 42 || index == 43)//"´ç½ÅÀº ÇĞ¾÷¿¡ °üÇÑ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 44 || index == 45)//"´ç½ÅÀÇ ÁË´Â Ã»°á°ú °ü·ÃÀÌ ÀÖ½À´Ï±î?"
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 46 || index == 47)//"´ç½ÅÀº ¼±»ı´Ô°ú °ü·ÃµÈ ÁË¸¦ Áö¾ú½À´Ï±î?"
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 48)//"´ç½ÅÀº È­Àå½Ç¿¡ ±³Àå ¼±»ı´Ô ³«¼­¸¦ Çß½À´Ï±î?"
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 49)//"´ç½ÅÀº ±³»ı ¼±»ı´Ô²² °í¹éÇß½À´Ï±î?"
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 50)//"´ç½ÅÀº ¼±»ı´Ô²² ¹İ¸»Çß½À´Ï±î?"
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 51)//"´ç½ÅÀº ¼úÀ» ÈÉÃÄ ¸¶¼Ì½À´Ï±î?"
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 52)//"´ç½ÅÀº ´ã¹è¸¦ ÈÉÃÄ Æñ½À´Ï±î?"
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 53)//"´ç½ÅÀº ÇĞ»ı È¸ºñ¸¦ ÈÉÃÆ½À´Ï±î?"
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 54)//"´ç½ÅÀº ¼÷Á¦¸¦ ¾È Çß½À´Ï±î?"
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ë„¤";
                     answerText.text = answer;
                 }
-                else if (index == 55)//"´ç½ÅÀº ½ÃÇèÀ» ¾È ÃÆ½À´Ï±î?"
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 56)//"´ç½ÅÀº ¶¯¶¯ÀÌ¸¦ ÃÆ½À´Ï±î?"
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 57)//"´ç½ÅÀº Ã»¼Ò¸¦ ¾È ÇÏ°í µµ¸ÁÃÆ½À´Ï±î?"
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 58)//"´ç½ÅÀº ¾ÄÁö ¾Ê°í Áö¼ÓÀûÀ¸·Î µî±³Çß½À´Ï±î?"
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "³×";
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
-                else if (index == 59)//"´ç½ÅÀº È­Àå½Ç ¹°À» ÀÏºÎ·¯ ¾È ³»·È½À´Ï±î?"
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
                 {
-                    answer = "¾Æ´Ï¿ä";
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                break;
+            case eCRIME.eCRIME_InformalLanguage://8 ë°˜ë§ : ë³„
+                if (index == 34 || index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                break;
+            case eCRIME.eCRIME_Restroom://9 í™”ì¥ì‹¤ë¬¼ì•ˆë‚´ë¦¼ : ì„¸ëª¨
+                if (index == 34 || index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                break;
+            case eCRIME.eCRIME_Teacher://10 ì„ ìƒë‹˜ê³ ë°± : ë³„
+                if (index == 34 || index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                break;
+            case eCRIME.eCRIME_Test://11 ì‹œí—˜ì•ˆì¹¨ :ë„¤ëª¨
+                if (index == 34 || index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                break;
+            case eCRIME.eCRIME_Washing://12 ì•ˆì”»ìŒ : ì„¸ëª¨
+                if (index == 34 || index == 35 || index == 36)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ê°€ë³ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 37 || index == 38 || index == 39)//"ë‹¹ì‹ ì€ íƒ€ì¸ì—ê²Œ í”¼í•´ ë¼ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 40 || index == 41)//"ë‹¹ì‹ ì€ ë¬¼ê±´ì„ í›”ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 42 || index == 43)//"ë‹¹ì‹ ì€ í•™ì—…ì— ê´€í•œ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 44 || index == 45)//"ë‹¹ì‹ ì˜ ì£„ëŠ” ì²­ê²°ê³¼ ê´€ë ¨ì´ ìˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 46 || index == 47)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê³¼ ê´€ë ¨ëœ ì£„ë¥¼ ì§€ì—ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 48)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ì— êµì¥ ì„ ìƒë‹˜ ë‚™ì„œë¥¼ í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 49)//"ë‹¹ì‹ ì€ êµìƒ ì„ ìƒë‹˜ê»˜ ê³ ë°±í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 50)//"ë‹¹ì‹ ì€ ì„ ìƒë‹˜ê»˜ ë°˜ë§í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 51)//"ë‹¹ì‹ ì€ ìˆ ì„ í›”ì³ ë§ˆì…¨ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 52)//"ë‹¹ì‹ ì€ ë‹´ë°°ë¥¼ í›”ì³ íˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 53)//"ë‹¹ì‹ ì€ í•™ìƒ íšŒë¹„ë¥¼ í›”ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 54)//"ë‹¹ì‹ ì€ ìˆ™ì œë¥¼ ì•ˆ í–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 55)//"ë‹¹ì‹ ì€ ì‹œí—˜ì„ ì•ˆ ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 56)//"ë‹¹ì‹ ì€ ë•¡ë•¡ì´ë¥¼ ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 57)//"ë‹¹ì‹ ì€ ì²­ì†Œë¥¼ ì•ˆ í•˜ê³  ë„ë§ì³¤ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
+                    answerText.text = answer;
+                }
+                else if (index == 58)//"ë‹¹ì‹ ì€ ì”»ì§€ ì•Šê³  ì§€ì†ì ìœ¼ë¡œ ë“±êµí–ˆìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ë„¤";
+                    answerText.text = answer;
+                }
+                else if (index == 59)//"ë‹¹ì‹ ì€ í™”ì¥ì‹¤ ë¬¼ì„ ì¼ë¶€ëŸ¬ ì•ˆ ë‚´ë ¸ìŠµë‹ˆê¹Œ?"
+                {
+                    answer = "ì•„ë‹ˆìš”";
                     answerText.text = answer;
                 }
                 break;
