@@ -7,6 +7,7 @@ public static class Singleton
     public static GameManager GameManager;
     public static SpriteManager SpriteManager;
     public static SceneManager SceneManager;
+    public static ButtonManager ButtonManager;
 
     public static RoomManager RoomManager;
 
@@ -14,9 +15,11 @@ public static class Singleton
     public static AI AI;
     public static AIMembers AIMembers;
 
+    public static CardUp CardUp;
     public static SelectCard SelectCard;
     public static RandomQuestion RandomQuestion;
     public static ProfileButton ProfileButton;
+   
     public static Reasoning Reasoning;
     public static ReasonCheck ReasonCheck;
 

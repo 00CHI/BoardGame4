@@ -12,10 +12,11 @@ public class CardUp : MonoBehaviour
     public float moveDistance = 1500f; // 이동 거리
     public float moveDuration = 1f;   // 이동 시간
 
-    private bool isUp = false; // 현재 올라간 상태인지 여부
+    public bool isUp = false; // 현재 올라간 상태인지 여부
 
-    void Start()
+    void Awake()
     {
+        Singleton.CardUp = this;
         myButton.onClick.AddListener(OnButtonClick);
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Reasoning : MonoBehaviour
 {
+    public AIMembers aiMembers;
     public eSTUDENT eSTUDENT;
     public eTIME eTIME;
     public eCRIME eCRIME;
@@ -19,12 +20,32 @@ public class Reasoning : MonoBehaviour
         eCRIME = eCRIME.eCRIME_NONE;
 
     }
+    private void Update()
+    {
+
+    }
 
     public void OnReasoning(AIMembers _AIMEM)
     {
         eSTUDENT = _AIMEM.eSTUDENT;
         eTIME = _AIMEM.eTIME;
         eCRIME = _AIMEM.eCRIME;
+
+        aiMembers = _AIMEM;
     }
+
+    public void OnReasonTrue()
+    {
+        aiMembers.isReason = true;
+        aiMembers.isReasonComplete = true;
+
+    }
+    public void OnReasonFalse()
+    {
+        aiMembers.isReason = false;
+        aiMembers.isReasonComplete = true;
+    }
+
+
 
 }

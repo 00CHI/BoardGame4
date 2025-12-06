@@ -89,7 +89,7 @@ public enum eSTUDENT
     eSTUDENT_mingug_Jo,//10
     eSTUDENT_Minjae_Kim,//11
     eSTUDENT_Mirae_Yoon,//12
-    eSTUDENT_schoolmaste//13
+    eSTUDENT_schoolmaster//13
 }
 public enum eTIME
 {

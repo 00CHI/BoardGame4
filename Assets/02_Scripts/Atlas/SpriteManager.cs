@@ -39,11 +39,11 @@ public class SpriteManager : MonoBehaviour
         //    spriteNum = 0;
         //}
 
-        inferenceImage.sprite = SpriteReturn("inferenceCheck" + spriteNum);
+        inferenceImage.sprite = SpriteReturn($"{spriteNum}");
         
         if (inferenceImage.sprite == null)
         {
-            inferenceImage.sprite = SpriteReturn("inferenceCheck5");
+            inferenceImage.sprite = SpriteReturn("5");
         }
 
     }

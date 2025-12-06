@@ -62,17 +62,34 @@ public class GameManager : MonoBehaviour
             }
             _randCharIndex++;
         }
+
+
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        //roundNumber = 0;
 
+        //UpdateSet
+        if (!Singleton.CardUp.isUp && !Singleton.ButtonManager.isReasoning)
+        {
+            UpdateLogic();
+        }
+        else
+        {
+            return;
+        }
+
+
+    }
+
+    public void UpdateLogic()
+    {
+        //Game
         int _trunindex = 0;
         //turnCount = 0;
 
-        while (Singleton.RoomManager.isStart == true && _trunindex < Singleton.RoomManager.roomMemberCount )
+        while (Singleton.RoomManager.isStart == true && _trunindex < Singleton.RoomManager.roomMemberCount)
         {
             Singleton.AIMembers = turnNumberIndex[_trunindex].GetComponent<AIMembers>();
             Singleton.Player = turnNumberIndex[_trunindex].GetComponent<Player>();
@@ -85,7 +102,7 @@ public class GameManager : MonoBehaviour
             {
                 Singleton.Player.turnNumber = _trunindex;
             }
-            if(_trunindex >= Singleton.RoomManager.roomMemberCount -1 )
+            if (_trunindex >= Singleton.RoomManager.roomMemberCount - 1)
             {
                 _trunindex = 0;
 
@@ -129,6 +146,7 @@ public class GameManager : MonoBehaviour
                     EndTurn(_aimem, _player);
 
                 }
+
             }
 
             //isTrun = false;
@@ -160,7 +178,6 @@ public class GameManager : MonoBehaviour
         //    //}
         //}
     }
-
     public void GameTurn()
     {
         AIMembers _aimem = turnNumberIndex[turnCount].GetComponent<AIMembers>();

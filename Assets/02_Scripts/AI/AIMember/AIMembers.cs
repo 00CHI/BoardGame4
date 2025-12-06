@@ -13,8 +13,6 @@ using static UnityEditor.Progress;
 
 public class AIMembers : MonoBehaviour
 {
-    public Image profileImage;
-
     public eAIMEMBER eAIMEMBER = eAIMEMBER.eAIMEMBER_NONE;
     public eCHARACTER eCHARACTER;
 
@@ -34,9 +32,12 @@ public class AIMembers : MonoBehaviour
     public bool myTrun = false;
     public bool myAnswer = false;
     public bool isAISelected = false;
+    public bool isReason = false;
+    public bool isReasonComplete = false;
+
+    Coroutine answerRoutine;
 
     public GameObject answerPanel;
-
 
 
     // Start is called before the first frame update
@@ -60,7 +61,48 @@ public class AIMembers : MonoBehaviour
 
     void Update()
     {
-        if(Singleton.SelectCard.isSelectedComplete && !isAISelected)
+
+
+        if (!Singleton.CardUp.isUp)
+        {
+            UpdateLogic();
+        }
+        else
+        {
+            return;
+        }
+
+
+
+    }
+
+   void LateUpdate()
+    {
+
+        if (!Singleton.CardUp.isUp && !Singleton.ButtonManager.isReasoning)
+        {
+            LateUpdateLogic();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public void UpdateLogic()
+    {
+        //UpdateSet
+        if (Singleton.CardUp.isUp)
+        {
+            enabled = false;
+        }
+        else if (!Singleton.CardUp.isUp)
+        {
+            enabled = true;
+        }
+
+        //Game
+        if (Singleton.SelectCard.isSelectedComplete && !isAISelected)
         {
 
             SelectedAI();
@@ -69,14 +111,20 @@ public class AIMembers : MonoBehaviour
             isAISelected = true;
             Singleton.GameManager.isTrunStart = true;
         }
-
-
-
-
     }
-
-   void LateUpdate()
+    public void LateUpdateLogic()
     {
+        //UpdateSet
+        if (!Singleton.CardUp.isUp)
+        {
+            enabled = true;
+        }
+        else if (Singleton.CardUp.isUp)
+        {
+            enabled = false;
+        }
+
+        //Game
         switch (eAISTATE)
         {
             case eAISTATE.eAISTATE_NONE:
@@ -114,13 +162,13 @@ public class AIMembers : MonoBehaviour
 
                 }
 
-                 eAISTATE = eAISTATE.eAISTATE_WAIT;
+                eAISTATE = eAISTATE.eAISTATE_WAIT;
                 myTrun = false;
 
                 break;
             case eAISTATE.eAISTATE_ANSWER:
 
-                if(myAnswer)
+                if (myAnswer)
                 {
                     AIStateAnswer();
                 }
@@ -141,7 +189,6 @@ public class AIMembers : MonoBehaviour
                 break;
         }
     }
-
     void AIMemberSetting()
     {
         //Singleton.AI.
@@ -168,60 +215,14 @@ public class AIMembers : MonoBehaviour
     }
     void AIStateQuestion()
     {
-
-
         Singleton.RandomQuestion.OnButtonClick();
 
-        int _aiIndex = UnityEngine.Random.Range(0, Singleton.RoomManager.roomMemberCount);
-
-        while(_aiIndex == turnNumber)
-        {
-            _aiIndex = UnityEngine.Random.Range(0, Singleton.RoomManager.roomMemberCount);
-           
-        }
-
-        Player _player = Singleton.GameManager.turnNumberIndex[_aiIndex].GetComponent<Player>();
-        AIMembers _aimem = Singleton.GameManager.turnNumberIndex[_aiIndex].GetComponent<AIMembers>();
-
-        if (_aimem == null)
-        {
-            //_player = Singleton.GameManager.turnNumberIndex[aiIndex].GetComponent<Player>();
-            _player.ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_ANSWER;
-
-            _player.myAnswer = true;
-
-
-        }
-        if (_player == null)
-        {
-            //_aimem = Singleton.GameManager.turnNumberIndex[aiIndex].GetComponent<AIMembers>();
-
-            _aimem.eAISTATE = eAISTATE.eAISTATE_ANSWER;
-            _aimem.myAnswer = true;
-            //_aimem.AIStateAnswer();
-            _aimem.answerPanel.SetActive(true);
-
-            //if (_aimem.answerPanel == null)
-            //{
-            //    Debug.LogError("_aimem.answerPanel is null!");
-            //}
-            //else
-            //{
-            //    _aimem.answerPanel.SetActive(true);
-            //}
-
-
-        }
-
-
-
+        StartCoroutine(AnswerTagrting());
         //myWait = true;
         //myTrun = false;
         //myAnswer = false;
 
         //Singleton.GameManager.isTrunStart = false;
-
-
     }
     void AIStateAnswer()
     {
@@ -237,6 +238,54 @@ public class AIMembers : MonoBehaviour
     {
     }
 
+    IEnumerator AnswerTagrting()    
+    {
+        int _aiIndex = UnityEngine.Random.Range(0, Singleton.RoomManager.roomMemberCount);
+
+        while (_aiIndex == turnNumber)
+        {
+            _aiIndex = UnityEngine.Random.Range(0, Singleton.RoomManager.roomMemberCount);
+        }
+
+        Player _player = Singleton.GameManager.turnNumberIndex[_aiIndex].GetComponent<Player>();
+        AIMembers _aimem = Singleton.GameManager.turnNumberIndex[_aiIndex].GetComponent<AIMembers>();
+
+        if (_aimem == null)
+        {
+            if(_player.eSTUDENT == eSTUDENT.eSTUDENT_schoolmaster)
+            {
+                RestartCoroutine();
+                yield break;
+            }
+            _player.ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_ANSWER;
+
+            _player.myAnswer = true;
+
+            yield break;
+
+        }
+        else if (_player == null)
+        {
+
+            if (_aimem.eSTUDENT == eSTUDENT.eSTUDENT_schoolmaster)
+            {
+                RestartCoroutine();
+                yield break;
+            }
+            _aimem.eAISTATE = eAISTATE.eAISTATE_ANSWER;
+            _aimem.myAnswer = true;
+            _aimem.answerPanel.SetActive(true);
+            yield break;
+
+        }
+
+        yield return null;
+    }
+    void RestartCoroutine()
+    {
+        answerRoutine = StartCoroutine(AnswerTagrting());
+    }
+
     public void SelectedAI()
     {
 
@@ -244,6 +293,13 @@ public class AIMembers : MonoBehaviour
         {
             GameObject _player = GameObject.FindWithTag("Player");
             Singleton.Player = _player.GetComponent<Player>();
+        }
+
+
+        if (!Singleton.RoomManager.isSchoolMaster)
+        {
+            Singleton.AI.aiStudents.Add(eSTUDENT.eSTUDENT_schoolmaster);
+
         }
 
         foreach (eSTUDENT eSTUDENT in System.Enum.GetValues(typeof(eSTUDENT)))
@@ -301,6 +357,9 @@ public class AIMembers : MonoBehaviour
                 isAISelected = true;
 
                 Debug.Log("AI Select Complete");
+
+ 
+
 
                 break;
             }
@@ -367,6 +426,7 @@ public class AIMembers : MonoBehaviour
 
         while (eSTUDENT == eSTUDENT.eSTUDENT_NONE)//Singleton.AI.aiStudents.Count > Singleton.RoomManager.roomMemberCount
         {
+
             if (Singleton.AI.aiStudents.Contains((eSTUDENT)_randomnum))
             {
                 _randomnum = UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(eSTUDENT)).Length);

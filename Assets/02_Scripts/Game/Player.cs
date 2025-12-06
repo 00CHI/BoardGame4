@@ -56,7 +56,31 @@ public class Player : MonoBehaviour
     void LateUpdate()
     {
 
-        switch(ePLAYERSTATE)
+        if (!Singleton.CardUp.isUp && !Singleton.ButtonManager.isReasoning)
+        {
+            LateUpdateLogic();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+
+    public void LateUpdateLogic()
+    {
+        //UpdateSet
+        if (!Singleton.CardUp.isUp)
+        {
+            enabled = true;
+        }
+        else if (Singleton.CardUp.isUp)
+        {
+            enabled = false;
+        }
+
+        //Game
+        switch (ePLAYERSTATE)
         {
             case ePLAYERSTATE.ePLAYERSTATE_NONE:
                 ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
@@ -79,7 +103,6 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-
     void PlayerWait()
     {
         answerPanel.SetActive(false);
@@ -122,25 +145,34 @@ public class Player : MonoBehaviour
 
         }
 
+        for (int i = 0; i < aiButtons.Length; i++)
+        {
+            ProfileButton _profileButton = aiButtons[i].GetComponent<ProfileButton>();
+            AIMembers _aiMembers = _profileButton.aiMembers;
+
+            if (_aiMembers.eSTUDENT == eSTUDENT.eSTUDENT_schoolmaster)
+            {
+                aiButtons[i].interactable = false;
+            }
+            else
+            {
+                aiButtons[i].interactable = true;
+            }
+
+        }
+
         blackBG.SetActive(true);
         reasoningButton.SetActive(true);
 
 
-        aiButtons[0].interactable = true;
-        aiButtons[1].interactable = true;
-        aiButtons[2].interactable = true;
-        aiButtons[3].interactable = true;
-        aiButtons[4].interactable = true;
-        aiButtons[5].interactable = true;
-        aiButtons[6].interactable = true;
-        aiButtons[7].interactable = true;
 
-
+       
 
 
     }
     void PlayerReasoning()
     {
+
     }
 
     public void PlayerAnswer(int index)

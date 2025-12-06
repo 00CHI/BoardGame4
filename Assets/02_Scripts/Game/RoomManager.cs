@@ -10,6 +10,7 @@ public class RoomManager : MonoBehaviour
     string teacherToggle = "YES";
 
     public bool isStart = false;
+    public bool isSchoolMaster;
 
     Text roomMemberText;
     Text teacherToggleText;
@@ -43,6 +44,8 @@ public class RoomManager : MonoBehaviour
 
 
         roomMemberText.text = $"{roomMemberCount}Έν";
+
+        isSchoolMaster = true;
 
         memberPlusButton.onClick.AddListener(OnMemeberPlusClick);
         memberMinusButton.onClick.AddListener(OnMemeberMinusClick);
@@ -81,7 +84,7 @@ public class RoomManager : MonoBehaviour
 
         if (roomMemberCount <= 4)
         {
-            roomMemberCount = 11;
+            roomMemberCount = 10;
         }
 
         roomMemberCount -= 1;
@@ -94,10 +97,13 @@ public class RoomManager : MonoBehaviour
         if (teacherToggle == "YES")
         {
             teacherToggle = "NO";
+            isSchoolMaster = false;
+
         }
         else
         {
             teacherToggle = "YES";
+            isSchoolMaster = true;
         }
 
         teacherToggleText.text = teacherToggle;

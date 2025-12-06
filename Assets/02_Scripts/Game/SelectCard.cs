@@ -120,8 +120,18 @@ public class SelectCard : SpreadCard
         selectedButton = studentButtons[index];
         studentButton = studentButtons[index];
 
-        studentNameIndex = UnityEngine.Random.Range(0, studentNames.Count);//{_studentName}
-        studentName = studentNames[studentNameIndex];
+        if (!Singleton.RoomManager.isSchoolMaster)
+        {
+            studentNameIndex = UnityEngine.Random.Range(0, studentNames.Count -1);//{_studentName}
+            studentName = studentNames[studentNameIndex];
+
+        }
+        else if (Singleton.RoomManager.isSchoolMaster)
+        {
+            studentNameIndex = UnityEngine.Random.Range(0, studentNames.Count);//{_studentName}
+            studentName = studentNames[studentNameIndex];
+
+        }
 
         if (Singleton.Player == null)
         {
