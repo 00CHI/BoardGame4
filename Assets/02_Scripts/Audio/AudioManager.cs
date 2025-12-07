@@ -129,9 +129,11 @@ public class AudioManager : MonoBehaviour
     {
         audioBGM.clip = Resources.Load<AudioClip>("03_Source/08_Sound/BGM/Reasoning_BGM");
         audioBGM.Play();
+
     }
     public void PlayButtonSFX()
     {
+
         buttonSFX.clip = Resources.Load<AudioClip>("03_Source/08_Sound/SFX/Button");
         buttonSFX.Play();
     }
@@ -157,12 +159,12 @@ public class AudioManager : MonoBehaviour
     {
         audioBGM.Stop();
         buttonSFX.clip = Resources.Load<AudioClip>("03_Source/08_Sound/SFX/WIN_LOSE/WIN");
-        buttonSFX.Play();
+        buttonSFX.PlayOneShot(buttonSFX.clip);
     }
     public void loseSFX()
     {
         audioBGM.Stop();
         buttonSFX.clip = Resources.Load<AudioClip>("03_Source/08_Sound/SFX/WIN_LOSE/LOSE");
-        buttonSFX.Play();
+        buttonSFX.PlayOneShot(buttonSFX.clip);
     }
 }

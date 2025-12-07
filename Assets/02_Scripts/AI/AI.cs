@@ -62,13 +62,16 @@ public class AI: MonoBehaviour
             if (isWin)
             {
                 endImage.sprite = Resources.Load<Sprite>("03_Source/07_UI/GameEnd/WIN");
-                Singleton.AudioManager.winSFX();
+                DOVirtual.DelayedCall(0.2f, () => Singleton.AudioManager.winSFX());
+
+                
 
             }
             else if(!isWin)
             {
                 endImage.sprite = Resources.Load<Sprite>("03_Source/07_UI/GameEnd/DEFEAT");
-                Singleton.AudioManager.loseSFX();
+                DOVirtual.DelayedCall(0.2f, () => Singleton.AudioManager.loseSFX());
+               
 
             }
 
