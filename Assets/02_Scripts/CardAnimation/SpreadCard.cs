@@ -28,7 +28,6 @@ public class SpreadCard : MonoBehaviour
 
     protected void SetCard(GameObject _PARENTPOS)
     {
-
         foreach (Transform child in _PARENTPOS.transform)
         {
             cards.Add(child);
@@ -50,6 +49,8 @@ public class SpreadCard : MonoBehaviour
 
     IEnumerator SpreadCards()
     {
+        Singleton.AudioManager.CardSpreadSFX();
+
         if (startPos == null)
         {
             Debug.LogWarning("StartPoint가 설정되지 않았습니다!");
@@ -109,6 +110,8 @@ public class SpreadCard : MonoBehaviour
 
     IEnumerator ReturnCards()
     {
+        Singleton.AudioManager.CardLeaveSFX();
+
         for (int i = 0; i < cards.Count; i++)
         {
             RectTransform card = cards[i].GetComponent<RectTransform>();

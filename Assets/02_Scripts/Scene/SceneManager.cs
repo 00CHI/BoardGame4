@@ -10,6 +10,10 @@ public  class  SceneManager : MonoBehaviour
     //[SerializeField]
     //Button StartButton;
 
+    public GameObject audioManager;
+    public GameObject settingCanvas;
+
+    public AudioSource bgmAudio;
 
 
     // Start is called before the first frame update
@@ -27,15 +31,36 @@ public  class  SceneManager : MonoBehaviour
 
     }
 
-    public void OnButtonClick()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("InGame");
 
-    }
 
     public void OnCancleButtonClick()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
+
+        DontDestroyOnLoad(gameObject);
+
     }
+
+    public void LoadSceneLobby()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Lobby");
+
+        //bgmAudio.clip = Resources.Load<AudioClip>("03_Source/08_Sound/BGM/Lobby_BGM");
+        //bgmAudio.Play();
+        DontDestroyOnLoad(gameObject);
+
+    }
+    public void OnButtonClick()
+    {
+        Singleton.AudioManager.PlayButtonSFX();
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("InGame");
+
+        //bgmAudio.clip = Resources.Load<AudioClip>("03_Source/08_Sound/BGM/InGame_BGM");
+        //bgmAudio.Play();
+        DontDestroyOnLoad(gameObject);
+
+    }
+
 
 }

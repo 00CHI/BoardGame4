@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     void LateUpdate()
     {
 
-        if (!Singleton.CardUp.isUp && !Singleton.ButtonManager.isReasoning)
+        if (!Singleton.CardUp.isUp && !Singleton.ButtonManager.isReasoning )
         {
             LateUpdateLogic();
         }

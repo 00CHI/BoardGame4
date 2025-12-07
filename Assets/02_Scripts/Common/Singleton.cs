@@ -8,6 +8,8 @@ public static class Singleton
     public static SpriteManager SpriteManager;
     public static SceneManager SceneManager;
     public static ButtonManager ButtonManager;
+    public static AudioManager AudioManager;
+    public static SettingManager SettingManager;
 
     public static RoomManager RoomManager;
 

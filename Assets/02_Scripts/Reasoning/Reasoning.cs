@@ -27,6 +27,8 @@ public class Reasoning : MonoBehaviour
 
     public void OnReasoning(AIMembers _AIMEM)
     {
+        Singleton.AudioManager.PlayButtonSFX();
+
         eSTUDENT = _AIMEM.eSTUDENT;
         eTIME = _AIMEM.eTIME;
         eCRIME = _AIMEM.eCRIME;

@@ -33,6 +33,8 @@ public class AIMembers : MonoBehaviour
     public bool myWait = false;
     public bool myTrun = false;
     public bool myAnswer = false;
+
+
     public bool isAISelected = false;
     public bool isReason = false;
     public bool isReasonComplete = false;
@@ -40,6 +42,8 @@ public class AIMembers : MonoBehaviour
     Coroutine answerRoutine;
 
     public GameObject answerPanel;
+
+
 
 
 
@@ -67,7 +71,7 @@ public class AIMembers : MonoBehaviour
     {
 
 
-        if (!Singleton.CardUp.isUp)
+        if (!Singleton.CardUp.isUp && !Singleton.ButtonManager.isReasoning )
         {
             UpdateLogic();
         }

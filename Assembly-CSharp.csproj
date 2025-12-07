@@ -72,13 +72,16 @@
     <Compile Include="Assets\02_Scripts\CardAnimation\CardController.cs" />
     <Compile Include="Assets\02_Scripts\Common\Struct.cs" />
     <Compile Include="Assets\02_Scripts\AI\AI.cs" />
+    <Compile Include="Assets\02_Scripts\UI\AnyKey.cs" />
     <Compile Include="Assets\02_Scripts\Atlas\SpriteManager.cs" />
     <Compile Include="Assets\02_Scripts\Reasoning\ReasonCheck.cs" />
     <Compile Include="Assets\02_Scripts\Setting\SettingManager.cs" />
     <Compile Include="Assets\02_Scripts\Game\RandomQuestion.cs" />
     <Compile Include="Assets\02_Scripts\Game\RoomManager.cs" />
+    <Compile Include="Assets\02_Scripts\Manager\LobbyButtonMgr.cs" />
     <Compile Include="Assets\02_Scripts\AI\AIMember\AIMembers.cs" />
     <Compile Include="Assets\02_Scripts\Game\SelectCard.cs" />
+    <Compile Include="Assets\02_Scripts\Audio\AudioManager.cs" />
     <Compile Include="Assets\02_Scripts\CardAnimation\CardUp.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +99,7 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Resources\03_Source\08_Sound\INTRO\CC0저작권.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />

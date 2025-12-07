@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public bool isAITrun;
     public bool isPlayerTrun;
     public bool isNext = false;
+    public bool isStop = false;
 
     public int turnCount;
     public float currentTurnTime = 0f;
@@ -71,7 +72,7 @@ public class GameManager : MonoBehaviour
     {
 
         //UpdateSet
-        if (!Singleton.CardUp.isUp && !Singleton.ButtonManager.isReasoning)
+        if (!Singleton.CardUp.isUp && !Singleton.ButtonManager.isReasoning && !isStop)
         {
             UpdateLogic();
         }
@@ -262,6 +263,8 @@ public class GameManager : MonoBehaviour
 
     public void NextTurnButton()
     {
+        Singleton.AudioManager.PlayButtonSFX();
+
         isNext = true;
     }
 

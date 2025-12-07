@@ -6,21 +6,30 @@ using UnityEngine.UI;
 public class SettingManager : MonoBehaviour
 {
 
-    Button settingButton;
     public GameObject settingCanvas;
 
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        settingButton = GetComponent<Button>();
+        Singleton.SettingManager = this;
+
+        if(settingCanvas == null)
+        {
+            settingCanvas = GameObject.Find("SETTING_Canvas");
+
+        }
     }
 
     public void OpenSetting()
     {
         settingCanvas.SetActive(true);
+        Singleton.AudioManager.PlayButtonSFX();
     }
     public void CloseSetting()
     {
         settingCanvas.SetActive(false);
+        Singleton.AudioManager.PlayButtonSFX();
+
     }
 }

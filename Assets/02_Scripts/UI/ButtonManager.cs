@@ -15,6 +15,8 @@ public class ButtonManager : MonoBehaviour
     public GameObject gameEndCanvas;
     public GameObject cardCheckCanvas;
     public GameObject reasoningCanvas;
+    public GameObject howCanvas;
+    public GameObject exitCanvas;
 
     public Canvas blackCanvas;
     public Canvas questionCanvas;
@@ -28,6 +30,7 @@ public class ButtonManager : MonoBehaviour
     public bool isReasonEnd = false;
 
     public bool isReasoning = false;
+    public bool isHowToPlay= false;
 
     private void Awake()
     {
@@ -38,6 +41,10 @@ public class ButtonManager : MonoBehaviour
     }
     public void OnClick_ReasoningStart()
     {
+        Singleton.AudioManager.PlayButtonSFX();
+        Singleton.AudioManager.ReasningBGM();
+
+
         blackBG.SetActive(true);
         blackCanvas.sortingOrder = 3;
         questionCanvas.sortingOrder = 2;
@@ -119,6 +126,46 @@ public class ButtonManager : MonoBehaviour
 
             cardCheckCanvas.SetActive(false);
     
+    }
+
+
+    public void OnClick_HowToPlayOpen()
+    {
+        isHowToPlay = true;
+        Singleton.GameManager.isStop = true;
+
+        Singleton.AudioManager.PlayButtonSFX();
+        howCanvas.SetActive(true);
+    }
+    public void OnClick_HowToPlayClose()
+    {
+        Singleton.AudioManager.PlayButtonSFX();
+        howCanvas.SetActive(false);
+        Singleton.GameManager.isStop = false;
+
+        isHowToPlay = false;
+
+    }
+
+    public void OnClick_ExitOpen()
+    {
+        Singleton.AudioManager.PlayButtonSFX();
+        exitCanvas.SetActive(true);
+    }
+    public void OnClick_ExitClose()
+    {
+        Singleton.AudioManager.PlayButtonSFX();
+        exitCanvas.SetActive(false);
+    }
+
+    public void OnClick_ExitGame()
+    {
+        Singleton.AudioManager.PlayButtonSFX();
+
+        DOVirtual.DelayedCall(0.5f, () =>
+        {
+            Singleton.SceneManager.LoadSceneLobby();
+        });
     }
     //public void OnClick_RestartGame()
     //{

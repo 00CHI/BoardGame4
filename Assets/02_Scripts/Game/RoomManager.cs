@@ -114,6 +114,7 @@ public class RoomManager : MonoBehaviour
 
         Singleton.SceneManager.OnButtonClick();
         DontDestroyOnLoad(gameObject);
+
         gameObject.SetActive(false);
 
         isStart = true;

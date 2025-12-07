@@ -386,6 +386,7 @@
 "Assets/02_Scripts/AI/AI.cs"
 "Assets/02_Scripts/AI/AIMember/AIMembers.cs"
 "Assets/02_Scripts/Atlas/SpriteManager.cs"
+"Assets/02_Scripts/Audio/AudioManager.cs"
 "Assets/02_Scripts/CardAnimation/CardController.cs"
 "Assets/02_Scripts/CardAnimation/CardUp.cs"
 "Assets/02_Scripts/CardAnimation/SpreadCard.cs"
@@ -398,10 +399,12 @@
 "Assets/02_Scripts/Game/RandomQuestion.cs"
 "Assets/02_Scripts/Game/RoomManager.cs"
 "Assets/02_Scripts/Game/SelectCard.cs"
+"Assets/02_Scripts/Manager/LobbyButtonMgr.cs"
 "Assets/02_Scripts/Reasoning/ReasonCheck.cs"
 "Assets/02_Scripts/Reasoning/Reasoning.cs"
 "Assets/02_Scripts/Scene/SceneManager.cs"
 "Assets/02_Scripts/Setting/SettingManager.cs"
+"Assets/02_Scripts/UI/AnyKey.cs"
 "Assets/02_Scripts/UI/ButtonManager.cs"
 -langversion:9.0
 /deterministic
