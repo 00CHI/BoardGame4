@@ -29839,6 +29839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myButton: {fileID: 891840340}
+  reasoningButton: {fileID: 1452581490}
   blackPanel: {fileID: 1496976714}
   myButtonPos: {fileID: 891840339}
   infoImage1: {fileID: 2108502473}

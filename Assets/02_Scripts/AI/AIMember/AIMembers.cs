@@ -191,10 +191,10 @@ public class AIMembers : MonoBehaviour
 
                 myAnswer = false;
 
-                DOVirtual.DelayedCall(2f, () =>
-                {
-                    answerPanel.SetActive(false);
-                });
+                //DOVirtual.DelayedCall(2f, () =>
+                //{
+                //    answerPanel.SetActive(false);
+                //});
 
 
                 break;
@@ -220,6 +220,7 @@ public class AIMembers : MonoBehaviour
     {
         eAISTATE = eAISTATE.eAISTATE_WAIT;
 
+
         //answerPanel.SetActive(false);
 
         //myWait = true;
@@ -240,7 +241,6 @@ public class AIMembers : MonoBehaviour
     void AIStateAnswer()
     {
         //AIMembers _aimem = Singleton.GameManager.turnNumberIndex[aiIndex].GetComponent<AIMembers>();
-        Debug.Log($"AI {eCHARACTER}질문 턴 시작");
 
         AIAnswer(Singleton.RandomQuestion.index);
 
@@ -1311,7 +1311,7 @@ public class AIMembers : MonoBehaviour
                 }
                 else if (index == 25 || index == 26 || index == 27)//"당신은 15시 이후에 범행을 저질렀습니까?"
                 {
-                    answer = "아니요";
+                    answer = "네";
                     answerText.text = answer;
                 }
                 else if (index == 28 || index == 29 || index == 30)//"당신은 13시 이전에 범행을 저질렀습니까?"
@@ -1443,7 +1443,7 @@ public class AIMembers : MonoBehaviour
                 }
                 else if (index == 25 || index == 26 || index == 27)//"당신은 15시 이후에 범행을 저질렀습니까?"
                 {
-                    answer = "아니요";
+                    answer = "네";
                     answerText.text = answer;
                 }
                 else if (index == 28 || index == 29 || index == 30)//"당신은 13시 이전에 범행을 저질렀습니까?"

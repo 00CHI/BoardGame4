@@ -102,6 +102,8 @@ public class Player : MonoBehaviour
                 PlayerAnswer();
                 break;
             case ePLAYERSTATE.ePLAYERSTATE_REASONING:
+
+
                 break;
         }
     }

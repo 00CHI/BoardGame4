@@ -58,7 +58,7 @@ public class ProfileButton : MonoBehaviour
             aiMembers.myAnswer = true;
             aiMembers.answerPanel.SetActive(true);
             player.ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
-            profileButton.isAnswer = false;
+            profileButton.isAnswer = true;
 
         }
         else if (!profileButton.isAnswer)

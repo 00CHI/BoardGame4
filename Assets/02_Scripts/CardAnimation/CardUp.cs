@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class CardUp : MonoBehaviour
 {
     public Button myButton;        // 버튼
+    public Button reasoningButton;        // 버튼
     public GameObject blackPanel;        // 버튼
     public RectTransform myButtonPos;        // 버튼
     public RectTransform infoImage1;   // 첫 번째 이미지
@@ -30,6 +31,7 @@ public class CardUp : MonoBehaviour
             StartCoroutine(Move(myButtonPos, Vector3.up * moveDistance));
             Singleton.AudioManager.InfoCradSFX();
             blackPanel.SetActive(true);
+            reasoningButton.interactable = false;
         }
         else
         {
@@ -39,6 +41,8 @@ public class CardUp : MonoBehaviour
             StartCoroutine(Move(myButtonPos, Vector3.down * moveDistance));
             Singleton.AudioManager.InfoCradSFX();
             blackPanel.SetActive(false);
+            reasoningButton.interactable = true;
+
 
         }
 

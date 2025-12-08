@@ -41,6 +41,13 @@ public class ButtonManager : MonoBehaviour
     }
     private void Update()
     {
+
+        if (Singleton.RandomQuestion.questionCount <= 0)
+        {
+
+            OnClick_ReasoningStart();
+
+        }
     }
     public void OnClick_ReasoningStart()
     {

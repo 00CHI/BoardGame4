@@ -88,6 +88,9 @@ public class GameManager : MonoBehaviour
 
     public void UpdateLogic()
     {
+
+
+
         //Game
         int _trunindex = 0;
         //turnCount = 0;
@@ -151,6 +154,7 @@ public class GameManager : MonoBehaviour
                 }
 
             }
+
 
             //isTrun = false;
 
