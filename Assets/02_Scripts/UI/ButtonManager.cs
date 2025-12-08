@@ -51,6 +51,7 @@ public class ButtonManager : MonoBehaviour
     }
     public void OnClick_ReasoningStart()
     {
+        player.PlayerReasoning();
         Singleton.AudioManager.PlayButtonSFX();
         Singleton.AudioManager.ReasningBGM();
 

@@ -66,12 +66,13 @@ public class AI : MonoBehaviour
             if (isWin)
             {
                 endImage.sprite = Resources.Load<Sprite>("03_Source/07_UI/GameEnd/WIN");
-                DOVirtual.DelayedCall(0.2f, () => Singleton.AudioManager.winSFX());
+                //DOVirtual.DelayedCall(0.2f, () => );
+                Singleton.AudioManager.winSFX();
 
                 endImage.rectTransform.DOScale(Vector3.one, 2f)
                 .SetEase(Ease.OutBack);
 
-                DOVirtual.DelayedCall(2f, () => OnAnyKeyToLobby());
+                //DOVirtual.DelayedCall(2f, () => OnAnyKeyToLobby());
 
 
 
@@ -79,8 +80,8 @@ public class AI : MonoBehaviour
             else if (!isWin)
             {
                 endImage.sprite = Resources.Load<Sprite>("03_Source/07_UI/GameEnd/DEFEAT");
-                DOVirtual.DelayedCall(0.2f, () => Singleton.AudioManager.loseSFX());
-
+                //DOVirtual.DelayedCall(0.2f, () => );
+                Singleton.AudioManager.loseSFX();
             }
 
             DOVirtual.DelayedCall(0.5f, () =>

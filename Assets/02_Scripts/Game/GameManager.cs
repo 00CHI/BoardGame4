@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -294,6 +295,12 @@ public class GameManager : MonoBehaviour
             _PLAYER.ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
 
         }
+        for (int i = 0; i < Singleton.RoomManager.roomMemberCount - 1; i++)
+        {
+            AIMembers _aimems = Singleton.AI.aiObjects[i].GetComponent<AIMembers>();
+
+            _aimems.eAISTATE = eAISTATE.eAISTATE_WAIT;
+        }
 
 
         isAITrun = false;
@@ -305,7 +312,8 @@ public class GameManager : MonoBehaviour
         isTrun = true;
         isNext = false;
 
-        GameTurn();
+
+        DOVirtual.DelayedCall(0.3f, () =>  GameTurn());
 
     }
 

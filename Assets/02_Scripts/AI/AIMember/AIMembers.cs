@@ -187,7 +187,7 @@ public class AIMembers : MonoBehaviour
                 }
 
 
-                eAISTATE = eAISTATE.eAISTATE_WAIT;
+                //eAISTATE = eAISTATE.eAISTATE_WAIT;
 
                 myAnswer = false;
 
@@ -221,7 +221,7 @@ public class AIMembers : MonoBehaviour
         eAISTATE = eAISTATE.eAISTATE_WAIT;
 
 
-        //answerPanel.SetActive(false);
+        answerPanel.SetActive(false);
 
         //myWait = true;
         //myTrun = false;

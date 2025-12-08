@@ -20,12 +20,15 @@ public class Player : MonoBehaviour
     public bool myTurn = false;
     public bool myAnswer= false;
     public bool isButtonClicked = false;
+    public bool isAIClick = false;
+    public bool isAIClicked = false;
 
     public string answer;
     public GameObject answerPanel;
     public GameObject blackBG;
     public GameObject reasoningButton;
     public Button[] aiButtons;
+    public Button questionButton;
     public Text answerText;
 
 
@@ -81,39 +84,44 @@ public class Player : MonoBehaviour
             enabled = false;
         }
 
+
         //Game
         switch (ePLAYERSTATE)
-        {
-            case ePLAYERSTATE.ePLAYERSTATE_NONE:
-                ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
+            {
+                case ePLAYERSTATE.ePLAYERSTATE_NONE:
+                    ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
 
-                break;
-            case ePLAYERSTATE.ePLAYERSTATE_WAIT:
+                    break;
+                case ePLAYERSTATE.ePLAYERSTATE_WAIT:
 
-                PlayerWait();
-
-                break;
-            case ePLAYERSTATE.ePLAYERSTATE_QUESTION:
-                PlayerQuestion();
-
-                break;
-            case ePLAYERSTATE.ePLAYERSTATE_ANSWER:
-
-                PlayerAnswer();
-                break;
-            case ePLAYERSTATE.ePLAYERSTATE_REASONING:
+                    PlayerWait();
 
 
-                break;
-        }
+                    break;
+                case ePLAYERSTATE.ePLAYERSTATE_QUESTION:
+                    PlayerQuestion();
+
+                    break;
+                case ePLAYERSTATE.ePLAYERSTATE_ANSWER:
+
+                    PlayerAnswer();
+                    break;
+                case ePLAYERSTATE.ePLAYERSTATE_REASONING:
+
+                    PlayerReasoning();
+
+                    break;
+            }
     }
     void PlayerWait()
     {
+        myAnswer = false;
+        isAIClicked = false;
+        isButtonClicked = false;
         answerPanel.SetActive(false);
         blackBG.SetActive(false);
         reasoningButton.SetActive(false);
-        Singleton.RandomQuestion.questionButton.interactable = false;
-        isButtonClicked = false;
+        questionButton.interactable = false;
     }
     void PlayerAnswer()
     {
@@ -129,11 +137,16 @@ public class Player : MonoBehaviour
 
 
 
-        DOVirtual.DelayedCall(2f, () =>
-        {
-            myAnswer = false;
-            ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
-        });
+        //DOVirtual.DelayedCall(2f, () =>
+        //{
+        //    if(!myTurn)
+        //    {
+        //        myAnswer = false;
+        //        answerPanel.SetActive(false);
+        //        ePLAYERSTATE = ePLAYERSTATE.ePLAYERSTATE_WAIT;
+        //    }
+
+        //});
 
 
 
@@ -142,12 +155,48 @@ public class Player : MonoBehaviour
     {
         myTurn = true;
 
+
         if (!isButtonClicked)
         {
-            Singleton.RandomQuestion.questionButton.interactable = true;
-            isButtonClicked = true;
+            questionButton.interactable = true;
+
+            isAIClick = true;
 
         }
+        else if (isButtonClicked)
+        {
+            questionButton.interactable = false;
+
+            isAIClick = false;
+        }
+
+        for (int i = 0; i < aiButtons.Length; i++)
+            {
+                ProfileButton _profileButton = aiButtons[i].GetComponent<ProfileButton>();
+                AIMembers _aiMembers = _profileButton.aiMembers;
+
+                if (_aiMembers.eSTUDENT == eSTUDENT.eSTUDENT_schoolmaster || isAIClick || isAIClicked)
+                {
+                    aiButtons[i].interactable = false;
+                }
+                else
+                {
+                    aiButtons[i].interactable = true;
+                }
+
+            }
+
+
+       
+
+        blackBG.SetActive(true);
+        reasoningButton.SetActive(true);
+
+    }
+    public void PlayerReasoning()
+    {
+        //isAIClick = false;
+        //isAIClicked = false;
 
         for (int i = 0; i < aiButtons.Length; i++)
         {
@@ -158,24 +207,21 @@ public class Player : MonoBehaviour
             {
                 aiButtons[i].interactable = false;
             }
-            else
+            else if(_aiMembers.eSTUDENT != eSTUDENT.eSTUDENT_schoolmaster)
             {
                 aiButtons[i].interactable = true;
             }
 
         }
 
-        blackBG.SetActive(true);
-        reasoningButton.SetActive(true);
-
-
-
-       
-
-
-    }
-    void PlayerReasoning()
-    {
+        //aiButtons[0].interactable = true;
+        //aiButtons[1].interactable = true;
+        //aiButtons[2].interactable = true;
+        //aiButtons[3].interactable = true;
+        //aiButtons[4].interactable = true;
+        //aiButtons[5].interactable = true;
+        //aiButtons[6].interactable = true;
+        //aiButtons[7].interactable = true;
 
     }
 
@@ -950,7 +996,7 @@ public class Player : MonoBehaviour
                 }
                 else if (index == 25 || index == 26 || index == 27)//"당신은 15시 이후에 범행을 저질렀습니까?"
                 {
-                    answer = "아니요";
+                    answer = "네";
                     answerText.text = answer;
                 }
                 else if (index == 28 || index == 29 || index == 30)//"당신은 13시 이전에 범행을 저질렀습니까?"
@@ -1082,7 +1128,7 @@ public class Player : MonoBehaviour
                 }
                 else if (index == 25 || index == 26 || index == 27)//"당신은 15시 이후에 범행을 저질렀습니까?"
                 {
-                    answer = "아니요";
+                    answer = "네";
                     answerText.text = answer;
                 }
                 else if (index == 28 || index == 29 || index == 30)//"당신은 13시 이전에 범행을 저질렀습니까?"

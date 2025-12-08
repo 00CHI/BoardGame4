@@ -14,7 +14,7 @@ using UnityEngine.UI;
 public class RandomQuestion : MonoBehaviour
 {
     public Button questionButton;
-
+    public Player player;
     string randomQuestion;
 
     public int index;
@@ -116,6 +116,7 @@ public class RandomQuestion : MonoBehaviour
         randomQuestion = GetRandomQuestion();
         questionText.text = randomQuestion;
 
+
         //questionButton.interactable = false;
 
 
@@ -138,6 +139,11 @@ public class RandomQuestion : MonoBehaviour
         //if(questions.Count)
 
         //string question = questions[index];
+    }
+    public void PlayerClickCheck()
+    {
+        player.isButtonClicked = true;
+
     }
 
     public string GetRandomQuestion()

@@ -115,6 +115,8 @@ public class SelectCard : SpreadCard
         SetCard(studentCanvas);
 
         SelectButton(studentCanvas, ref studentButtons, (idx) => SelectStudentCard(idx));
+
+
     }
 
 
@@ -126,7 +128,7 @@ public class SelectCard : SpreadCard
 
         if (!Singleton.RoomManager.isSchoolMaster)
         {
-            studentNameIndex = UnityEngine.Random.Range(0, studentNames.Count -1);//{_studentName}
+            studentNameIndex = UnityEngine.Random.Range(0, studentNames.Count - 1);//{_studentName}
             studentName = studentNames[studentNameIndex];
 
         }
@@ -147,7 +149,14 @@ public class SelectCard : SpreadCard
 
         CardRotate(selectedButton.transform, "01_studentID", $"{studentName}", "studentID_back", timeCanvas, studentCanvas, crimeCanvas);//, timeCanvas, studentCanvas, crimeCanvas, studentButton
 
+        for (int i = 0; i < studentButtons.Length; i++)
+        {
+            studentButtons[i].interactable = false;
+        }
+
         SelectButton(timeCanvas, ref timeButtons, (idx) => SelectTimeCard(idx));
+
+
 
     }
 
@@ -173,6 +182,11 @@ public class SelectCard : SpreadCard
 
 
         CardRotate(selectedButton.transform, "02_time", $"{timeName}", "time_back", crimeCanvas, studentCanvas, timeCanvas);//, crimeCanvas, studentCanvas, timeCanvas, timeButton
+        
+        for (int i = 0; i < timeButtons.Length; i++)
+        {
+            timeButtons[i].interactable = false;
+        }
 
         SelectButton(crimeCanvas, ref crimeButtons, (idx) => SelectCrimeCard(idx));
 
@@ -197,6 +211,10 @@ public class SelectCard : SpreadCard
 
         CardRotate(selectedButton.transform, "03_crime", $"{crimeName}", "crime_back", crimeCanvas, studentCanvas, timeCanvas);//, crimeCanvas, studentCanvas, timeCanvas, crimeButton
 
+        for (int i = 0; i < crimeButtons.Length; i++)
+        {
+            crimeButtons[i].interactable = false;
+        }
 
         DOVirtual.DelayedCall(2.5f, () => SetActiveFalse());
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(studentCard, "01_studentID", $"{studentName}"));
