@@ -8,8 +8,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
+#if UNITY_EDITOR
 using static UnityEditor.Progress;
-
+#endif
 
 public class AIMembers : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class AIMembers : MonoBehaviour
     int currentIndex = 0;
     int schoolMasterIndex = 0;
     //public int aiIndex;
+
+    public Image endStudentCard;
+    public Image endTimeCard;
+    public Image endCrimeCard;
 
     public bool myWait = false;
     public bool myTrun = false;
@@ -425,9 +430,12 @@ public class AIMembers : MonoBehaviour
     }
     void AllAISelect()
     {
+
         AIStudentSelect();
         AITimeSelect();
         AICrimeSelect();
+        SetGameCard(endStudentCard, endTimeCard, endCrimeCard, eSTUDENT, eTIME, eCRIME);
+
     }
 
     public void AIStudentSelect()
@@ -2607,7 +2615,42 @@ public class AIMembers : MonoBehaviour
 
     }
 
+    void SetGameCard(Image _STUDENTIMAGE, Image _TIMEIMAGE, Image CRIMEIMAGE,eSTUDENT _ESTUDENT, eTIME _ETIME, eCRIME _ECRIME)
+    {
 
+        if(_ESTUDENT == eSTUDENT.eSTUDENT_schoolmaster)
+        {
+            int _student = (int)_ESTUDENT;
+ 
+            string _studentName = $"{Singleton.SelectCard.studentNames[_student - 1]}";
+
+            _STUDENTIMAGE.sprite = Resources.Load<Sprite>($"03_Source/01_studentID/{_studentName}");
+            _TIMEIMAGE.sprite = Resources.Load<Sprite>($"03_Source/04_back/time_back");
+            CRIMEIMAGE.sprite = Resources.Load<Sprite>($"03_Source/04_back/crime_back");
+        }
+        else if (_ESTUDENT != eSTUDENT.eSTUDENT_NONE && _ETIME != eTIME.eTIME_NONE && _ECRIME != eCRIME.eCRIME_NONE)
+        {
+            int _student = (int)_ESTUDENT;
+            int _time = (int)_ETIME;
+            int _crime = (int)_ECRIME;
+
+            string _studentName = $"{Singleton.SelectCard.studentNames[_student - 1]}";
+            string _timeName = $"{Singleton.SelectCard.timeNames[_time - 1]}";
+            string _crimeName = $"{Singleton.SelectCard.crimeNames[_crime - 1]}";
+
+            _STUDENTIMAGE.sprite = Resources.Load<Sprite>($"03_Source/01_studentID/{_studentName}");
+            _TIMEIMAGE.sprite = Resources.Load<Sprite>($"03_Source/02_time/{_timeName}");
+            CRIMEIMAGE.sprite = Resources.Load<Sprite>($"03_Source/03_crime/{_crimeName}");
+        }
+        else
+        {
+            _STUDENTIMAGE.sprite = Resources.Load<Sprite>($"03_Source/04_back/studentID_back");
+            _TIMEIMAGE.sprite = Resources.Load<Sprite>($"03_Source/04_back/time_back");
+            CRIMEIMAGE.sprite = Resources.Load<Sprite>($"03_Source/04_back/crime_back");
+        }
+
+
+    }
 }
 
 //int _membernum = 0;

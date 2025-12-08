@@ -140,12 +140,13 @@ public class AudioManager : MonoBehaviour
 
     public void CardSpreadSFX()
     {
+        buttonSFXStop();
         buttonSFX.clip = Resources.Load<AudioClip>("03_Source/08_Sound/SFX/CARD_SOUND/Card_Set");
         buttonSFX.Play();
     }
     public void CardLeaveSFX()
     {
-        //buttonSFX.Stop();
+        buttonSFXStop();
         buttonSFX.clip = Resources.Load<AudioClip>("03_Source/08_Sound/SFX/CARD_SOUND/Card_Leave");
         buttonSFX.Play();
     }
@@ -153,6 +154,11 @@ public class AudioManager : MonoBehaviour
     {
         buttonSFX.clip = Resources.Load<AudioClip>("03_Source/08_Sound/SFX/CARD_SOUND/CardSelect");
         buttonSFX.Play();
+    }
+    public void InfoCradSFX()
+    {
+        buttonSFX.clip = Resources.Load<AudioClip>("03_Source/08_Sound/SFX/CARD_SOUND/INFOnote");
+        buttonSFX.PlayOneShot(buttonSFX.clip);
     }
 
     public void winSFX()
@@ -166,5 +172,12 @@ public class AudioManager : MonoBehaviour
         audioBGM.Stop();
         buttonSFX.clip = Resources.Load<AudioClip>("03_Source/08_Sound/SFX/WIN_LOSE/LOSE");
         buttonSFX.PlayOneShot(buttonSFX.clip);
+    }
+
+
+    public void buttonSFXStop()
+    {
+        buttonSFX.Stop();
+
     }
 }

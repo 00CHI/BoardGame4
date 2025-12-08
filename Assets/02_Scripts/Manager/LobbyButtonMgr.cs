@@ -7,6 +7,7 @@ public class LobbyButtonMgr : MonoBehaviour
     public GameObject exitCanvas;
     public GameObject roomCanvas;
     public GameObject settingCanvas;
+    public GameObject profileCanvas;
 
     public void OnClick_ExitButton()
     {
@@ -43,5 +44,16 @@ public class LobbyButtonMgr : MonoBehaviour
     {
         Singleton.AudioManager.PlayButtonSFX();
         Application.OpenURL("https://youtu.be/z2nJkrxZqVo?si=4cvBQza_3PoLSMyW");
+    }
+
+    public void OnClick_ProfileOpen()
+    {
+        Singleton.AudioManager.PlayButtonSFX();
+        profileCanvas.SetActive(true);
+    }
+    public void OnClick_ProfileClose()
+    {
+        Singleton.AudioManager.PlayButtonSFX();
+        profileCanvas.SetActive(false);
     }
 }

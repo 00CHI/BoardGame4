@@ -186,12 +186,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1929,6 +1929,9 @@ MonoBehaviour:
   answer: 
   answerText: {fileID: 1216982160}
   turnNumber: 0
+  endStudentCard: {fileID: 2131045724}
+  endTimeCard: {fileID: 1947039301}
+  endCrimeCard: {fileID: 2004016117}
   myWait: 0
   myTrun: 0
   myAnswer: 0
@@ -2750,6 +2753,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116184584}
+  m_CullTransparentMesh: 1
+--- !u!1 &118377111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 118377112}
+  - component: {fileID: 118377114}
+  - component: {fileID: 118377113}
+  m_Layer: 5
+  m_Name: Crime_targetPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &118377112
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118377111}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 671015706}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 373, y: -250}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &118377113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118377111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &118377114
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118377111}
   m_CullTransparentMesh: 1
 --- !u!1 &124551753
 GameObject:
@@ -4652,7 +4730,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 171123761}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 171123763}
+        m_TargetAssemblyTypeName: CardController, Assembly-CSharp
+        m_MethodName: CheckPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &171123761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4705,6 +4795,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 50
   moveDuration: 0.2
+  targetPos: {fileID: 118377112}
+  blackBG: {fileID: 581514622}
+  blackText: {fileID: 1277461407}
+  isUpMoving: 0
 --- !u!1 &173393370
 GameObject:
   m_ObjectHideFlags: 0
@@ -10436,6 +10530,7 @@ MonoBehaviour:
   aiMembers: {fileID: 2106320395}
   player: {fileID: 1439125456}
   profileButton: {fileID: 0}
+  studentAnim: {fileID: 2054845086}
   isAnswer: 0
   reasoningCanvas: {fileID: 517076728}
 --- !u!1 &354068525
@@ -10700,7 +10795,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -11741,6 +11836,7 @@ MonoBehaviour:
   isAIReasonComplete: 0
   isWin: 0
   endImage: {fileID: 1489900512}
+  goToLobbyText: {fileID: 1764324745}
 --- !u!1 &411388378
 GameObject:
   m_ObjectHideFlags: 0
@@ -11912,7 +12008,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -13029,6 +13125,7 @@ MonoBehaviour:
   aiMembers: {fileID: 2024336294}
   player: {fileID: 1439125456}
   profileButton: {fileID: 0}
+  studentAnim: {fileID: 2054845086}
   isAnswer: 0
   reasoningCanvas: {fileID: 517076728}
 --- !u!1 &465097354
@@ -13975,6 +14072,9 @@ MonoBehaviour:
   answer: 
   answerText: {fileID: 1641163870}
   turnNumber: 0
+  endStudentCard: {fileID: 6319067}
+  endTimeCard: {fileID: 63824584}
+  endCrimeCard: {fileID: 796766015}
   myWait: 0
   myTrun: 0
   myAnswer: 0
@@ -14609,6 +14709,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508883605}
+  m_CullTransparentMesh: 1
+--- !u!1 &509257083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 509257084}
+  - component: {fileID: 509257086}
+  - component: {fileID: 509257085}
+  m_Layer: 5
+  m_Name: Student_targetPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &509257084
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509257083}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 671015706}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -373, y: -250}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &509257085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509257083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &509257086
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509257083}
   m_CullTransparentMesh: 1
 --- !u!1 &509555199
 GameObject:
@@ -15301,7 +15476,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -15619,7 +15794,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -15808,6 +15983,7 @@ MonoBehaviour:
   aiMembers: {fileID: 1551339427}
   player: {fileID: 1439125456}
   profileButton: {fileID: 0}
+  studentAnim: {fileID: 2054845086}
   isAnswer: 0
   reasoningCanvas: {fileID: 517076728}
 --- !u!1 &534462248
@@ -16257,7 +16433,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -17160,12 +17336,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -18520,6 +18696,9 @@ MonoBehaviour:
   answer: 
   answerText: {fileID: 1007867029}
   turnNumber: 0
+  endStudentCard: {fileID: 1674052566}
+  endTimeCard: {fileID: 566708290}
+  endCrimeCard: {fileID: 808342338}
   myWait: 0
   myTrun: 0
   myAnswer: 0
@@ -20434,7 +20613,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &671015706
 RectTransform:
@@ -20448,6 +20627,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 509257084}
+  - {fileID: 963713569}
+  - {fileID: 118377112}
   - {fileID: 1202274025}
   - {fileID: 1978230854}
   - {fileID: 171123759}
@@ -20516,6 +20698,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 50
   moveDuration: 0.2
+  targetPos: {fileID: 0}
+  blackBG: {fileID: 0}
+  blackText: {fileID: 0}
+  isUpMoving: 0
 --- !u!1 &673745818
 GameObject:
   m_ObjectHideFlags: 0
@@ -24460,6 +24646,9 @@ MonoBehaviour:
   answer: 
   answerText: {fileID: 2106601459}
   turnNumber: 0
+  endStudentCard: {fileID: 1174939068}
+  endTimeCard: {fileID: 1519250507}
+  endCrimeCard: {fileID: 744768832}
   myWait: 0
   myTrun: 0
   myAnswer: 0
@@ -25584,6 +25773,7 @@ GameObject:
   - component: {fileID: 765245490}
   - component: {fileID: 765245489}
   - component: {fileID: 765245488}
+  - component: {fileID: 765245493}
   m_Layer: 5
   m_Name: CRIME_Canvas
   m_TagString: Untagged
@@ -25709,6 +25899,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &765245493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765245487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb8d3486898a09409a8f8c7fdd77a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &769954061
 GameObject:
   m_ObjectHideFlags: 0
@@ -27711,7 +27913,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 315, y: -1003.9999}
+  m_AnchoredPosition: {x: 315, y: -1018}
   m_SizeDelta: {x: 4195, y: 5953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &830962271
@@ -28017,6 +28219,7 @@ MonoBehaviour:
   aiMembers: {fileID: 751816488}
   player: {fileID: 1439125456}
   profileButton: {fileID: 0}
+  studentAnim: {fileID: 2054845086}
   isAnswer: 0
   reasoningCanvas: {fileID: 517076728}
 --- !u!1 &852109372
@@ -28691,6 +28894,7 @@ GameObject:
   - component: {fileID: 878690620}
   - component: {fileID: 878690619}
   - component: {fileID: 878690618}
+  - component: {fileID: 878690622}
   m_Layer: 5
   m_Name: TIME_Canvas
   m_TagString: Untagged
@@ -28810,6 +29014,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &878690622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878690616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb8d3486898a09409a8f8c7fdd77a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &880716261
 GameObject:
   m_ObjectHideFlags: 0
@@ -28991,7 +29207,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 3.3394165, y: -12.427429}
-  m_SizeDelta: {x: 650, y: 926}
+  m_SizeDelta: {x: 650, y: 946.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &881281311
 MonoBehaviour:
@@ -29647,7 +29863,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &893577720
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31613,6 +31829,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959489376}
+  m_CullTransparentMesh: 1
+--- !u!1 &963713568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 963713569}
+  - component: {fileID: 963713571}
+  - component: {fileID: 963713570}
+  m_Layer: 5
+  m_Name: TIme_targetPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &963713569
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963713568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 671015706}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -250}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &963713570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963713568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &963713571
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963713568}
   m_CullTransparentMesh: 1
 --- !u!1 &966548193
 GameObject:
@@ -33670,6 +33961,9 @@ MonoBehaviour:
   answer: 
   answerText: {fileID: 421637632}
   turnNumber: 0
+  endStudentCard: {fileID: 757768577}
+  endTimeCard: {fileID: 2064858300}
+  endCrimeCard: {fileID: 1681125651}
   myWait: 0
   myTrun: 0
   myAnswer: 0
@@ -34439,6 +34733,7 @@ MonoBehaviour:
   aiMembers: {fileID: 73842485}
   player: {fileID: 1439125456}
   profileButton: {fileID: 0}
+  studentAnim: {fileID: 2054845086}
   isAnswer: 0
   reasoningCanvas: {fileID: 517076728}
 --- !u!1 &1013130175
@@ -34489,12 +34784,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -39058,6 +39353,7 @@ MonoBehaviour:
   aiMembers: {fileID: 492922016}
   player: {fileID: 1439125456}
   profileButton: {fileID: 0}
+  studentAnim: {fileID: 2054845086}
   isAnswer: 0
   reasoningCanvas: {fileID: 517076728}
 --- !u!1 &1159474859
@@ -40966,7 +41262,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1202274027}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1202274029}
+        m_TargetAssemblyTypeName: CardController, Assembly-CSharp
+        m_MethodName: CheckPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1202274027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41019,6 +41327,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 50
   moveDuration: 0.2
+  targetPos: {fileID: 509257084}
+  blackBG: {fileID: 581514622}
+  blackText: {fileID: 1277461407}
+  isUpMoving: 0
 --- !u!1 &1203031099
 GameObject:
   m_ObjectHideFlags: 0
@@ -41546,8 +41858,11 @@ MonoBehaviour:
   reasoningCanvas: {fileID: 517076728}
   howCanvas: {fileID: 523027158}
   exitCanvas: {fileID: 3318274}
+  timeAnim: {fileID: 878690622}
+  crimeAnim: {fileID: 765245493}
   blackCanvas: {fileID: 581514625}
   questionCanvas: {fileID: 750787075}
+  descText: {fileID: 1277461407}
   isStudentOkay: 0
   isTimeOkay: 0
   isCrimeOkay: 0
@@ -46101,6 +46416,7 @@ MonoBehaviour:
   aiMembers: {fileID: 1001161170}
   player: {fileID: 1439125456}
   profileButton: {fileID: 0}
+  studentAnim: {fileID: 2054845086}
   isAnswer: 0
   reasoningCanvas: {fileID: 517076728}
 --- !u!1 &1363133763
@@ -52918,7 +53234,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1764324744}
   m_Father: {fileID: 1817495689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -55315,6 +55632,9 @@ MonoBehaviour:
   answer: 
   answerText: {fileID: 736881402}
   turnNumber: 0
+  endStudentCard: {fileID: 36779616}
+  endTimeCard: {fileID: 558126851}
+  endCrimeCard: {fileID: 987401556}
   myWait: 0
   myTrun: 0
   myAnswer: 0
@@ -56528,7 +56848,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -56555,7 +56875,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 75
+  m_SortingOrder: 11
   m_TargetDisplay: 0
 --- !u!224 &1603436758
 RectTransform:
@@ -56604,6 +56924,9 @@ MonoBehaviour:
   studentCard: {fileID: 1202274027}
   timeCard: {fileID: 1978230856}
   crimeCard: {fileID: 171123761}
+  endStudentCard: {fileID: 1497087904}
+  endTimeCard: {fileID: 1845392340}
+  endCrimeCard: {fileID: 101511173}
   studentNameIndex: 0
   timeNameIndex: 0
   cirmeNameIndex: 0
@@ -60266,7 +60589,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0002746582, y: 0.00018310547}
-  m_SizeDelta: {x: 650, y: 926}
+  m_SizeDelta: {x: 650, y: 946.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1731732095
 MonoBehaviour:
@@ -61072,6 +61395,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762718660}
+  m_CullTransparentMesh: 1
+--- !u!1 &1764324743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1764324744}
+  - component: {fileID: 1764324746}
+  - component: {fileID: 1764324745}
+  m_Layer: 5
+  m_Name: GoToLobby_Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1764324744
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764324743}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1489900511}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -250}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1764324745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764324743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 75be103b23b53674fbd89be7b8a96f01, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &1764324746
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764324743}
   m_CullTransparentMesh: 1
 --- !u!1 &1764999790
 GameObject:
@@ -63601,6 +64003,7 @@ MonoBehaviour:
   isAITrun: 0
   isPlayerTrun: 0
   isNext: 0
+  isStop: 0
   turnCount: 0
   currentTurnTime: 30
   maxTurnTime: 30
@@ -63657,7 +64060,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -69271,7 +69674,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1978230856}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1978230858}
+        m_TargetAssemblyTypeName: CardController, Assembly-CSharp
+        m_MethodName: CheckPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1978230856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69324,6 +69739,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 50
   moveDuration: 0.2
+  targetPos: {fileID: 963713569}
+  blackBG: {fileID: 581514622}
+  blackText: {fileID: 1277461407}
+  isUpMoving: 0
 --- !u!1 &1984765467
 GameObject:
   m_ObjectHideFlags: 0
@@ -70332,6 +70751,9 @@ MonoBehaviour:
   answer: 
   answerText: {fileID: 503062651}
   turnNumber: 0
+  endStudentCard: {fileID: 626848304}
+  endTimeCard: {fileID: 248771954}
+  endCrimeCard: {fileID: 1126787943}
   myWait: 0
   myTrun: 0
   myAnswer: 0
@@ -70981,6 +71403,7 @@ GameObject:
   - component: {fileID: 2054845083}
   - component: {fileID: 2054845082}
   - component: {fileID: 2054845081}
+  - component: {fileID: 2054845086}
   m_Layer: 5
   m_Name: CHARACTER_Canvas
   m_TagString: Untagged
@@ -71106,6 +71529,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2054845086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054845080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb8d3486898a09409a8f8c7fdd77a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2056998769
 GameObject:
   m_ObjectHideFlags: 0
@@ -71323,6 +71758,7 @@ MonoBehaviour:
   aiMembers: {fileID: 623667631}
   player: {fileID: 1439125456}
   profileButton: {fileID: 0}
+  studentAnim: {fileID: 2054845086}
   isAnswer: 0
   reasoningCanvas: {fileID: 517076728}
 --- !u!1 &2064858298
@@ -72343,6 +72779,9 @@ MonoBehaviour:
   answer: 
   answerText: {fileID: 665070155}
   turnNumber: 0
+  endStudentCard: {fileID: 836627181}
+  endTimeCard: {fileID: 1233427455}
+  endCrimeCard: {fileID: 730895579}
   myWait: 0
   myTrun: 0
   myAnswer: 0
@@ -72464,7 +72903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -375, y: -1004}
+  m_AnchoredPosition: {x: -375, y: -1018.0001}
   m_SizeDelta: {x: 4195, y: 5953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108502474
@@ -73634,16 +74073,16 @@ SceneRoots:
   - {fileID: 708169563}
   - {fileID: 759715616}
   - {fileID: 553086845}
-  - {fileID: 671015706}
   - {fileID: 750787076}
+  - {fileID: 671015706}
   - {fileID: 411388382}
-  - {fileID: 517076733}
   - {fileID: 1013130179}
   - {fileID: 2114134841}
   - {fileID: 523027162}
   - {fileID: 1989961627}
-  - {fileID: 1603436758}
   - {fileID: 3318279}
+  - {fileID: 413196514}
+  - {fileID: 517076733}
+  - {fileID: 1603436758}
   - {fileID: 1817495689}
   - {fileID: 371768939}
-  - {fileID: 413196514}

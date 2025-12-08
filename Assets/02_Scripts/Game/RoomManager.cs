@@ -11,7 +11,6 @@ public class RoomManager : MonoBehaviour
 
     public bool isStart = false;
     public bool isSchoolMaster;
-
     Text roomMemberText;
     Text teacherToggleText;
 
@@ -114,6 +113,7 @@ public class RoomManager : MonoBehaviour
 
         Singleton.SceneManager.OnButtonClick();
         DontDestroyOnLoad(gameObject);
+
 
         gameObject.SetActive(false);
 

@@ -37,7 +37,7 @@ public  class  SceneManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
     }
 
@@ -45,9 +45,10 @@ public  class  SceneManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Lobby");
 
+
         //bgmAudio.clip = Resources.Load<AudioClip>("03_Source/08_Sound/BGM/Lobby_BGM");
         //bgmAudio.Play();
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
     }
     public void OnButtonClick()
@@ -58,7 +59,7 @@ public  class  SceneManager : MonoBehaviour
 
         //bgmAudio.clip = Resources.Load<AudioClip>("03_Source/08_Sound/BGM/InGame_BGM");
         //bgmAudio.Play();
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
     }
 

@@ -24,6 +24,7 @@ MonoBehaviour:
   m_ExitPlayMode: 1
   m_RecorderSettings:
   - {fileID: 2}
+  - {fileID: 3}
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 53
@@ -37,7 +38,7 @@ MonoBehaviour:
   m_Name: Movie
   m_EditorClassIdentifier: 
   enabled: 1
-  take: 21
+  take: 17
   captureEveryNthFrame: 1
   fileNameGenerator:
     m_Path:
@@ -45,10 +46,10 @@ MonoBehaviour:
       m_Leaf: Recordings
       m_ForceAssetFolder: 0
       m_AbsolutePath: 
-    m_FileName: <TestVdieo>_<Take>
+    m_FileName: <Recorder>_<Take>
   m_Version: 1
   encoderSettings:
-    rid: 7816071160746213376
+    rid: 4771186861744848896
   captureAlpha: 0
   captureAudio: 1
   m_ImageInputSelector:
@@ -109,7 +110,7 @@ MonoBehaviour:
   m_AudioInputSettings:
     preserveAudio: 1
   _accumulationSettings:
-    rid: 7816071160746213377
+    rid: 4771186861744848897
   outputFormat: 0
   encodingQuality: 2
   containerFormatSelected: 0
@@ -123,7 +124,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7816071160746213376
+    - rid: 4771186861744848896
       type: {class: CoreEncoderSettings, ns: UnityEditor.Recorder.Encoder, asm: Unity.Recorder.Editor}
       data:
         targetBitRate: 8
@@ -133,7 +134,7 @@ MonoBehaviour:
         keyframeDistance: 25
         codec: 0
         encodingQuality: 2
-    - rid: 7816071160746213377
+    - rid: 4771186861744848897
       type: {class: AccumulationSettings, ns: , asm: Unity.Recorder.Editor}
       data:
         captureAccumulation: 0
@@ -167,3 +168,28 @@ MonoBehaviour:
         shutterFullyOpen: 0.25
         shutterBeginsClosing: 0.75
         useSubPixelJitter: 1
+--- !u!114 &3
+MonoBehaviour:
+  m_ObjectHideFlags: 53
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bf883917114fbf86b41182323db352, type: 3}
+  m_Name: Audio
+  m_EditorClassIdentifier: 
+  enabled: 1
+  take: 16
+  captureEveryNthFrame: 1
+  fileNameGenerator:
+    m_Path:
+      m_Root: 0
+      m_Leaf: Recordings
+      m_ForceAssetFolder: 0
+      m_AbsolutePath: 
+    m_FileName: <Recorder>_<Take>
+  m_Version: 1
+  m_AudioInputSettings:
+    preserveAudio: 1

@@ -18,10 +18,13 @@ public class ButtonManager : MonoBehaviour
     public GameObject howCanvas;
     public GameObject exitCanvas;
 
+    public ReasoningAnim timeAnim;
+    public ReasoningAnim crimeAnim;
+
     public Canvas blackCanvas;
     public Canvas questionCanvas;
 
-
+    public Text descText;
 
     public bool isStudentOkay = false;
     public bool isTimeOkay = false;
@@ -44,7 +47,7 @@ public class ButtonManager : MonoBehaviour
         Singleton.AudioManager.PlayButtonSFX();
         Singleton.AudioManager.ReasningBGM();
 
-
+        descText.text = "프로필을 눌러 추리하세요.";
         blackBG.SetActive(true);
         blackCanvas.sortingOrder = 3;
         questionCanvas.sortingOrder = 2;
@@ -59,11 +62,14 @@ public class ButtonManager : MonoBehaviour
         switch (_reasonCheck.eBUTTONTYBE)
         {
             case eBUTTONTYBE.eBUTTONTYBE_STUDENT:
+
                 studentObject.SetActive(false);
 
                 DOVirtual.DelayedCall(0.5f, () =>
                 {
                     timeObject.SetActive(true);
+                    timeAnim.AppearCards();
+
 
                 });
                 break;
@@ -74,6 +80,7 @@ public class ButtonManager : MonoBehaviour
                 DOVirtual.DelayedCall(0.5f, () =>
                 {
                     crimeObject.SetActive(true);
+                    crimeAnim.AppearCards();
 
                 });
 
@@ -84,7 +91,7 @@ public class ButtonManager : MonoBehaviour
 
                 reasoningCanvas.SetActive(false);
                 isReasonEnd = true;
-                if(isReasonEnd)
+                if (isReasonEnd)
                 {
                     if (isStudentOkay && isTimeOkay && isCrimeOkay)
                     {
@@ -114,17 +121,20 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
+
     public void OnClickCardCheckTrue()
     {
+        Singleton.AudioManager.PlayButtonSFX();
 
-            cardCheckCanvas.SetActive(true);
+        cardCheckCanvas.SetActive(true);
         
 
     }
     public void OnClickCardCheckFalse()
     {
+        Singleton.AudioManager.PlayButtonSFX();
 
-            cardCheckCanvas.SetActive(false);
+        cardCheckCanvas.SetActive(false);
     
     }
 

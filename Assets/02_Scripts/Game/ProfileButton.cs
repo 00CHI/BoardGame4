@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using Unity.VisualScripting;
+#endif
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ProfileButton : MonoBehaviour
 {
     public AIMembers aiMembers;
     public Player player;
     public ProfileButton profileButton;
+    public ReasoningAnim studentAnim;
+
+
     public bool isAnswer;
 
     public GameObject reasoningCanvas;
@@ -62,6 +66,7 @@ public class ProfileButton : MonoBehaviour
             Image _renderer = proButton.GetComponent<Image>();
             Darken(_renderer, 0.5f);
 
+            studentAnim.AppearCards();
             Singleton.Reasoning.OnReasoning(aiMembers);
             reasoningCanvas.SetActive(true);
             proButton.interactable = false;

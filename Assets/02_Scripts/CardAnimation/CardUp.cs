@@ -28,6 +28,7 @@ public class CardUp : MonoBehaviour
             StartCoroutine(Move(infoImage1, Vector3.up * moveDistance));
             StartCoroutine(Move(infoImage2, Vector3.up * moveDistance));
             StartCoroutine(Move(myButtonPos, Vector3.up * moveDistance));
+            Singleton.AudioManager.InfoCradSFX();
             blackPanel.SetActive(true);
         }
         else
@@ -36,6 +37,7 @@ public class CardUp : MonoBehaviour
             StartCoroutine(Move(infoImage1, Vector3.down * moveDistance));
             StartCoroutine(Move(infoImage2, Vector3.down * moveDistance));
             StartCoroutine(Move(myButtonPos, Vector3.down * moveDistance));
+            Singleton.AudioManager.InfoCradSFX();
             blackPanel.SetActive(false);
 
         }

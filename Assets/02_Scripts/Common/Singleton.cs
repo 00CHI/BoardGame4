@@ -10,6 +10,7 @@ public static class Singleton
     public static ButtonManager ButtonManager;
     public static AudioManager AudioManager;
     public static SettingManager SettingManager;
+    public static GameDataMgr GameDataMgr;
 
     public static RoomManager RoomManager;
 
@@ -24,6 +25,7 @@ public static class Singleton
    
     public static Reasoning Reasoning;
     public static ReasonCheck ReasonCheck;
+    public static ReasoningAnim ReasoningAinm;
 
     //public static AudioManager AudioManager;
 }

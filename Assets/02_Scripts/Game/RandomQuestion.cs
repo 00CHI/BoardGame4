@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using TMPro;
+#if UNITY_EDITOR
 using Unity.VisualScripting;
-using UnityEditor.VersionControl;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 

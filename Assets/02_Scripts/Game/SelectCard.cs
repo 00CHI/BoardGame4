@@ -35,6 +35,10 @@ public class SelectCard : SpreadCard
     public Image timeCard;
     public Image crimeCard;
 
+    public Image endStudentCard;
+    public Image endTimeCard;
+    public Image endCrimeCard;
+
     string studentName;
     string timeName;
     string crimeName;
@@ -198,9 +202,13 @@ public class SelectCard : SpreadCard
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(studentCard, "01_studentID", $"{studentName}"));
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(timeCard, "02_time", $"{timeName}"));
         DOVirtual.DelayedCall(2.5f, () => SetGameCard(crimeCard, "03_crime", $"{crimeName}"));
+        DOVirtual.DelayedCall(2.5f, () => SetGameCard(endStudentCard, "01_studentID", $"{studentName}"));
+        DOVirtual.DelayedCall(2.5f, () => SetGameCard(endTimeCard, "02_time", $"{timeName}"));
+        DOVirtual.DelayedCall(2.5f, () => SetGameCard(endCrimeCard, "03_crime", $"{crimeName}"));
         DOVirtual.DelayedCall(2.5f, () =>
         {
             isSelectedComplete = true;
+            Singleton.AudioManager.buttonSFXStop();
 
         });
 
@@ -276,7 +284,7 @@ public class SelectCard : SpreadCard
             DOVirtual.DelayedCall(3f, () => SetFalseCard(_CANVAS1, _CANVAS2, _CANVAS3));
         }
 
-    void SetGameCard(Image _CARDIMAGE,  string _FILENAME, string _CARDNAME)
+        void SetGameCard(Image _CARDIMAGE,  string _FILENAME, string _CARDNAME)
         {
             _CARDIMAGE.sprite = Resources.Load<Sprite>($"03_Source/{_FILENAME}/{_CARDNAME}");
         }      
